@@ -1,0 +1,138 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:message bundle="${locale}" key="local.privateOffice" var="privateOffice"/>
+<fmt:message bundle="${locale}" key="local.signIn" var="signIn"/>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a>
+                <form action="Controller" method="post">
+                    <input type="hidden" name="command" value="to-home-page">
+                    <button class="btn btn-link" type="submit"><h3>${carRental}</h3></button>
+                </form>
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <c:if test="${requestScope.loginFailed == true}">
+            <div class="alert alert-danger fade in alert-msg">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    ${invLogin}
+            </div>
+            <c:set var="loginFailed" scope="session" value="false"/>
+        </c:if>
+
+        <c:if test="${sessionScope.successfulRegister == true}">
+            <div class="alert alert-success fade in alert-msg">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    ${mSuccessfulRegister}
+            </div>
+            <c:set var="successfulRegister" scope="session" value="false"/>
+        </c:if>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <c:if test="${sessionScope.user.type.equals('user')}">
+                        <form action="Controller" method="get">
+                            <input type="hidden" name="command" value="to-priv-office-user">
+                            <button type="submit" class="btn btn-link btn-nav"><h4>${privateOffice}</h4></button>
+                        </form>
+                    </c:if>
+                    <c:if test="${sessionScope.user.type.equals('admin')}">
+                        <form action="Controller" method="get">
+                            <input type="hidden" name="command" value="to-priv-office-admin">
+                            <button type="submit" class="btn btn-link btn-nav"><h4>${privateOffice}</h4></button>
+                        </form>
+                    </c:if>
+                </li>
+                <li>
+                    <form action="Controller" method="get">
+                        <input type="hidden" name="command" value="view-all-cars">
+                        <button type="submit" class="btn btn-link btn-nav"><h4>${cars}</h4></button>
+                    </form>
+                </li>
+                <li>
+                    <form action="Controller" method="get">
+                        <input type="hidden" name="command" value="to-about">
+                        <button type="submit" class="btn btn-link btn-nav"><h4>${info}</h4></button>
+                    </form>
+                </li>
+                <c:if test="${sessionScope.user != null}">
+                    <li>
+                        <div>
+                            <form action="Controller" method="post">
+                                <input type="hidden" name="command" value="log-out-user">
+                                <button type="submit" class="btn btn-danger btn-nav"><h4>${logOut}</h4></button>
+                            </form>
+                        </div>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.user == null}">
+                    <li class="dropdown btn btn-success sign-li">
+                        <a href="#" class="dropdown-toggle sign-in" data-toggle="dropdown">
+                            <h4 style="color: #ffffff;">${signIn}<span class="caret"/></h4></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form" role="form" method="post" action="Controller">
+                                            <input type="hidden" name="command" value="login-user"/>
+                                            <input type="hidden" name="page-name" value="index"/>
+
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">${login}</label>
+                                                <input type="text" name="login" class="form-control"
+                                                       id="exampleInputEmail2" placeholder="Login" required
+                                                       maxlength="25">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">${password}</label>
+                                                <input type="password" name="password" class="form-control"
+                                                       id="exampleInputPassword2" placeholder="Password" required
+                                                       maxlength="35">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-block">${signIn}</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        <form action="Controller" method="post">
+                                            <input type="hidden" name="command" value="to-registration"/>
+
+                                            <div>
+                                                <input type="submit" value="${registration}" class="btn btn-info"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </c:if>
+                <li>
+                    <form action="Controller" method="post">
+                        <input type="hidden" name="command" value="change-locale"/>
+                        <input type="hidden" name="language" value="en">
+                        <button type="submit" class="btn btn-link">${en_button}</button>
+                    </form>
+                    <form action="Controller" method="post">
+                        <input type="hidden" name="command" value="change-locale"/>
+                        <input type="hidden" name="language" value="ru">
+                        <button type="submit" class="btn btn-link">${ru_button}</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
