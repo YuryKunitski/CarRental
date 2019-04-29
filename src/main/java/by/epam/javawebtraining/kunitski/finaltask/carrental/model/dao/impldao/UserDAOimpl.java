@@ -6,6 +6,7 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connection
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOStringConstant;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -18,21 +19,13 @@ import java.util.List;
 
 public class UserDAOimpl implements UserDAO {
 
-	private static final String SQL_ADD_USER = "INSERT INTO car_rental.user (`login`, `password`, `name`, `surname`, `phone`, `email`, `passport_id`) VALUES (?,?,?,?,?,?,?);";
-	private static final String SQL_FIND_USER = "SELECT user_id, login, password, name, surname, phone, email, passport_id FROM user WHERE user.login=? AND user.password=?;";
+	private static final String SQL_ADD_USER = "INSERT INTO car_rental.user (`login`, `password`, `role_id`, `name`, `surname`, `phone`, `email`, `passport_id`) VALUES (?,?,?,?,?,?,?,?);";
+	private static final String SQL_FIND_USER = "SELECT user_id, login, password, role_id, name, surname, phone, email, passport_id FROM user WHERE user.login=? AND user.password=?;";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT login FROM user WHERE login=?;";
 	private static final String SQL_FIND_USER_BY_PASSPORT = "SELECT login FROM user WHERE passport=?;";
 	private static final String SQL_FIND_USER_BY_EMAIL = "SELECT login FROM user WHERE email=?";
 //	private static final String TAKE_ALL_USERS_QUERY =  "SELECT userID, login, type, lastName, firstName, email, phone FROM users GROUP BY (userID) DESC LIMIT ?,?;";
 //	private static final String COUNT_ALL_USERS_QUERY = "SELECT COUNT(user_id) FROM user";
-
-
-//	private static final String SQL_NAME = "name";
-//	private static final String SQL_SURNAME = "surname";
-//	private static final String SQL_PHONE = "phone";
-//	private static final String SQL_EMAIL = "email";
-//	private static final String SQL_PASSPORT_ID = "passport_id";
-//	private static final String SQL_USER_ID = "user_id";
 
 	private static final Logger LOG = LogManager.getLogger(UserDAOimpl.class.getName());
 
@@ -52,11 +45,12 @@ public class UserDAOimpl implements UserDAO {
 
 			ps.setString(1, user.getLogin());
 			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
-			ps.setString(4, user.getSurName());
-			ps.setString(5, user.getPhone());
-			ps.setString(6, user.getEmail());
-			ps.setString(7, user.getPassportID());
+			ps.setInt(3, user.getRoleType().getOrdinal());
+			ps.setString(4, user.getName());
+			ps.setString(5, user.getSurName());
+			ps.setString(6, user.getPhone());
+			ps.setString(7, user.getEmail());
+			ps.setString(8, user.getPassportID());
 			ps.executeUpdate();
 			connection.commit();
 
@@ -71,6 +65,7 @@ public class UserDAOimpl implements UserDAO {
 				throw new DAOException(DAOStringConstant.DAO_REGISTRATION_CLOSE_CON_ERROR_MSG, e);
 			}
 		}
+		LOG.debug(DAOStringConstant.DAO_REGISTARATION_ENDS_MSG);
 	}
 
 	@Override
@@ -98,11 +93,12 @@ public class UserDAOimpl implements UserDAO {
 				user.setUserID(rs.getInt(1));
 				user.setLogin(rs.getString(2));
 				user.setPassword(rs.getString(3));
-				user.setName(rs.getString(4));
-				user.setSurName(rs.getString(5));
-				user.setPhone(rs.getString(6));
-				user.setEmail(rs.getString(7));
-				user.setPassportID(rs.getString(8));
+				user.setRoleType(RoleType.getValue(rs.getInt(4)));
+				user.setName(rs.getString(5));
+				user.setSurName(rs.getString(6));
+				user.setPhone(rs.getString(7));
+				user.setEmail(rs.getString(8));
+				user.setPassportID(rs.getString(9));
 			}
 
 		} catch (ConnectionPoolException | SQLException e) {
@@ -121,7 +117,7 @@ public class UserDAOimpl implements UserDAO {
 	}
 
 	@Override
-	public ValidatorUniqueUser findUser(String login, String email, String passport) throws DAOException {
+	public ValidatorUniqueUser findUser(String login, String email, String passportID) throws DAOException {
 
 		LOG.debug(DAOStringConstant.DAO_FIND_USER_STARTS_MSG);
 
@@ -145,7 +141,7 @@ public class UserDAOimpl implements UserDAO {
 			}
 
 			ps = connection.prepareStatement(SQL_FIND_USER_BY_PASSPORT);
-			ps.setString(1, passport);
+			ps.setString(1, passportID);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -181,26 +177,6 @@ public class UserDAOimpl implements UserDAO {
 		return validatorUniqueUser;
 	}
 
-//
-//	private Customer getCustomer(ResultSet rs) throws SQLException {
-//		Customer customer = new Customer();
-//
-//		if (!rs.next()) {
-//			return null;
-//		}
-//
-//		customer.setName(rs.getString(SQL_NAME));
-//		customer.setSurName(rs.getString(SQL_SURNAME));
-//		customer.setPhone(rs.getString(SQL_PHONE));
-//		customer.setEmail(rs.getString(SQL_EMAIL));
-//		customer.setPassportID(rs.getString(SQL_PASSPORT_ID));
-//		customer.setDriveExperience(rs.getInt(SQL_DRIVE_EXPERIENCE));
-//		customer.setUserID(rs.getInt(SQL_USER_ID));
-//
-//		return customer;
-//	}
-
-
 	@Override
 	public List<User> takeAllUsers(int startPage, int amountUsersOnPage) throws DAOException {
 		return null;
@@ -213,8 +189,17 @@ public class UserDAOimpl implements UserDAO {
 
 	public static void main(String[] args) throws DAOException {
 
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		try {
+			connectionPool.initConnectionPool();
+		} catch (ConnectionPoolException e) {
+			e.printStackTrace();
+		}
 		UserDAO userDAO = new UserDAOimpl();
-		System.out.println(userDAO.authorization("trol", "1"));
+//		userDAO.registration(new User("Kat","1",RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
+		System.out.println(userDAO.authorization("Kat", "1"));
+//		System.out.println(userDAO.authorization("trol", "1"));
+
 	}
 
 

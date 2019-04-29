@@ -64,7 +64,7 @@ public interface OrderDAO {
 	 * Changing the status of the order, without the reason for the change
 	 *
 	 * @param status  new status
-	 * @param orderId id изменяемого заказа
+	 * @param orderId id changing order
 	 * @throws DAOException exception changing the status
 	 */
 	void updateStatusWithoutReason(String status, int orderId) throws DAOException;

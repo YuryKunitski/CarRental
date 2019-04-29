@@ -5,6 +5,7 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connection
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao.UserDAOimpl;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 import com.google.protobuf.ServiceException;
 import org.apache.log4j.LogManager;
@@ -26,12 +27,13 @@ public class UserService {
 	}
 
 	/**
-	 * Передача данных на DAO для авторизации пользователя
 	 *
-	 * @param login    логин польщователя
-	 * @param password пароль пользователя
-	 * @return если пользователь не null, то он может авторизиоваться
-	 * @throws ServiceException ошибка при авторизации пользователя
+	 * Data transfer to DAO for user authorization
+	 *
+	 * @param login   user's login
+	 * @param password user's password
+	 * @return authorized user
+	 * @throws ServiceException error authorization user
 	 */
 	public User login(String login, String password) throws ServiceException {
 
@@ -48,23 +50,23 @@ public class UserService {
 	}
 
 	/**
-	 * Передача параметров на DAO для регистрации пользователя
+	 * Data transfer to DAO for user registration
 	 *
-	 * @param login        логин пользователя
-	 * @param password хэш-значение пароля
-	 * @param name     фамилия пользователя
-	 * @param surname    имя пользователя
-	 * @param phone        телефон пользователя
-	 * @param email        e-mail пользователя
-	 * @param passportID     паспорт пользователя private static final String REGISTER_START_MSG
-	 * @return объект класса ValidatorUniqueUser, который несет в себе информацию о причине отказа
-	 * в регистрации пользователя или успешной регистрации
-	 * @throws ServiceException ошибка при регистрации пользователя
+	 * @param login        user's login
+	 * @param password user's password
+	 * @param name     user's name
+	 * @param surname    user's surname
+	 * @param phone        user's phone
+	 * @param email        user's e-mail
+	 * @param passportID    user's passportID
+	 * @return object of class ValidatorUniqueUser, which carries information about the reason for refusal
+	 * to register a user or successful registration
+	 * @throws ServiceException error registration user
 	 */
-	public ValidatorUniqueUser register(String login, String password, String name, String surname, String phone,
+	public ValidatorUniqueUser register(String login, String password, RoleType roleType, String name, String surname, String phone,
 	                                    String email, String passportID) throws ServiceException {
 		LOG.debug(ServiceConstant.REGISTER_START_MSG);
-		User user = new User(login, password, name, surname, phone, email, passportID);
+		User user = new User(login, password, roleType, name, surname, phone, email, passportID);
 		try {
 			ValidatorUniqueUser validatorUniqueUser = userDAO.findUser(login, email, passportID);
 			if (validatorUniqueUser.isUniqueLogin() && validatorUniqueUser.isUniqueEmail() && validatorUniqueUser.isUniquePassportID()) {

@@ -2,8 +2,7 @@ package by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity;
 /**
  *
  * <p>
- *     Класс ValidatorUniqueUser проверяет на уникальность данные пользователя, которые
- *     должны быть уникальны.
+ *     The ValidatorUniqueUser class checks for uniqueness user data that must be unique.
  * </p>
  */
 public class ValidatorUniqueUser {

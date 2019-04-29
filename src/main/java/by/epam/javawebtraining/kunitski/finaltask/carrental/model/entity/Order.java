@@ -1,13 +1,13 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity;
 
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.Customer;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 
 import java.sql.Date;
 
 public class Order {
 
 	private int orderID;
-	private Customer customer;
+	private User user;
 	private Car car;
 	private Date rentalStartDate;
 	private int rentDuration;
@@ -19,10 +19,10 @@ public class Order {
 	public Order() {
 	}
 
-	public Order(int orderID, Customer customer, Car car, Date rentalStartDate, int rentDuration,
+	public Order(int orderID, User user, Car car, Date rentalStartDate, int rentDuration,
 	             double costCoefficient, CrashHistory crashHistory, String status, double totalBill) {
 		this.orderID = orderID;
-		this.customer = customer;
+		this.user = user;
 		this.car = car;
 		this.rentalStartDate = rentalStartDate;
 		this.rentDuration = rentDuration;
@@ -42,13 +42,13 @@ public class Order {
 		}
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCustomer(Customer customer) {
-		if (customer != null) {
-			this.customer = customer;
+	public void setUser(User user) {
+		if (user != null) {
+			this.user = user;
 		}
 	}
 
@@ -133,7 +133,7 @@ public class Order {
 		if (rentDuration != order.rentDuration) return false;
 		if (Double.compare(order.costCoefficient, costCoefficient) != 0) return false;
 		if (Double.compare(order.totalBill, totalBill) != 0) return false;
-		if (customer != null ? !customer.equals(order.customer) : order.customer != null) return false;
+		if (user != null ? !user.equals(order.user) : order.user != null) return false;
 		if (car != null ? !car.equals(order.car) : order.car != null) return false;
 		if (rentalStartDate != null ? !rentalStartDate.equals(order.rentalStartDate) : order.rentalStartDate != null)
 			return false;
@@ -147,7 +147,7 @@ public class Order {
 		int result;
 		long temp;
 		result = orderID;
-		result = 31 * result + (customer != null ? customer.hashCode() : 0);
+		result = 31 * result + (user != null ? user.hashCode() : 0);
 		result = 31 * result + (car != null ? car.hashCode() : 0);
 		result = 31 * result + (rentalStartDate != null ? rentalStartDate.hashCode() : 0);
 		result = 31 * result + rentDuration;
@@ -164,7 +164,7 @@ public class Order {
 	public String toString() {
 		return "Order{" +
 				"orderID=" + orderID +
-				", customer=" + customer +
+				", user=" + user +
 				", car=" + car +
 				", rentalStartDate=" + rentalStartDate +
 				", rentDuration=" + rentDuration +

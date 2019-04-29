@@ -52,10 +52,10 @@ public class Validator {
 	}
 
 	/**
-	 * Валидация логина.
+	 * Check login
 	 *
-	 * @param login логин пользователя
-	 * @return true - логин корректен, false - некорректен
+	 * @param login user's login
+	 * @return true - login is correct, false is incorrect
 	 */
 	public boolean validateLogin(String login) {
 		Pattern pattern = Pattern.compile(PATTERN_LOGIN);
@@ -69,10 +69,10 @@ public class Validator {
 	}
 
 	/**
-	 * Валидация пароля.
+	 * Check password
 	 *
-	 * @param password пароль пользователя
-	 * @return true - пароль корректен, false - некорректен
+	 * @param password user's password
+	 * @return true - password is correct, false is incorrect
 	 */
 	public boolean validatePassword(String password) {
 		Pattern pattern = Pattern.compile(PATTERN_PASSWORD);
@@ -86,11 +86,11 @@ public class Validator {
 	}
 
 	/**
-	 * Проверка подтверждения пароля.
+	 * Verifying password confirmation
 	 *
-	 * @param password        пароль пользователя
-	 * @param confirmPassword подтверждение пароля
-	 * @return true - пароль подтвержден, false - не подтвержден
+	 * @param password        user's password
+	 * @param confirmPassword password confirmation
+	 * @return true - password is correct, false is incorrect
 	 */
 	public boolean validateConfirmationPassword(String password, String confirmPassword) {
 		if (password.equals(confirmPassword)) {
@@ -101,10 +101,10 @@ public class Validator {
 	}
 
 	/**
-	 * Валидация e-mail пользователя.
+	 * Check user's email
 	 *
-	 * @param email e-mail пользователя
-	 * @return true - e-mail корректен, не корректен
+	 * @param email user's e-mail
+	 * @return true - email is correct, false is incorrect
 	 */
 	public boolean validateEmail(String email) {
 		Pattern pattern = Pattern.compile(PATTERN_EMAIL);
@@ -118,16 +118,16 @@ public class Validator {
 	}
 
 	/**
-	 * Валидация фамилии пользователя
+	 * Check name or surname
 	 *
-	 * @param lastName фамилия пользвателя
-	 * @return true - фамилия корректна, false - не корректна
+	 * @param name user's name
+	 * @return true - name is correct, false is incorrect
 	 */
-	public boolean validateLastName(String lastName) {
+	public boolean validateName(String name) {
 		Pattern pattern = Pattern.compile(PATTERN_NAME);
-		Matcher matcher = pattern.matcher(lastName);
+		Matcher matcher = pattern.matcher(name);
 		boolean match = matcher.matches();
-		if ((lastName.length() <= NAME_LENGTH) && match && !lastName.isEmpty()) {
+		if ((name.length() <= NAME_LENGTH) && match && !name.isEmpty()) {
 			return true;
 		} else {
 			return false;
@@ -135,44 +135,10 @@ public class Validator {
 	}
 
 	/**
-	 * Валидация имени пользователя
+	 * Check user's phone
 	 *
-	 * @param firstName имя пользователя
-	 * @return true - имя корректно, false - не корректно
-	 */
-	public boolean validateFirstName(String firstName) {
-		Pattern pattern = Pattern.compile(PATTERN_NAME);
-		Matcher matcher = pattern.matcher(firstName);
-		boolean match = matcher.matches();
-		if ((firstName.length() <= NAME_LENGTH) && match && !firstName.isEmpty()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * Валидация отчества пользователя
-	 *
-	 * @param middleName отчество пользователя
-	 * @return true - отчество корректно, false - не корректно
-	 */
-	public boolean validateMiddleName(String middleName) {
-		Pattern pattern = Pattern.compile(PATTERN_NAME);
-		Matcher matcher = pattern.matcher(middleName);
-		boolean match = matcher.matches();
-		if ((middleName.length() <= NAME_LENGTH) && match && !middleName.isEmpty()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * Валидация телефона пользователя.
-	 *
-	 * @param phone телефон пользователя
-	 * @return true - телефон корректен, false - не корректен
+	 * @param phone user's phone
+	 * @return true - phone is correct, false is incorrect
 	 */
 	public boolean validatePhone(String phone) {
 		Pattern pattern = Pattern.compile(PATTERN_PHONE);
@@ -186,39 +152,23 @@ public class Validator {
 	}
 
 	/**
-	 * Валидация серии и номера паспорта пользователя.
+	 * Check passportID
 	 *
-	 * @param passport серия и номер паспорта пользователя
-	 * @return true - серия и номер корректны, false - не корректны
+	 * @param passportID user's passportID
+	 * @return true - passportID is correct, false is incorrect
 	 */
-	public boolean validatePassport(String passport) {
+	public boolean validatePassport(String passportID) {
 		Pattern pattern = Pattern.compile(PATTERN_PASSPORT);
-		Matcher matcher = pattern.matcher(passport);
+		Matcher matcher = pattern.matcher(passportID);
 		boolean match = matcher.matches();
-		if ((passport.length() <= PASSPORT_LENGTH) && match && !passport.isEmpty()) {
+		if ((passportID.length() <= PASSPORT_LENGTH) && match && !passportID.isEmpty()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	/**
-	 * Валидация адреса пользователя.
-	 *
-	 * @param address адрес пользователя
-	 * @return true - адрес корректен, false - не корректен
-//	 */
-//	public boolean validateAddress(String address) {
-//		Pattern pattern = Pattern.compile(PATTERN_ADDRESS);
-//		if (address != null) {
-//			if (address.length() <= ADDRESS_LENGTH) {
-//				Matcher matcher = pattern.matcher(address);
-//				boolean match = matcher.matches();
-//				return match;
-//			}
-//		}
-//		return true;
-//	}
+
 
 	/**
 	 * Валидация даты и времени.
@@ -278,26 +228,6 @@ public class Validator {
 		}
 	}
 
-//	/**
-//	 * Валидация места доставки или возврата автомобиля.
-//	 *
-//	 * @param place место доставки или возврата автомобиля
-//	 * @return true - место доставки доставки или воврата корректно,
-//	 * false - место доставки или возврата не корректно
-//	 */
-//	public boolean validatePlace(String place) {
-//		if (place == null) {
-//			return false;
-//		}
-//		Pattern pattern = Pattern.compile(PATTERN_PLACES);
-//		Matcher matcher = pattern.matcher(place);
-//		boolean match = matcher.matches();
-//		if (place.length() <= PLACE_LENGTH && !place.isEmpty() && match) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
 
 	/**
 	 * Валидация цены

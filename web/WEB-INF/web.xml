@@ -24,7 +24,7 @@
     <filter>
         <display-name>CharsetFilter</display-name>
         <filter-name>CharsetFilter</filter-name>
-        <filter-class>by.epam.javawebtraining.kunitski.finaltask.carrental.webapp.filter.CharsetFilter</filter-class>
+        <filter-class>by.epam.javawebtraining.kunitski.finaltask.carrental.webutil.filter.CharsetFilter</filter-class>
         <init-param>
             <param-name>character-encoding</param-name>
             <param-value>utf-8</param-value>
@@ -37,7 +37,7 @@
     </filter-mapping>
 
     <listener>
-        <listener-class>by.epam.javawebtraining.kunitski.finaltask.carrental.webapp.listener.ProjectServletContextListener</listener-class>
+        <listener-class>by.epam.javawebtraining.kunitski.finaltask.carrental.webutil.listener.ProjectServletContextListener</listener-class>
     </listener>
 
     <error-page>

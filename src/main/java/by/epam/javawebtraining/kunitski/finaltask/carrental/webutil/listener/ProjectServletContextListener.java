@@ -1,4 +1,4 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.webapp.listener;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.webutil.listener;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;

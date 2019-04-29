@@ -4,6 +4,7 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.command.Command;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.command.PageName;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.CommandException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.UserService;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.Validator;
 import com.google.protobuf.ServiceException;
@@ -23,6 +24,7 @@ public class RegisterUserCommand implements Command {
 
 	private static final String LOGIN_PARAMETER = "login";
 	private static final String PASSWORD_PARAMETER = "password";
+	private static final String ROLE_ID_PARAMETER = "role_id";
 	private static final String CONFIRM_PASSWORD_PARAMETER = "confirm-password";
 	private static final String E_MAIL = "email";
 	private static final String NAME = "name";
@@ -72,6 +74,7 @@ public class RegisterUserCommand implements Command {
 		LOG.debug(VALID_PARAMETERS_STARTS_MSG);
 		String login = request.getParameter(LOGIN_PARAMETER);
 		String password = request.getParameter(PASSWORD_PARAMETER);
+		RoleType roleType = RoleType.valueOf(request.getParameter(ROLE_ID_PARAMETER));
 		String confirmPassword = request.getParameter(CONFIRM_PASSWORD_PARAMETER);
 		String email = request.getParameter(E_MAIL);
 		String name = request.getParameter(NAME);
@@ -121,18 +124,15 @@ public class RegisterUserCommand implements Command {
 			request.setAttribute(E_MAIL_VALID, false);
 			countFailedValidations++;
 		}
-		if (!validator.validateLastName(name)) {
+		if (!validator.validateName(name)) {
 			request.setAttribute(LAST_NAME_VALID, false);
 			countFailedValidations++;
 		}
-		if (!validator.validateFirstName(surname)) {
+		if (!validator.validateName(surname)) {
 			request.setAttribute(FIRST_NAME_VALID, false);
 			countFailedValidations++;
 		}
-//		if (!validator.validateMiddleName(middleName)) {
-//			request.setAttribute(LAST_NAME_VALID, false);
-//			countFailedValidations++;
-//		}
+
 		if (!validator.validatePhone(phone)) {
 			request.setAttribute(PHONE_VALID, false);
 			countFailedValidations++;
@@ -141,10 +141,6 @@ public class RegisterUserCommand implements Command {
 			request.setAttribute(PASSPORT_VALID, false);
 			countFailedValidations++;
 		}
-//		if (!validator.validateAddress(address)) {
-//			request.setAttribute(ADDRESS_VALID, false);
-//			countFailedValidations++;
-//		}
 
 		if (countFailedValidations > 0) {
 			LOG.debug(VALID_PARAMETERS_ENDS_MSG);
@@ -152,7 +148,7 @@ public class RegisterUserCommand implements Command {
 		} else {
 			try {
 				UserService service = UserService.getInstance();
-				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, name, surname, phone,
+				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, roleType ,name, surname, phone,
 						email, passportID);
 				uniqueLogin = validatorUniqueUser.isUniqueLogin();
 				uniqueEmail = validatorUniqueUser.isUniqueEmail();

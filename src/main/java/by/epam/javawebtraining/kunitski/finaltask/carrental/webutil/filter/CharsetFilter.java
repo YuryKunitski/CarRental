@@ -1,4 +1,4 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.webapp.filter;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.webutil.filter;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import org.apache.log4j.LogManager;

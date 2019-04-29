@@ -26,21 +26,20 @@ public interface UserDAO {
 	User authorization(String login, String password) throws DAOException;
 
 	/**
-	 * Проверка наличия таких логина, e-mail, пароля в базе данных
-	 * @param login логин пользователя
-	 * @param email e-mail пользователя
-	 * @param passport серия и номер пасспорта пользователя
-	 * @return объект класса ValidatorUniqueUser, хранящий в себе информацию, об уникальности
-	 * вставляемых данных
-	 * @throws DAOException ошибка при проверке наличия таких логина,
-	 * e-mail, пароля в бд
+	 * Check for such logins, e-mail, password in the database
+	 * @param login user's login
+	 * @param email user's e-mail
+	 * @param passportID user's passportID
+	 * @return object of class ValidatorUniqueUser, which stores information about uniqueness
+	 * inserted data
+	 * @throws DAOException error checking the presence of such a login, email, password in the database
 	 */
-	public ValidatorUniqueUser findUser(String login, String email, String passport) throws DAOException;
+	public ValidatorUniqueUser findUser(String login, String email, String passportID) throws DAOException;
 
 	/**
-	 * Получение всех пользователей
-	 * @return список всех пользователей
-	 * @throws DAOException ошибка при получении всех пользователей
+	 * Getting all users
+	 * @return list of all users
+	 * @throws DAOException error getting all users
 	 */
 	public List<User> takeAllUsers(int startPage, int amountUsersOnPage) throws DAOException;
 
@@ -48,7 +47,7 @@ public interface UserDAO {
 	 * Remove user account by id.
 	 *
 	 * @param idUser
-	 * @return
+	 * @return true/false
 	 * @throws DAOException
 	 */
 	boolean removeUserByID(int idUser) throws DAOException;

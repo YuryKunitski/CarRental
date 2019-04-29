@@ -9,7 +9,7 @@
     <short-name>CopyRightTld</short-name>
     <tag>
         <name>CopyRight</name>
-        <tag-class>by.epam.javawebtraining.kunitski.finaltask.carrental.webapp.tag.CopyRightsTag</tag-class>
+        <tag-class>by.epam.javawebtraining.kunitski.finaltask.carrental.webutil.tag.CopyRightsTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 

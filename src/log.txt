@@ -2,3 +2,16 @@
 2019-04-20 19:46:04 INFO  root:55 - logger
 2019-04-28 21:59:50 INFO  LoginUserCommand:21 - isWork?
 2019-04-29 11:57:30 INFO  LoginUserCommand:21 - isWork?
+2019-04-29 23:01:07 DEBUG ConnectionPool:56 - ConnectionPool : initConnectionPool : starts
+2019-04-29 23:01:15 DEBUG ConnectionPool:78 - ConnectionPool : initConnectionPool : ends
+2019-04-29 23:01:15 DEBUG UserDAOimpl:42 - UserDAO : registrate user : starts
+2019-04-29 23:01:15 DEBUG ConnectionPool:88 - ConnectionPool : takeConnection : starts
+2019-04-29 23:01:15 DEBUG ConnectionPool:102 - ConnectionPool : takeConnection : ends
+2019-04-29 23:01:15 DEBUG ConnectionPool:159 - ConnectionPool : closeConnection
+2019-04-29 23:05:13 DEBUG ConnectionPool:56 - ConnectionPool : initConnectionPool : starts
+2019-04-29 23:05:16 DEBUG ConnectionPool:78 - ConnectionPool : initConnectionPool : ends
+2019-04-29 23:05:16 DEBUG UserDAOimpl:82 - UserDAOdb : authorization : starts
+2019-04-29 23:05:16 DEBUG ConnectionPool:88 - ConnectionPool : takeConnection : starts
+2019-04-29 23:05:16 DEBUG ConnectionPool:102 - ConnectionPool : takeConnection : ends
+2019-04-29 23:05:16 DEBUG ConnectionPool:131 - ConnectionPool : closeConnection
+2019-04-29 23:05:16 DEBUG UserDAOimpl:119 - UserDAOdb : authorization : ends
