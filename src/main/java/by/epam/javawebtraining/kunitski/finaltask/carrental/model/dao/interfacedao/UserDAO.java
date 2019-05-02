@@ -13,7 +13,7 @@ public interface UserDAO {
 	 *
 	 * @throws DAOException
 	 */
-	void registration(User user) throws DAOException;
+	void register(User user) throws DAOException;
 
 	/**
 	 * Authorize user.
@@ -23,25 +23,37 @@ public interface UserDAO {
 	 * @return
 	 * @throws DAOException
 	 */
-	User authorization(String login, String password) throws DAOException;
+	User authorize(String login, String password) throws DAOException;
 
 	/**
-	 * Check for such logins, e-mail, password in the database
-	 * @param login user's login
-	 * @param email user's e-mail
+	 * Check for similar login, e-mail, password in the database
+	 *
+	 * @param login      user's login
+	 * @param email      user's e-mail
 	 * @param passportID user's passportID
-	 * @return object of class ValidatorUniqueUser, which stores information about uniqueness
+	 * @return object of class ValidatorUniqueUser, which contains information about uniqueness
 	 * inserted data
 	 * @throws DAOException error checking the presence of such a login, email, password in the database
 	 */
 	public ValidatorUniqueUser findUser(String login, String email, String passportID) throws DAOException;
 
 	/**
-	 * Getting all users
-	 * @return list of all users
+	 * Find user by ID
+	 *
+	 * @param userId user's id
+	 * @return found user
+	 * @throws DAOException error find user by id
+	 */
+	User findUserById(int userId) throws DAOException;
+
+	/**
+	 * Updating user
+	 *
+	 * @param newUser
 	 * @throws DAOException error getting all users
 	 */
-	public List<User> takeAllUsers(int startPage, int amountUsersOnPage) throws DAOException;
+	public void updateUser(User newUser) throws DAOException;
+
 
 	/**
 	 * Remove user account by id.

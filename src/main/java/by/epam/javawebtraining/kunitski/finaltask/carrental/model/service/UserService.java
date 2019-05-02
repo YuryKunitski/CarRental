@@ -1,8 +1,8 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao.UserDAOimpl;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
@@ -16,7 +16,7 @@ public class UserService {
 	private static final Logger LOG = LogManager.getLogger(ConnectionPool.class.getName());
 	private static final UserService instance = new UserService();
 
-	private final UserDAO userDAO = new UserDAOimpl();
+	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 
 	private UserService() {
 
@@ -27,10 +27,9 @@ public class UserService {
 	}
 
 	/**
-	 *
 	 * Data transfer to DAO for user authorization
 	 *
-	 * @param login   user's login
+	 * @param login    user's login
 	 * @param password user's password
 	 * @return authorized user
 	 * @throws ServiceException error authorization user
@@ -40,7 +39,7 @@ public class UserService {
 		LOG.debug(ServiceConstant.LOGIN_START_MSG);
 
 		try {
-			User user = userDAO.authorization(login, password);
+			User user = userDAO.authorize(login, password);
 			LOG.debug(ServiceConstant.LOGIN_END_MSG);
 			return user;
 
@@ -52,25 +51,28 @@ public class UserService {
 	/**
 	 * Data transfer to DAO for user registration
 	 *
-	 * @param login        user's login
-	 * @param password user's password
-	 * @param name     user's name
+	 * @param login      user's login
+	 * @param password   user's password
+	 * @param name       user's name
 	 * @param surname    user's surname
-	 * @param phone        user's phone
-	 * @param email        user's e-mail
-	 * @param passportID    user's passportID
-	 * @return object of class ValidatorUniqueUser, which carries information about the reason for refusal
+	 * @param phone      user's phone
+	 * @param email      user's e-mail
+	 * @param passportID user's passportID
+	 * @return object of class ValidatorUniqueUser, which contains information about the reason for refusal
 	 * to register a user or successful registration
 	 * @throws ServiceException error registration user
 	 */
 	public ValidatorUniqueUser register(String login, String password, RoleType roleType, String name, String surname, String phone,
 	                                    String email, String passportID) throws ServiceException {
+
 		LOG.debug(ServiceConstant.REGISTER_START_MSG);
+
 		User user = new User(login, password, roleType, name, surname, phone, email, passportID);
+
 		try {
 			ValidatorUniqueUser validatorUniqueUser = userDAO.findUser(login, email, passportID);
 			if (validatorUniqueUser.isUniqueLogin() && validatorUniqueUser.isUniqueEmail() && validatorUniqueUser.isUniquePassportID()) {
-				userDAO.registration(user);
+				userDAO.register(user);
 				LOG.debug(ServiceConstant.REGISTER_END_MSG);
 				return validatorUniqueUser;
 			} else {
@@ -80,6 +82,62 @@ public class UserService {
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
+	}
+
+	/**
+	 * Data transfer to DAO for find user by id
+	 *
+	 * @param userID user's id
+	 * @return authorized user
+	 * @throws ServiceException error find user by id
+	 */
+	public User findUserById(int userID) throws ServiceException {
+		LOG.debug(ServiceConstant.TAKE_USER_BY_ID_START_MSG);
+		try {
+			User user = userDAO.findUserById(userID);
+			LOG.debug(ServiceConstant.TAKE_USER_BY_ID_END_MSG);
+			return user;
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+	}
+
+	/**
+	 * Data transfer to DAO for update user
+	 *
+	 * @param newUser new users
+	 * @throws ServiceException error update user
+	 */
+	public void updateUser(User newUser) throws ServiceException {
+		LOG.debug(ServiceConstant.UPDATE_USER_START_MSG);
+		try {
+			userDAO.updateUser(newUser);
+			LOG.debug(ServiceConstant.UPDATE_USER_ENDS_MSG);
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+	}
+
+	/**
+	 * Data transfer to DAO for remove user by id
+	 *
+	 * @param userID user's id
+	 * @throws ServiceException error remove user by id
+	 */
+	public boolean removeUserByID(int userID) throws ServiceException {
+
+		LOG.debug(ServiceConstant.UPDATE_USER_START_MSG);
+		boolean result = false;
+
+		try {
+			userDAO.removeUserByID(userID);
+			result = true;
+
+			LOG.debug(ServiceConstant.UPDATE_USER_ENDS_MSG);
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+		return result;
 	}
 
 }

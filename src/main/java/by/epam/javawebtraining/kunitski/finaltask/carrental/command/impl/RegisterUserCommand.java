@@ -29,10 +29,8 @@ public class RegisterUserCommand implements Command {
 	private static final String E_MAIL = "email";
 	private static final String NAME = "name";
 	private static final String SURNAME = "surname";
-	//	private static final String MIDDLE_NAME = "middle-name";
 	private static final String PHONE = "phone";
 	private static final String PASSPORT = "passport";
-	//	private static final String ADDRESS = "address";
 	private static final String LOGIN_VALID = "validLogin";
 	private static final String PASSWORD_VALID = "validPassword";
 	private static final String CONFIRM_PASSWORD_VALID = "validConfirmPassword";
@@ -43,7 +41,6 @@ public class RegisterUserCommand implements Command {
 	private static final String MIDDLE_NAME_VALID = "validMiddleName";
 	private static final String PHONE_VALID = "validPhone";
 	private static final String PASSPORT_VALID = "validPassport";
-	//	private static final String ADDRESS_VALID = "validAddress";
 	private static final String UNIQUE_LOGIN = "uniqueLogin";
 	private static final String UNIQUE_EMAIL = "uniqueEmail";
 	private static final String UNIQUE_PASSPORT = "uniquePassport";
@@ -79,10 +76,9 @@ public class RegisterUserCommand implements Command {
 		String email = request.getParameter(E_MAIL);
 		String name = request.getParameter(NAME);
 		String surname = request.getParameter(SURNAME);
-//		String middleName = request.getParameter(MIDDLE_NAME);
 		String phone = request.getParameter(PHONE);
 		String passportID = request.getParameter(PASSPORT);
-//		String address = request.getParameter(ADDRESS);
+
 
 		boolean uniqueLogin = false;
 		boolean uniqueEmail = false;
@@ -102,7 +98,7 @@ public class RegisterUserCommand implements Command {
 		request.setAttribute(MIDDLE_NAME_VALID, true);
 		request.setAttribute(PHONE_VALID, true);
 		request.setAttribute(PASSPORT_VALID, true);
-//		request.setAttribute(ADDRESS_VALID, true);
+
 
 		if (!validator.validateLogin(login)) {
 			request.setAttribute(LOGIN_VALID, false);

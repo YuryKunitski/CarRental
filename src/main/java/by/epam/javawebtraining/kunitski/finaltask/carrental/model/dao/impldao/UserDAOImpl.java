@@ -15,22 +15,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
-public class UserDAOimpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
-	private static final String SQL_ADD_USER = "INSERT INTO car_rental.user (`login`, `password`, `role_id`, `name`, `surname`, `phone`, `email`, `passport_id`) VALUES (?,?,?,?,?,?,?,?);";
+	private static final String SQL_ADD_USER = "INSERT INTO car_rental.user (login, password, role_id, name, surname, phone, email, passport_id) VALUES (?,?,?,?,?,?,?,?);";
 	private static final String SQL_FIND_USER = "SELECT user_id, login, password, role_id, name, surname, phone, email, passport_id FROM user WHERE user.login=? AND user.password=?;";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT login FROM user WHERE login=?;";
 	private static final String SQL_FIND_USER_BY_PASSPORT = "SELECT login FROM user WHERE passport=?;";
-	private static final String SQL_FIND_USER_BY_EMAIL = "SELECT login FROM user WHERE email=?";
-//	private static final String TAKE_ALL_USERS_QUERY =  "SELECT userID, login, type, lastName, firstName, email, phone FROM users GROUP BY (userID) DESC LIMIT ?,?;";
-//	private static final String COUNT_ALL_USERS_QUERY = "SELECT COUNT(user_id) FROM user";
+	private static final String SQL_FIND_USER_BY_EMAIL = "SELECT login FROM user WHERE email=?;";
+	private static final String SQL_REMOVE_USER_BY_ID = "DELETE FROM user WHERE user_id = ?;";
+	private final static String SQL_UPDATE_USER_BY_LOGIN = "UPDATE user set login = ?, password = ?, name = ?, surname= ?, phone= ?, email= ?, passport_id=?  where user_id = ?;";
+	private static final String FIND_USER_BY_ID_QUERY = "SELECT * FROM user WHERE user_id=?;";
 
-	private static final Logger LOG = LogManager.getLogger(UserDAOimpl.class.getName());
+	private static final Logger LOG = LogManager.getLogger(UserDAOImpl.class.getName());
 
 	@Override
-	public void registration(User user) throws DAOException {
+	public void register(User user) throws DAOException {
 		LOG.debug(DAOStringConstant.DAO_REGISTRATION_STARTS_MSG);
 
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -69,7 +69,7 @@ public class UserDAOimpl implements UserDAO {
 	}
 
 	@Override
-	public User authorization(String login, String password) throws DAOException {
+	public User authorize(String login, String password) throws DAOException {
 
 		LOG.debug(DAOStringConstant.DAO_AUTORIZATION_STARTS_MSG);
 
@@ -114,6 +114,52 @@ public class UserDAOimpl implements UserDAO {
 			}
 		}
 		return user;
+	}
+
+	@Override
+	public User findUserById(int userID) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_FIND_USER_BY_ID_STARTS_MSG);
+
+		Connection connection = null;
+		ConnectionPool connectionPooldb = ConnectionPool.getInstance();
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		User user = null;
+
+		try {
+
+			connection = connectionPooldb.takeConnection();
+			ps = connection.prepareStatement(FIND_USER_BY_ID_QUERY);
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				user = new User();
+				user.setUserID(rs.getInt(1));
+				user.setLogin(rs.getString(2));
+				user.setPassword(rs.getString(3));
+				user.setRoleType(RoleType.getValue(rs.getInt(4)));
+				user.setName(rs.getString(5));
+				user.setSurName(rs.getString(6));
+				user.setPhone(rs.getString(7));
+				user.setEmail(rs.getString(8));
+				user.setPassportID(rs.getString(9));
+			}
+
+			return user;
+
+		} catch (SQLException | ConnectionPoolException ex) {
+			throw new DAOException(DAOStringConstant.DAO_FIND_USER_BY_ID_ERROR, ex);
+		} finally {
+			try {
+				if (connectionPooldb != null) {
+					connectionPooldb.closeConnection(connection, ps, rs);
+				}
+				LOG.debug(DAOStringConstant.DAO_FIND_USER_BY_ID_ENDS_MSG);
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(DAOStringConstant.DAO_FIND_USER_BY_ID_CLOSE_CON_ERROR, ex);
+			}
+		}
 	}
 
 	@Override
@@ -178,13 +224,83 @@ public class UserDAOimpl implements UserDAO {
 	}
 
 	@Override
-	public List<User> takeAllUsers(int startPage, int amountUsersOnPage) throws DAOException {
-		return null;
+	public void updateUser(User user) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_UPDATE_USER_BY_ID_STARTS_MSG);
+
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try {
+			connection = connectionPool.takeConnection();
+			connection.setAutoCommit(false);
+
+			ps = connection.prepareStatement(SQL_UPDATE_USER_BY_LOGIN);
+			ps.setString(1, user.getLogin());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setString(4, user.getSurName());
+			ps.setString(5, user.getPhone());
+			ps.setString(6, user.getEmail());
+			ps.setString(7, user.getPassportID());
+			ps.setInt(8, user.getUserID());
+
+			ps.executeUpdate();
+			connection.commit();
+
+		} catch (ConnectionPoolException | SQLException e) {
+			throw new DAOException(DAOStringConstant.DAO_FIND_USER_ERROR_MSG, e);
+
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, ps);
+				}
+				LOG.debug(DAOStringConstant.DAO_UPDATE_USER_BY_ID_ENDS_MSG);
+
+			} catch (ConnectionPoolException e) {
+				throw new DAOException(DAOStringConstant.DAO_UPDATE_USER_BY_ID_CON_ERROR_MSG, e);
+			}
+		}
+
 	}
 
 	@Override
-	public boolean removeUserByID(int idUser) throws DAOException {
-		return false;
+	public boolean removeUserByID(int userID) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_REMOVE_USER_BY_ID_END_MSG);
+
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		PreparedStatement removeProfileDataPS = null;
+
+		boolean result = false;
+		try {
+			connection = connectionPool.takeConnection();
+			connection.setAutoCommit(false);
+
+			ps = connection.prepareStatement(SQL_REMOVE_USER_BY_ID);
+			ps.setInt(1, userID);
+			ps.executeUpdate();
+			connection.commit();
+			result = true;
+		} catch (ConnectionPoolException | SQLException e) {
+			throw new DAOException(DAOStringConstant.DAO_REMOVE_USER_BY_ID_ERROR_MSG, e);
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, ps);
+				}
+
+				LOG.debug(DAOStringConstant.DAO_REMOVE_USER_BY_ID_END_MSG);
+
+			} catch (ConnectionPoolException e) {
+				throw new DAOException(DAOStringConstant.DAO_REMOVE_USER_BY_ID_CON_ERROR_MSG, e);
+			}
+		}
+
+		return result;
 	}
 
 	public static void main(String[] args) throws DAOException {
@@ -195,11 +311,12 @@ public class UserDAOimpl implements UserDAO {
 		} catch (ConnectionPoolException e) {
 			e.printStackTrace();
 		}
-		UserDAO userDAO = new UserDAOimpl();
-//		userDAO.registration(new User("Kat","1",RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
-		System.out.println(userDAO.authorization("Kat", "1"));
-//		System.out.println(userDAO.authorization("trol", "1"));
+		UserDAO userDAO = new UserDAOImpl();
+//		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
+//		userDAO.updateUser(new User(1,"Liza","1", RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
+		System.out.println(userDAO.findUserById(2));
 
+//		userDAO.removeUserByID(1);
 	}
 
 

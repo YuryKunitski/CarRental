@@ -30,9 +30,9 @@ public class DAOStringConstant {
 	public static final String DAO_TAKE_MARKS_STARTS_MSG = "CarDAOdb : takeMarks : starts";
 	public static final String DAO_TAKE_MODELS_STARTS_MSG = "CarDAOdb : takeModels : starts";
 	public static final String DAO_TAKE_CAR_TYPES_STARTS_MSG = "CarDAOdb : takeCarTypes : starts";
-	public static final String DAO_TAKE_CARS_BY_TYPE_STARTS_MSG = "CarDAOdb : takeCarsByType : starts";
+	public static final String DAO_TAKE_CARS_BY_CLASS_STARTS_MSG = "CarDAOdb : takeCarsByClass : starts";
 	public static final String DAO_TAKE_UNUSED_CARS_STARTS_MSG = "CarDAOdb : takeUnusedCars : starts";
-	public static final String DAO_TAKE_UNUSED_CARS_BY_TYPE_STARTS_MSG = "CarDAOdb : takeUnusedCarsByType : starts";
+	public static final String DAO_TAKE_UNUSED_CARS_BY_CLASS_STARTS_MSG = "CarDAOdb : takeUnusedCarsByClass : starts";
 	public static final String DAO_TAKE_ALL_CARS_STARTS_MSG = "CarDAOdb : takeAllCars : starts";
 	public static final String DAO_INSERT_CAR_STARTS_MSG = "CarDAOdb : insertCar : starts";
 	public static final String DAO_FIND_CAR_BY_VIN_NUMBER_STARTS_MSG = "CarDAOdb : findCarByGovNumberVin : starts";
@@ -44,9 +44,9 @@ public class DAOStringConstant {
 	public static final String DAO_TAKE_MARKS_ENDS_MSG = "CarDAOdb : takeMarks : ends";
 	public static final String DAO_TAKE_MODELS_ENDS_MSG = "CarDAOdb : takeModels : ends";
 	public static final String DAO_TAKE_CAR_TYPES_ENDS_MSG = "CarDAOdb : takeCarTypes : ends";
-	public static final String DAO_TAKE_CARS_BY_TYPE_ENDS_MSG = "CarDAOdb : takeCarsByType : ends";
+	public static final String DAO_TAKE_CARS_BY_CLASS_ENDS_MSG = "CarDAOdb : takeCarsByClass : ends";
 	public static final String DAO_TAKE_UNUSED_CARS_ENDS_MSG = "CarDAOdb : takeUnusedCars : ends";
-	public static final String DAO_TAKE_UNUSED_CARS_BY_TYPE_ENDS_MSG = "CarDAOdb : takeUnusedCarsByType : ends";
+	public static final String DAO_TAKE_UNUSED_CARS_BY_CLASS_ENDS_MSG = "CarDAOdb : takeUnusedCarsByClass : ends";
 	public static final String DAO_TAKE_ALL_CARS_ENDS_MSG = "CarDAOdb : takeAllCars : ends";
 	public static final String DAO_INSERT_CAR_ENDS_MSG = "CarDAOdb : insertCar : ends";
 	public static final String DAO_FIND_CAR_BY_VIN_NUMBER_ENDS_MSG = "CarDAOdb : findCarByGovNumberVin : ends";
@@ -62,12 +62,12 @@ public class DAOStringConstant {
 	public static final String DAO_TAKE_MODELS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeModels : close connection error";
 	public static final String DAO_TAKE_CAR_TYPES_ERROR_MSG = "CarDAOdb : takeCarTypes : ERROR";
 	public static final String DAO_TAKE_CAR_TYPES_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeCarTypes : close connection error";
-	public static final String DAO_TAKE_CARS_BY_TYPE_ERROR_MSG = "CarDAOdb : takeCarsByType : ERROR";
-	public static final String DAO_TAKE_CARS_BY_TYPE_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeCarsByType : close connection error";
+	public static final String DAO_TAKE_CARS_BY_CLASS_ERROR_MSG = "CarDAOdb : takeCarsByClass : ERROR";
+	public static final String DAO_TAKE_CARS_BY_CLASS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeCarsByCLass : close connection error";
 	public static final String DAO_TAKE_UNUSED_CARS_ERROR_MSG = "CarDAOdb : takeUnusedCars : ERROR";
 	public static final String DAO_TAKE_UNUSED_CARS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeUnusedCars : close connection error";
-	public static final String DAO_TAKE_UNUSED_CARS_BY_TYPE_ERROR_MSG = "CarDAOdb : takeUnusedCarsByType : ERROR";
-	public static final String DAO_TAKE_UNUSED_CARS_BY_TYPE_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeUnusedCarsByType : close connection error";
+	public static final String DAO_TAKE_UNUSED_CARS_BY_CLASS_ERROR_MSG = "CarDAOdb : takeUnusedCarsByClass : ERROR";
+	public static final String DAO_TAKE_UNUSED_CARS_BY_CLASS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeUnusedCarsByClass : close connection error";
 	public static final String DAO_TAKE_ALL_CARS_ERROR_MSG = "CarDAOdb : takeAllCars : ERROR";
 	public static final String DAO_TAKE_ALL_CARS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeAllCars : close connection error";
 	public static final String DAO_INSERT_CAR_ERROR_MSG = "CarDAOdb : insertCar : ERROR";
@@ -151,6 +151,9 @@ public class DAOStringConstant {
 	public static final String DAO_REGISTRATION_CLOSE_CON_ERROR_MSG = "UserDAOdb : registration : close connection error";
 	public static final String DAO_FIND_USER_ERROR_MSG = "UserDAOdb : findUser : ERROR";
 	public static final String DAO_FIND_USER_CLOSE_CON_ERROR_MSG = "UserDAOdb : findUser : close connection error";
+	public static final String DAO_REMOVE_USER_BY_ID_ERROR_MSG = "UserDAOdb : removeUserByID : ERROR";
+	public static final String DAO_REMOVE_USER_BY_ID_CON_ERROR_MSG = "UserDAOdb : removeUserByID : close connection error";
+	public static final String DAO_UPDATE_USER_BY_ID_CON_ERROR_MSG = "UserDAOdb : updateUserByID : close connection error";
 	public static final String DAO_TAKE_ALL_USERS_ERROR = "UserDAOdb : takeAllUsers : ERROR";
 	public static final String DAO_TAKE_ALL_USERS_CLOSE_CON_ERROR_MSG = "UserDAOdb : takeAllUsers : close connection error";
 	public static final String DAO_FIND_USER_BY_ID_ERROR = "UserDAOdb : findUserById : ERROR";
@@ -162,11 +165,17 @@ public class DAOStringConstant {
 	public static final String DAO_AUTORIZATION_ENDS_MSG = "UserDAOdb : authorization : ends";
 	public static final String DAO_REGISTRATION_STARTS_MSG = "UserDAO : registrate user : starts";
 	public static final String DAO_REGISTARATION_ENDS_MSG = "UserDAO : registrate user : ends";
+	public static final String DAO_REMOVE_USER_BY_ID_END_MSG = "UserDAO : removeUserByID : ends";
+	public static final String DAO_UPDATE_USER_BY_ID_STARTS_MSG = "UserDAOdb : updateUserByID : starts";
+	public static final String DAO_UPDATE_USER_BY_ID_ENDS_MSG = "UserDAOdb : updateUserByID : ends";
 	public static final String DAO_TAKE_ALL_USERS_STARTS_MSG = "UserDAOdb : takeAllUsers : starts";
 	public static final String DAO_TAKE_ALL_USERS_ENDS_MSG = "UserDAOdb : takeAllUsers : ends";
 	public static final String DAO_FIND_USER_BY_ID_STARTS_MSG = "UserDAOdb : findUserById : starts";
 	public static final String DAO_FIND_USER_BY_ID_ENDS_MSG = "UserDAOdb : findUserById : ends";
 	public static final String DAO_COUNT_ALL_USERS_STARTS_MSG = "UserDAOdb : countAllUsers : starts";
 	public static final String DAO_COUNT_ALL_USERS_ENDS_MSG = "UserDAOdb : countAllUsers : ends";
+
+	public static final String INIT_DAO_FACTORY_MSG = "DAOFactory : init DAO factory";
+
 
 }

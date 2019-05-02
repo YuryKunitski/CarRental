@@ -21,7 +21,6 @@ public class User {
 
 	public User(String login, String password, RoleType role, String name, String surName, String phone,
 	            String email, String passportID) {
-//		this.userID = userID;
 		this.login = login;
 		this.password = password;
 		this.role = role;
@@ -30,8 +29,14 @@ public class User {
 		this.phone = phone;
 		this.email = email;
 		this.passportID = passportID;
-
 	}
+
+	public User(int userID, String login, String password, RoleType role, String name, String surName, String phone,
+	            String email, String passportID) {
+		this(login, password, role, name, surName, phone, email, passportID);
+		this.userID = userID;
+	}
+
 
 	public int getUserID() {
 		return userID;
@@ -107,17 +112,9 @@ public class User {
 	}
 
 	public void setEmail(String email) {
-		if (checkEmail(email)) {
+		if (email != null) {
 			this.email = email;
 		}
-	}
-
-	private boolean checkEmail(String email) {
-		String regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(email);
-		return matcher.matches();
 	}
 
 	public String getPassportID() {

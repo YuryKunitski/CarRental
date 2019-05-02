@@ -126,9 +126,33 @@ public class ConnectionPool {
 	/*
 	 * Close connection pool.
 	 */
+
+
+	public void closeConnection(Connection con, Statement st) throws ConnectionPoolException {
+		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_MSG);
+		try {
+			if (con != null) {
+				con.close();
+			}
+		} catch (SQLException ex) {
+			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
+			throw new ConnectionPoolException(ex);
+		}
+		try {
+			if (st != null) {
+				st.close();
+			}
+		} catch (SQLException ex) {
+			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
+			throw new ConnectionPoolException( ex);
+		}
+	}
+
 	public void closeConnection(Connection con, Statement st, ResultSet rs) throws ConnectionPoolException {
 
 		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_MSG);
+
+		closeConnection(con, st);
 
 		try {
 			if (rs != null)
@@ -137,39 +161,10 @@ public class ConnectionPool {
 		LOG.error(DAOStringConstant.CLOSE_CON_EXC);
 			throw new ConnectionPoolException(ex);
 		}
-		try {
-			if (st != null)
-				st.close();
-		} catch (SQLException ex) {
-			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
-			throw new ConnectionPoolException( ex);
-		}
-		try {
-			if (con != null)
-				con.close();
-		} catch (SQLException ex) {
-			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
-			throw new ConnectionPoolException(ex);
-		}
 
 	}
 
 
-	public void closeConnection(Connection con, Statement st) throws ConnectionPoolException {
-		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_MSG);
-		try {
-			con.close();
-		} catch (SQLException ex) {
-			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
-			throw new ConnectionPoolException(ex);
-		}
-		try {
-			st.close();
-		} catch (SQLException ex) {
-			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
-			throw new ConnectionPoolException( ex);
-		}
-	}
 
 
 	private void closeConnectionsQueue(BlockingQueue<Connection> queue) throws SQLException {

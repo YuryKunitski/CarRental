@@ -1,5 +1,6 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity;
 
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 
 import java.sql.Date;
