@@ -15,13 +15,22 @@ public interface OrderDAO {
 	void addOrder(Order order) throws DAOException;
 
 	/**
+	 * Find cars id that are used for a certain period of time.
+	 * @param order заказ
+	 * @return список id автомобилей
+	 * @throws DAOException ошибка при получении списка id автомобилей
+	 */
+	public List<Integer> findUsedCarsID(Order order) throws DAOException;
+
+
+	/**
 	 * Find orders by user id
 	 *
 	 * @param userId
 	 * @return list of orders
 	 * @throws DAOException exception getting orders list
 	 */
-	List<Order> findOrdersByUserId(int userId, int toStartPage, int ordersOnPage) throws DAOException;
+	List<Order> findOrdersByUserId(int userId) throws DAOException;
 
 	/**
 	 * Find orders by car id
@@ -30,7 +39,7 @@ public interface OrderDAO {
 	 * @return list of orders
 	 * @throws DAOException exception getting orders list
 	 */
-	List<Order> findOrdersByCarId(int carId, int toStartPage, int ordersOnPage) throws DAOException;
+	List<Order> findOrdersByCarId(int carId) throws DAOException;
 
 
 	/**
@@ -39,7 +48,16 @@ public interface OrderDAO {
 	 * @return list of all orders
 	 * @throws DAOException exception getting orders list
 	 */
-	List<Order> takeAllOrders(int toStartPage, int carsOnPage) throws DAOException;
+	List<Order> takeAllOrders(int toStartPage, int ordersOnPage) throws DAOException;
+
+	/**
+	 * Find an order by order_id for administrator
+	 * @param orderId order's id
+	 * @return finding order
+	 * @throws DAOException exception finding order
+	 */
+	public Order takeAdminOrderByOrderId(int orderId) throws DAOException;
+
 
 	/**
 	 * Find order by order id
@@ -68,6 +86,14 @@ public interface OrderDAO {
 	 * @throws DAOException exception changing the status
 	 */
 	void updateStatusWithoutReason(String status, int orderId) throws DAOException;
+
+	/**
+	 * Changing damage price
+	 * @param orderId order's id
+	 * @param damagePrice damage price
+	 * @throws DAOException exception changing damage price
+	 */
+	public void updateDamagePriceByOrderId(int orderId, double damagePrice) throws DAOException;
 
 	/**
 	 * Take all count of orders

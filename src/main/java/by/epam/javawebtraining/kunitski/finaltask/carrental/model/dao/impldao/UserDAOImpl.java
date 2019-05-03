@@ -18,13 +18,23 @@ import java.sql.SQLException;
 
 public class UserDAOImpl implements UserDAO {
 
-	private static final String SQL_ADD_USER = "INSERT INTO car_rental.user (login, password, role_id, name, surname, phone, email, passport_id) VALUES (?,?,?,?,?,?,?,?);";
-	private static final String SQL_FIND_USER = "SELECT user_id, login, password, role_id, name, surname, phone, email, passport_id FROM user WHERE user.login=? AND user.password=?;";
+	private static final String SQL_ADD_USER = "INSERT INTO car_rental.user (login, password, role_id, name, surname," +
+			" phone, email, passport_id) VALUES (?,?,?,?,?,?,?,?);";
+
+	private static final String SQL_FIND_USER = "SELECT user_id, login, password, role_id, name, surname, phone, email," +
+			" passport_id FROM user WHERE user.login=? AND user.password=?;";
+
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT login FROM user WHERE login=?;";
-	private static final String SQL_FIND_USER_BY_PASSPORT = "SELECT login FROM user WHERE passport=?;";
+
+	private static final String SQL_FIND_USER_BY_PASSPORT = "SELECT login FROM user WHERE passport_id=?;";
+
 	private static final String SQL_FIND_USER_BY_EMAIL = "SELECT login FROM user WHERE email=?;";
+
 	private static final String SQL_REMOVE_USER_BY_ID = "DELETE FROM user WHERE user_id = ?;";
-	private final static String SQL_UPDATE_USER_BY_LOGIN = "UPDATE user set login = ?, password = ?, name = ?, surname= ?, phone= ?, email= ?, passport_id=?  where user_id = ?;";
+
+	private final static String SQL_UPDATE_USER_BY_ID = "UPDATE car_rental.user set login = ?, password = ?, name = ?," +
+			" surname= ?, phone= ?, email= ?, passport_id=?  WHERE user_id = ?;";
+
 	private static final String FIND_USER_BY_ID_QUERY = "SELECT * FROM user WHERE user_id=?;";
 
 	private static final Logger LOG = LogManager.getLogger(UserDAOImpl.class.getName());
@@ -224,7 +234,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void updateUser(User user) throws DAOException {
+	public void updateUser(User newUser) throws DAOException {
 
 		LOG.debug(DAOStringConstant.DAO_UPDATE_USER_BY_ID_STARTS_MSG);
 
@@ -235,15 +245,15 @@ public class UserDAOImpl implements UserDAO {
 			connection = connectionPool.takeConnection();
 			connection.setAutoCommit(false);
 
-			ps = connection.prepareStatement(SQL_UPDATE_USER_BY_LOGIN);
-			ps.setString(1, user.getLogin());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
-			ps.setString(4, user.getSurName());
-			ps.setString(5, user.getPhone());
-			ps.setString(6, user.getEmail());
-			ps.setString(7, user.getPassportID());
-			ps.setInt(8, user.getUserID());
+			ps = connection.prepareStatement(SQL_UPDATE_USER_BY_ID);
+			ps.setString(1, newUser.getLogin());
+			ps.setString(2, newUser.getPassword());
+			ps.setString(3, newUser.getName());
+			ps.setString(4, newUser.getSurName());
+			ps.setString(5, newUser.getPhone());
+			ps.setString(6, newUser.getEmail());
+			ps.setString(7, newUser.getPassportID());
+			ps.setInt(8, newUser.getUserID());
 
 			ps.executeUpdate();
 			connection.commit();
@@ -313,8 +323,8 @@ public class UserDAOImpl implements UserDAO {
 		}
 		UserDAO userDAO = new UserDAOImpl();
 //		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
-//		userDAO.updateUser(new User(1,"Liza","1", RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
-		System.out.println(userDAO.findUserById(2));
+		userDAO.updateUser(new User(2,"Liza","1000", RoleType.CUSTOMER,"Lizaveta","Wolsen","989898","sdsd","df4"));
+//		System.out.println(userDAO.findUserById(2));
 
 //		userDAO.removeUserByID(1);
 	}

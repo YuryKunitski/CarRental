@@ -1,5 +1,6 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service;
 
+import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
@@ -11,6 +12,9 @@ import com.google.protobuf.ServiceException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/*
+ * Class for creating some logical actions with an entity User
+ */
 public class UserService {
 
 	private static final Logger LOG = LogManager.getLogger(ConnectionPool.class.getName());
@@ -62,8 +66,8 @@ public class UserService {
 	 * to register a user or successful registration
 	 * @throws ServiceException error registration user
 	 */
-	public ValidatorUniqueUser register(String login, String password, RoleType roleType, String name, String surname, String phone,
-	                                    String email, String passportID) throws ServiceException {
+	public ValidatorUniqueUser register(String login, String password, RoleType roleType, String name, String surname,
+	                                    String phone, String email, String passportID) throws ServiceException {
 
 		LOG.debug(ServiceConstant.REGISTER_START_MSG);
 
@@ -71,7 +75,8 @@ public class UserService {
 
 		try {
 			ValidatorUniqueUser validatorUniqueUser = userDAO.findUser(login, email, passportID);
-			if (validatorUniqueUser.isUniqueLogin() && validatorUniqueUser.isUniqueEmail() && validatorUniqueUser.isUniquePassportID()) {
+			if (validatorUniqueUser.isUniqueLogin() && validatorUniqueUser.isUniqueEmail()
+					&& validatorUniqueUser.isUniquePassportID()) {
 				userDAO.register(user);
 				LOG.debug(ServiceConstant.REGISTER_END_MSG);
 				return validatorUniqueUser;
@@ -138,6 +143,24 @@ public class UserService {
 			throw new ServiceException(ex);
 		}
 		return result;
+	}
+
+	public static void main(String[] args) {
+
+		try {
+			ConnectionPool.getInstance().initConnectionPool();
+		} catch (ConnectionPoolException e) {
+			e.printStackTrace();
+		}
+
+		UserService userService = UserService.getInstance();
+		try {
+			userService.updateUser(new User(18,"Yutta", "102030", RoleType.CUSTOMER, "Yury",
+					"Kunitski", "+37529 1111111", "yyy@gmail.com", "кн123456789"));
+//			System.out.println(userService.findUserById(18));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

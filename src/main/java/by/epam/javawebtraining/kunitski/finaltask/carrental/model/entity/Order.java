@@ -3,7 +3,8 @@ package by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class Order {
 
@@ -11,25 +12,25 @@ public class Order {
 	private User user;
 	private Car car;
 	private Date rentalStartDate;
-	private int rentDuration;
-	private double costCoefficient;
-	private CrashHistory crashHistory;
+	private Date rentalEndDate;
+	private double damagePrice;
 	private String status;
+	private String info;
 	private double totalBill;
 
 	public Order() {
 	}
 
-	public Order(int orderID, User user, Car car, Date rentalStartDate, int rentDuration,
-	             double costCoefficient, CrashHistory crashHistory, String status, double totalBill) {
+	public Order(int orderID, User user, Car car, Date rentalStartDate, Date rentalEndDate,
+	             double damagePrice, String status, String info, double totalBill) {
 		this.orderID = orderID;
 		this.user = user;
 		this.car = car;
 		this.rentalStartDate = rentalStartDate;
-		this.rentDuration = rentDuration;
-		this.costCoefficient = costCoefficient;
-		this.crashHistory = crashHistory;
+		this.rentalEndDate = rentalEndDate;
+		this.damagePrice = damagePrice;
 		this.status = status;
+		this.info = info;
 		this.totalBill = totalBill;
 	}
 
@@ -38,9 +39,7 @@ public class Order {
 	}
 
 	public void setOrderID(int orderID) {
-		if (orderID > 0) {
-			this.orderID = orderID;
-		}
+		this.orderID = orderID;
 	}
 
 	public User getUser() {
@@ -48,9 +47,7 @@ public class Order {
 	}
 
 	public void setUser(User user) {
-		if (user != null) {
-			this.user = user;
-		}
+		this.user = user;
 	}
 
 	public Car getCar() {
@@ -58,9 +55,7 @@ public class Order {
 	}
 
 	public void setCar(Car car) {
-		if (car != null) {
-			this.car = car;
-		}
+		this.car = car;
 	}
 
 	public Date getRentalStartDate() {
@@ -68,49 +63,39 @@ public class Order {
 	}
 
 	public void setRentalStartDate(Date rentalStartDate) {
-		if (rentalStartDate != null) {
-			this.rentalStartDate = rentalStartDate;
-		}
+		this.rentalStartDate = rentalStartDate;
 	}
 
-	public int getRentDuration() {
-		return rentDuration;
+	public Date getRentalEndDate() {
+		return rentalEndDate;
 	}
 
-	public void setRentDuration(int rentDuration) {
-		if (rentDuration > 0) {
-			this.rentDuration = rentDuration;
-		}
+	public void setRentalEndDate(Date rentalEndDate) {
+		this.rentalEndDate = rentalEndDate;
 	}
 
-	public double getCostCoefficient() {
-		return costCoefficient;
+	public double getDamagePrice() {
+		return damagePrice;
 	}
 
-	public void setCostCoefficient(double costCoefficient) {
-		if (costCoefficient > 0) {
-			this.costCoefficient = costCoefficient;
-		}
-	}
-
-	public CrashHistory getCrashHistory() {
-		return crashHistory;
-	}
-
-	public void setCrashHistory(CrashHistory crashHistory) {
-		if (crashHistory != null) {
-			this.crashHistory = crashHistory;
-		}
+	public void setDamagePrice(double damagePrice) {
+		this.damagePrice = damagePrice;
 	}
 
 	public String getStatus() {
 		return status;
 	}
 
-	public void setAllowed(String status) {
-		if (status != null) {
-			this.status = status;
-		}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	public double getTotalBill() {
@@ -118,9 +103,7 @@ public class Order {
 	}
 
 	public void setTotalBill(double totalBill) {
-		if (totalBill > 0) {
-			this.totalBill = totalBill;
-		}
+		this.totalBill = totalBill;
 	}
 
 	@Override
@@ -131,15 +114,16 @@ public class Order {
 		Order order = (Order) o;
 
 		if (orderID != order.orderID) return false;
-		if (rentDuration != order.rentDuration) return false;
-		if (Double.compare(order.costCoefficient, costCoefficient) != 0) return false;
+		if (Double.compare(order.damagePrice, damagePrice) != 0) return false;
 		if (Double.compare(order.totalBill, totalBill) != 0) return false;
 		if (user != null ? !user.equals(order.user) : order.user != null) return false;
 		if (car != null ? !car.equals(order.car) : order.car != null) return false;
 		if (rentalStartDate != null ? !rentalStartDate.equals(order.rentalStartDate) : order.rentalStartDate != null)
 			return false;
-		if (crashHistory != null ? !crashHistory.equals(order.crashHistory) : order.crashHistory != null) return false;
-		return status != null ? status.equals(order.status) : order.status == null;
+		if (rentalEndDate != null ? !rentalEndDate.equals(order.rentalEndDate) : order.rentalEndDate != null)
+			return false;
+		if (status != null ? !status.equals(order.status) : order.status != null) return false;
+		return info != null ? info.equals(order.info) : order.info == null;
 
 	}
 
@@ -151,11 +135,11 @@ public class Order {
 		result = 31 * result + (user != null ? user.hashCode() : 0);
 		result = 31 * result + (car != null ? car.hashCode() : 0);
 		result = 31 * result + (rentalStartDate != null ? rentalStartDate.hashCode() : 0);
-		result = 31 * result + rentDuration;
-		temp = Double.doubleToLongBits(costCoefficient);
+		result = 31 * result + (rentalEndDate != null ? rentalEndDate.hashCode() : 0);
+		temp = Double.doubleToLongBits(damagePrice);
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		result = 31 * result + (crashHistory != null ? crashHistory.hashCode() : 0);
 		result = 31 * result + (status != null ? status.hashCode() : 0);
+		result = 31 * result + (info != null ? info.hashCode() : 0);
 		temp = Double.doubleToLongBits(totalBill);
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		return result;
@@ -167,11 +151,11 @@ public class Order {
 				"orderID=" + orderID +
 				", user=" + user +
 				", car=" + car +
-				", rentalStartDate=" + rentalStartDate +
-				", rentDuration=" + rentDuration +
-				", costCoefficient=" + costCoefficient +
-				", crashHistory=" + crashHistory +
+				", rentalStartDate='" + rentalStartDate + '\'' +
+				", rentalEndDate='" + rentalEndDate + '\'' +
+				", damagePrice=" + damagePrice +
 				", status='" + status + '\'' +
+				", info='" + info + '\'' +
 				", totalBill=" + totalBill +
 				'}';
 	}
