@@ -1,11 +1,11 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOStringConstant;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.CarDAO;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.CarDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
 import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
@@ -15,8 +15,12 @@ import org.apache.log4j.Logger;
 
 import java.io.ByteArrayInputStream;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CarDAOImpl implements CarDAO {
 
@@ -26,7 +30,7 @@ public class CarDAOImpl implements CarDAO {
 	private static final String INSERT_CAR_QUERY = "INSERT INTO car (car_model_id, car_class_id, year_issue," +
 			" price_per_day, status, image) VALUES ((SELECT car_model.car_model_id FROM car_model WHERE model = ?),?,?,?,?,?);";
 
-	private static final String TAKE_CAR_BY_ID_QUERY = "SELECT car_model.model, car_class.class, car.year_issue," +
+	private static final String TAKE_CAR_BY_ID_QUERY = "SELECT car.car_id, car_model.model, car_class.class, car.year_issue," +
 			" car.price_per_day, car.status, car.image FROM car_rental.car " +
 			"INNER JOIN car_model ON car_model.car_model_id = car.car_model_id " +
 			"INNER JOIN car_class ON car_class.car_class_id = car.car_class_id WHERE car_id=?;";
@@ -112,12 +116,13 @@ public class CarDAOImpl implements CarDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				car.setCarModel(rs.getString(1));
-				car.setCarClassType(CarClassType.valueOf(rs.getString(2).toUpperCase()));
-				car.setYearIssue(rs.getString(3));
-				car.setPricePerDay(rs.getDouble(4));
-				car.setCarStatus(rs.getString(5));
-				car.setImage(Base64.encode(rs.getBytes(6)));
+				car.setCarID(rs.getInt(1));
+				car.setCarModel(rs.getString(2));
+				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
+				car.setYearIssue(rs.getString(4));
+				car.setPricePerDay(rs.getDouble(5));
+				car.setCarStatus(rs.getString(6));
+				car.setImage(Base64.encode(rs.getBytes(7)));
 
 			}
 			return car;
@@ -207,7 +212,7 @@ public class CarDAOImpl implements CarDAO {
 	}
 
 	@Override
-	public List<Car> takeUnusedCars(String supposedDateFrom, String supposedDateTo, int startPage, int carsOnPage)
+	public List<Car> takeUnusedCars(Date supposedDateFrom, Date supposedDateTo, int startPage, int carsOnPage)
 			throws DAOException {
 
 		LOG.debug(DAOStringConstant.DAO_TAKE_UNUSED_CARS_STARTS_MSG);
@@ -223,10 +228,10 @@ public class CarDAOImpl implements CarDAO {
 			ps = connection.prepareStatement(TAKE_UNUSED_CARS_QUERY);
 
 			ps.setString(1, ORDER_STATUS_APPROVED);
-			ps.setString(2, supposedDateFrom);
-			ps.setString(3, supposedDateTo);
-			ps.setString(4, supposedDateFrom);
-			ps.setString(5, supposedDateTo);
+			ps.setDate(2, supposedDateFrom);
+			ps.setDate(3, supposedDateTo);
+			ps.setDate(4, supposedDateFrom);
+			ps.setDate(5, supposedDateTo);
 			ps.setInt(6, startPage);
 			ps.setInt(7, carsOnPage);
 			rs = ps.executeQuery();
@@ -259,7 +264,7 @@ public class CarDAOImpl implements CarDAO {
 	}
 
 	@Override
-	public List<Car> takeUnUsedCarsByClass(String supposedDateFrom, String supposedDateTo, CarClassType carClassType,
+	public List<Car> takeUnUsedCarsByClass(Date supposedDateFrom, Date supposedDateTo, CarClassType carClassType,
 	                                       int startPage, int carsOnPage) throws DAOException {
 
 		LOG.debug(DAOStringConstant.DAO_TAKE_UNUSED_CARS_BY_CLASS_STARTS_MSG);
@@ -275,10 +280,10 @@ public class CarDAOImpl implements CarDAO {
 			ps = connection.prepareStatement(TAKE_UNUSED_CARS_BY_CLASS_QUERY);
 
 			ps.setString(1, ORDER_STATUS_APPROVED);
-			ps.setString(2, supposedDateFrom);
-			ps.setString(3, supposedDateTo);
-			ps.setString(4, supposedDateFrom);
-			ps.setString(5, supposedDateTo);
+			ps.setDate(2, supposedDateFrom);
+			ps.setDate(3, supposedDateTo);
+			ps.setDate(4, supposedDateFrom);
+			ps.setDate(5, supposedDateTo);
 			ps.setString(6, carClassType.toString());
 			ps.setInt(7, startPage);
 			ps.setInt(8, carsOnPage);
@@ -398,15 +403,24 @@ public class CarDAOImpl implements CarDAO {
 		} catch (ConnectionPoolException e) {
 			e.printStackTrace();
 		}
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
 		CarDAO carDAO = DAOFactory.getInstance().getCarDAO();
 //		carDAO.insertCar(new Car(21,"ford_focus",CarClassType.ECONOM,"2008", 75.5, "used", ""));
 //		System.out.println(carDAO.takeCarById(15));
 //		List<Car> carList = carDAO.takeAllCars(5, 8);
 //		System.out.println(carList.toString());
 //		carDAO.deleteCarById(41);
-//		List<Car> unusedCars = carDAO.takeUnUsedCarsByClass("2019.06.10", "2019.06.16", CarClassType.ECONOM, 20,0);
-//		System.out.println(unusedCars.toString());
-		List<Car> listCarByClass = carDAO.takeCarsByClass(CarClassType.BUSINESS, 20, 0);
-		System.out.println(listCarByClass.toString());
+		List<Car> unusedCars = null;
+		try {
+			unusedCars = carDAO.takeUnUsedCarsByClass(new  java.sql.Date(format.parse( "2019-06-10").getTime()),
+					new java.sql.Date(format.parse( "2019-06-16").getTime()), CarClassType.ECONOM, 20,0);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(unusedCars.toString());
+//		List<Car> listCarByClass = carDAO.takeCarsByClass(CarClassType.BUSINESS, 20, 0);
+//		System.out.println(listCarByClass.toString());
+//		System.out.println(carDAO.takeCarById(5));
 	}
 }

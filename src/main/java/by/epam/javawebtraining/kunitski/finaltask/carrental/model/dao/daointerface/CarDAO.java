@@ -1,9 +1,10 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface CarDAO {
@@ -19,19 +20,19 @@ public interface CarDAO {
 	/*
 	 *Take car by id
 	 *
-	 * @param id
+	 * @param id car's id
 	 * @return car
-	 * @throws DAOException
+	 * @throws DAOException  error take car by id
 	 */
 	Car takeCarById(int id) throws DAOException;
 
 	/**
 	 * Get all cars
 	 *
-	 * @param toStartPage
-	 * @param startPage
+	 * @param startPage number of page
+	 * @param toStartPage count cars on page
 	 * @return list of all cars
-	 * @throws DAOException
+	 * @throws DAOException error get all cars
 	 */
 	List<Car> takeAllCars(int startPage, int toStartPage) throws DAOException;
 
@@ -39,8 +40,8 @@ public interface CarDAO {
 	/**
 	 * Delete a car by id
 	 *
-	 * @param carId
-	 * @throws DAOException
+	 * @param carId car's id
+	 * @throws DAOException delete a car by id
 	 */
 	void deleteCarById(int carId) throws DAOException;
 
@@ -52,18 +53,18 @@ public interface CarDAO {
 	 * @return list of free cars
 	 * @throws DAOException
 	 */
-	List<Car> takeUnusedCars(String supposedDateFrom, String supposedDateTo,
-	                            int startPage, int carsOnPage) throws DAOException;
+	List<Car> takeUnusedCars(Date supposedDateFrom, Date supposedDateTo,
+	                         int startPage, int carsOnPage) throws DAOException;
 
 	/**
-	 * Getting a list of free cars on some free time interval by class
+	 * Getting a list of free cars by class on some free time interval by class
 	 *
 	 * @param supposedDateFrom date and time of car rental by user from
 	 * @param supposedDateTo   date and time of car rental by user to
 	 * @return list of free cars
 	 * @throws DAOException
 	 */
-	List<Car> takeUnUsedCarsByClass(String supposedDateFrom, String supposedDateTo, CarClassType carClassType,
+	List<Car> takeUnUsedCarsByClass(Date supposedDateFrom, Date supposedDateTo, CarClassType carClassType,
 	                                int startPage, int carsOnPage) throws DAOException;
 
 	/**
@@ -71,7 +72,7 @@ public interface CarDAO {
 	 *
 	 * @param carClassType car class
 	 * @return list of cars of certain class
-	 * @throws DAOException
+	 * @throws DAOException error getting all cars of certain class
 	 */
 	List<Car> takeCarsByClass(CarClassType carClassType, int startPage, int toStartPage) throws DAOException;
 

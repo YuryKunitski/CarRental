@@ -1,10 +1,10 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOStringConstant;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.UserDAO;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAOImpl implements UserDAO {
+
+	private static final Logger LOG = LogManager.getLogger(UserDAOImpl.class.getName());
 
 	private static final String SQL_ADD_USER = "INSERT INTO car_rental.user (login, password, role_id, name, surname," +
 			" phone, email, passport_id) VALUES (?,?,?,?,?,?,?,?);";
@@ -37,7 +39,6 @@ public class UserDAOImpl implements UserDAO {
 
 	private static final String FIND_USER_BY_ID_QUERY = "SELECT * FROM user WHERE user_id=?;";
 
-	private static final Logger LOG = LogManager.getLogger(UserDAOImpl.class.getName());
 
 	@Override
 	public void register(User user) throws DAOException {
@@ -323,10 +324,10 @@ public class UserDAOImpl implements UserDAO {
 		}
 		UserDAO userDAO = new UserDAOImpl();
 //		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
-		userDAO.updateUser(new User(2,"Liza","1000", RoleType.CUSTOMER,"Lizaveta","Wolsen","989898","sdsd","df4"));
+//		userDAO.updateUser(new User(2,"Liza","1000", RoleType.CUSTOMER,"Lizaveta","Wolsen","989898","sdsd","df4"));
 //		System.out.println(userDAO.findUserById(2));
-
 //		userDAO.removeUserByID(1);
+		System.out.println(userDAO.findUserById(18));
 	}
 
 

@@ -1,4 +1,4 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.Order;
@@ -64,7 +64,7 @@ public interface OrderDAO {
 	 *
 	 * @param orderId
 	 * @return sought order
-	 * @throws DAOException exception sought order
+	 * @throws DAOException exception find order
 	 */
 	Order findOrderByOrderId(int orderId) throws DAOException;
 
@@ -94,6 +94,22 @@ public interface OrderDAO {
 	 * @throws DAOException exception changing damage price
 	 */
 	public void updateDamagePriceByOrderId(int orderId, double damagePrice) throws DAOException;
+
+	/**
+	 * Taking discount coefficient
+	 * @param countRentDays count rent days
+	 * @throws DAOException taking discount coefficient
+	 */
+	public double takeDiscountCoefficient(int countRentDays) throws DAOException;
+
+	/**
+	 * Changing discount coefficient
+	 * @param discountID discount coefficient id
+	 * @param value value for updating
+	 * @throws DAOException changing discount coefficient
+	 */
+	public void updateDiscountCoefficient(int discountID, double value) throws DAOException;
+
 
 	/**
 	 * Take all count of orders

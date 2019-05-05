@@ -1,11 +1,11 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao;
 
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao.CarDAOImpl;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao.OrderDAOImpl;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao.UserDAOImpl;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.CarDAO;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.OrderDAO;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.UserDAO;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl.CarDAOImpl;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl.OrderDAOImpl;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl.UserDAOImpl;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.CarDAO;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.OrderDAO;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.UserDAO;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

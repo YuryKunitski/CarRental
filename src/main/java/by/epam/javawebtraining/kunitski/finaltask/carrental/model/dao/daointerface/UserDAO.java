@@ -1,10 +1,8 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
-
-import java.util.List;
 
 public interface UserDAO {
 

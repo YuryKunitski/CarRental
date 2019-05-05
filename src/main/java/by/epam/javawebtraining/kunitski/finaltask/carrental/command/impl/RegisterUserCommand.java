@@ -5,8 +5,10 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.command.PageName;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.CommandException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.UserService;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceFactory;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl.UserServiceImpl;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.Validator;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.UserService;
 import com.google.protobuf.ServiceException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -143,7 +145,7 @@ public class RegisterUserCommand implements Command {
 			return false;
 		} else {
 			try {
-				UserService service = UserService.getInstance();
+				UserService service = ServiceFactory.getInstance().getUserService();
 				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, roleType ,name, surname, phone,
 						email, passportID);
 				uniqueLogin = validatorUniqueUser.isUniqueLogin();

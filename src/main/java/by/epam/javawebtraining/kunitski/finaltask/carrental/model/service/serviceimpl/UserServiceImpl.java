@@ -1,13 +1,14 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl;
 
-import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.UserDAO;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceConstant;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.UserService;
 import com.google.protobuf.ServiceException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -15,20 +16,13 @@ import org.apache.log4j.Logger;
 /*
  * Class for creating some logical actions with an entity User
  */
-public class UserService {
+public class UserServiceImpl implements UserService {
 
-	private static final Logger LOG = LogManager.getLogger(ConnectionPool.class.getName());
-	private static final UserService instance = new UserService();
+	private static final Logger LOG = LogManager.getLogger(UserServiceImpl.class.getName());
 
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 
-	private UserService() {
 
-	}
-
-	public static UserService getInstance() {
-		return instance;
-	}
 
 	/**
 	 * Data transfer to DAO for user authorization
@@ -38,6 +32,7 @@ public class UserService {
 	 * @return authorized user
 	 * @throws ServiceException error authorization user
 	 */
+	@Override
 	public User login(String login, String password) throws ServiceException {
 
 		LOG.debug(ServiceConstant.LOGIN_START_MSG);
@@ -66,6 +61,7 @@ public class UserService {
 	 * to register a user or successful registration
 	 * @throws ServiceException error registration user
 	 */
+	@Override
 	public ValidatorUniqueUser register(String login, String password, RoleType roleType, String name, String surname,
 	                                    String phone, String email, String passportID) throws ServiceException {
 
@@ -96,6 +92,7 @@ public class UserService {
 	 * @return authorized user
 	 * @throws ServiceException error find user by id
 	 */
+	@Override
 	public User findUserById(int userID) throws ServiceException {
 		LOG.debug(ServiceConstant.TAKE_USER_BY_ID_START_MSG);
 		try {
@@ -113,6 +110,7 @@ public class UserService {
 	 * @param newUser new users
 	 * @throws ServiceException error update user
 	 */
+	@Override
 	public void updateUser(User newUser) throws ServiceException {
 		LOG.debug(ServiceConstant.UPDATE_USER_START_MSG);
 		try {
@@ -129,6 +127,7 @@ public class UserService {
 	 * @param userID user's id
 	 * @throws ServiceException error remove user by id
 	 */
+	@Override
 	public boolean removeUserByID(int userID) throws ServiceException {
 
 		LOG.debug(ServiceConstant.UPDATE_USER_START_MSG);
@@ -143,24 +142,6 @@ public class UserService {
 			throw new ServiceException(ex);
 		}
 		return result;
-	}
-
-	public static void main(String[] args) {
-
-		try {
-			ConnectionPool.getInstance().initConnectionPool();
-		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-		}
-
-		UserService userService = UserService.getInstance();
-		try {
-			userService.updateUser(new User(18,"Yutta", "102030", RoleType.CUSTOMER, "Yury",
-					"Kunitski", "+37529 1111111", "yyy@gmail.com", "кн123456789"));
-//			System.out.println(userService.findUserById(18));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

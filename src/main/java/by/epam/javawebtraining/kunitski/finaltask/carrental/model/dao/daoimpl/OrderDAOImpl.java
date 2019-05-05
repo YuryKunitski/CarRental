@@ -1,11 +1,11 @@
-package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.impldao;
+package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOStringConstant;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.interfacedao.OrderDAO;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.OrderDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.Order;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
@@ -85,6 +85,11 @@ public class OrderDAOImpl implements OrderDAO {
 
 	private static final String COUNT_ALL_ORDERS = "SELECT COUNT(order_id) FROM car_rental.order;";
 
+	private static final String TAKE_DISCOUNT_COEFFICIENT_QUERY = "SELECT d.coefficient " +
+			"FROM car_rental.discount_coefficient AS d WHERE d.days_from <= ? AND d.days_to >= ?;";
+
+	private static final String UPDATE_DISCOUNT_COEFFICIENT_QUERY = "UPDATE car_rental.discount_coefficient AS d " +
+			"SET d.coefficient = ?  WHERE d.discount_coefficient_id = ?;";
 
 
 	@Override
@@ -125,7 +130,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 	@Override
 	public List<Integer> findUsedCarsID(Order order) throws DAOException {
-		LOG.debug(DAOStringConstant.DAO_TAKE_ORDER_BY_ORDER_STARTS_MSG);
+		LOG.debug(DAOStringConstant.DAO_FIND_USED_CARS_ID_STARTS_MSG);
 		Connection connection = null;
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		PreparedStatement ps = null;
@@ -149,15 +154,15 @@ public class OrderDAOImpl implements OrderDAO {
 			}
 			return carIds;
 		} catch (ConnectionPoolException | SQLException ex) {
-			throw new DAOException(DAOStringConstant.DAO_TAKE_ORDER_BY_ORDER_ERROR_MSG, ex);
+			throw new DAOException(DAOStringConstant.DAO_FIND_USED_CARS_ID_ERROR_MSG, ex);
 		} finally {
 			try {
 				if (connectionPool != null) {
 					connectionPool.closeConnection(connection, ps, rs);
 				}
-				LOG.debug(DAOStringConstant.DAO_TAKE_ORDER_BY_ORDER_ENDS_MSG);
+				LOG.debug(DAOStringConstant.DAO_FIND_USED_CARS_ID_ENDS_MSG);
 			} catch (ConnectionPoolException ex) {
-				throw new DAOException(DAOStringConstant.DAO_TAKE_ORDER_BY_ORDER_CLOSE_CON_ERROR_MSG, ex);
+				throw new DAOException(DAOStringConstant.DAO_FIND_USED_CARS_ID_CLOSE_CON_ERROR_MSG, ex);
 			}
 		}
 	}
@@ -172,8 +177,6 @@ public class OrderDAOImpl implements OrderDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Order> orders = new ArrayList<>();
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
 
 		try {
 
@@ -224,7 +227,6 @@ public class OrderDAOImpl implements OrderDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Order> orders = new ArrayList<>();
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 
 		try {
@@ -330,6 +332,7 @@ public class OrderDAOImpl implements OrderDAO {
 			connection = connectionPool.takeConnection();
 			ps = connection.prepareStatement(TAKE_ADMIN_ORDER_BY_ORDER_ID_QUERY);
 			ps.setInt(1, orderId);
+
 			rs = ps.executeQuery();
 			Order order = new Order();
 			Car car = new Car();
@@ -362,7 +365,7 @@ public class OrderDAOImpl implements OrderDAO {
 				order.setUser(user);
 			}
 			return order;
-		} catch(ConnectionPoolException | SQLException ex) {
+		} catch (ConnectionPoolException | SQLException ex) {
 			throw new DAOException(DAOStringConstant.DAO_TAKE_ADMIN_ORDER_BY_ORDER_ID_ERROR_MSG, ex);
 		} finally {
 			try {
@@ -516,6 +519,72 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
+	public double takeDiscountCoefficient(int countRentDays) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_STARTS_MSG);
+
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		double discountCoefficient = 0;
+		try {
+
+			connection = connectionPool.takeConnection();
+			ps = connection.prepareStatement(TAKE_DISCOUNT_COEFFICIENT_QUERY);
+			ps.setInt(1, countRentDays);
+			ps.setInt(2, countRentDays);
+
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				discountCoefficient = rs.getDouble(1);
+			}
+			return discountCoefficient;
+		} catch (ConnectionPoolException | SQLException ex) {
+			throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ERROR_MSG, ex);
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, ps, rs);
+				}
+				LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ENDS_MSG);
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR_MSG, ex);
+			}
+		}
+	}
+
+	@Override
+	public void updateDiscountCoefficient(int discountID, double value) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_STARTS_MSG);
+
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement ps = null;
+		try {
+
+			connection = connectionPool.takeConnection();
+			ps = connection.prepareStatement(UPDATE_DISCOUNT_COEFFICIENT_QUERY);
+			ps.setDouble(1, value);
+			ps.setInt(2, discountID);
+			ps.executeUpdate();
+
+		} catch (ConnectionPoolException | SQLException ex) {
+			throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ERROR_MSG, ex);
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, ps);
+				}
+				LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ENDS_MSG);
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR_MSG, ex);
+			}
+		}
+	}
+
+	@Override
 	public int countAllOrders() throws DAOException {
 
 		LOG.debug(DAOStringConstant.DAO_COUNT_ALL_ORDERS_STARTS_MSG);
@@ -558,20 +627,20 @@ public class OrderDAOImpl implements OrderDAO {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
-//		try {
-//			User user = new User();
-//			user.setUserID(1);
-//			Car car = new Car();
-//			car.setCarID(1);
-//			orderDAO.addOrder(new Order(7, user, car, format.parse("2019-05-25"),
-//					format.parse("2019-05-28") , 0, "undefined", " ", 250));
+		try {
+			User user = new User();
+			user.setUserID(1);
+			Car car = new Car();
+			car.setCarID(1);
+			orderDAO.addOrder(new Order(0, user, car, format.parse("2019-05-25"),
+					format.parse("2019-05-28") , 0, "undefined", " ", 250));
 //			List<Integer> listUsedCarIDs = orderDAO.findUsedCarsID(new Order(7, user, car, format.parse("2019-05-02"),
 //					format.parse("2019-05-08") , 0, "undefined", " ", 250));
 //			System.out.println(listUsedCarIDs.toString());
 //
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 //		List<Order> orderList = orderDAO.findOrdersByUserId(1);
 //		System.out.println(orderList.toString());
 //		List<Order> orderListByCarID = orderDAO.findOrdersByCarId(10);
@@ -583,7 +652,9 @@ public class OrderDAOImpl implements OrderDAO {
 //		orderDAO.updateStatusWithoutReason("closed", 10);
 //		orderDAO.updateDamagePriceByOrderId(1, 80);
 //		System.out.println(orderDAO.countAllOrders());
-		System.out.println(orderDAO.findOrderByOrderId(2));
+//		System.out.println(orderDAO.findOrderByOrderId(2));
+//		System.out.println(orderDAO.takeDiscountCoefficient(14));
+//	orderDAO.updateDiscountCoefficient(3, 0.6);
 	}
 }
 

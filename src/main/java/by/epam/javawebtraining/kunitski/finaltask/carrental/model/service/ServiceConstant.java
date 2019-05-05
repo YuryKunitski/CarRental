@@ -4,25 +4,25 @@ public class ServiceConstant {
 
 
 	/**
-	 * Строковые константы для UserService
+	 * String constants for UserServiceImpl
 	 */
-	public static final String LOGIN_START_MSG = "UserService : login : starts";
-	public static final String LOGIN_END_MSG = "UserService : login : ends";
-	public static final String REGISTER_START_MSG = "UserService : register : starts";
-	public static final String REGISTER_END_MSG = "UserService : register : ends";
-	public static final String UPDATE_USER_START_MSG = "UserService : updateUserByID : starts";
-	public static final String UPDATE_USER_ENDS_MSG = "UserService : updateUserByID : ends";
-	public static final String TAKE_ALL_USERS_START_MSG = "UserService : takeAllUsers : starts";
-	public static final String TAKE_ALL_USERS_END_MSG = "UserService : takeAllUsers : ends";
-	public static final String TAKE_USER_BY_ID_START_MSG = "UserService : takeUserById : starts";
-	public static final String TAKE_USER_BY_ID_END_MSG = "UserService : takeUserById : ends";
-	public static final String COUNT_PAGE_AMOUNT_ALL_USERS_START_MSG = "UserService : countPageAmountAllUsers : starts";
-	public static final String COUNT_PAGE_AMOUNT_ALL_USERS_END_MSG = "UserService : countPageAmountAllUsers : ends";
-	public static final String USER_TO_START_PAGE_STARTS_MSG = "UserService : userToStartPage : starts";
-	public static final String USER_TO_START_PAGE_ENDS_MSG = "UserService : userToStartPage : ends";
+	public static final String LOGIN_START_MSG = "UserServiceImpl : login : starts";
+	public static final String LOGIN_END_MSG = "UserServiceImpl : login : ends";
+	public static final String REGISTER_START_MSG = "UserServiceImpl : register : starts";
+	public static final String REGISTER_END_MSG = "UserServiceImpl : register : ends";
+	public static final String UPDATE_USER_START_MSG = "UserServiceImpl : updateUserByID : starts";
+	public static final String UPDATE_USER_ENDS_MSG = "UserServiceImpl : updateUserByID : ends";
+	public static final String TAKE_ALL_USERS_START_MSG = "UserServiceImpl : takeAllUsers : starts";
+	public static final String TAKE_ALL_USERS_END_MSG = "UserServiceImpl : takeAllUsers : ends";
+	public static final String TAKE_USER_BY_ID_START_MSG = "UserServiceImpl : takeUserById : starts";
+	public static final String TAKE_USER_BY_ID_END_MSG = "UserServiceImpl : takeUserById : ends";
+	public static final String COUNT_PAGE_AMOUNT_ALL_USERS_START_MSG = "UserServiceImpl : countPageAmountAllUsers : starts";
+	public static final String COUNT_PAGE_AMOUNT_ALL_USERS_END_MSG = "UserServiceImpl : countPageAmountAllUsers : ends";
+	public static final String USER_TO_START_PAGE_STARTS_MSG = "UserServiceImpl : userToStartPage : starts";
+	public static final String USER_TO_START_PAGE_ENDS_MSG = "UserServiceImpl : userToStartPage : ends";
 
 	/**
-	 * Строковые константы для CarService
+	 * String constants for CarService
 	 */
 	public static final String SERVICE_TAKE_MARKS_STARTS_MSG = "CarService : takeMarks : starts";
 	public static final String SERVICE_TAKE_MARKS_ENDS_MSG = "CarService : takeMarks : ends";
@@ -30,8 +30,8 @@ public class ServiceConstant {
 	public static final String SERVICE_TAKE_MODELS_ENDS_MSG = "CarService : takeModels : ends";
 	public static final String SERVICE_TAKE_CAR_TYPES_STARTS_MSG = "CarService : takeCarTypes : starts";
 	public static final String SERVICE_TAKE_CAR_TYPES_ENDS_MSG = "CarService : takeCarTypes : ends";
-	public static final String SERVICE_TAKE_CARS_BY_TYPE_START_MSG = "CarService : takeCarsByType : starts";
-	public static final String SERVICE_TAKE_CARS_BY_TYPE_END_MSG = "CarService : takeCarsByType : ends";
+	public static final String SERVICE_TAKE_CARS_BY_CLASS_START_MSG = "CarService : takeCarsByClass : starts";
+	public static final String SERVICE_TAKE_CARS_BY_ClASS_END_MSG = "CarService : takeCarsByClass : ends";
 	public static final String SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_START_MSG = "CarService : takeCarsByTypeAndDate : starts";
 	public static final String SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_END_MSG = "CarService : takeCarsByTypeAndDate : ends";
 	public static final String SERVICE_TAKE_ALL_CARS_STARTS_MSG = "CarService : takeAllCars : starts";
@@ -52,7 +52,7 @@ public class ServiceConstant {
 	public static final String SERVICE_TAKE_CAR_BY_ID_ENDS_MSG = "CarService : takeCarById : ends";
 
 	/**
-	 * Строковые константы для OrderService
+	 * String constants for OrderService
 	 */
 	public static final String SERVICE_ADD_ORDER_STARTS_MSG = "OrderService : addOrder : starts";
 	public static final String SERVICE_ADD_ORDER_ENDS_MSG = "OrderService : addOrder : ends";
@@ -80,4 +80,6 @@ public class ServiceConstant {
 	public static final String SERVICE_COUNT_PAGE_AMOUNT_ALL_ORDERS_ENDS_MSG = "OrderService : countPageAmountAllCars : ends";
 	public static final String SERVICE_IS_MAY_DELETE_STARTS_MSG = "OrderService : isMayDelete : starts";
 	public static final String SERVICE_IS_MAY_DELETE_ENDS_MSG = "OrderService : isMayDelete : ends";
+
+	public static final String INIT_SERVICE_FACTORY_MSG = "ServiceFactory : init Service factory";
 }
