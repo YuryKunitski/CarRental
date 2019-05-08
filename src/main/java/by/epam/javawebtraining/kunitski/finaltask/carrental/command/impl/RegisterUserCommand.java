@@ -3,18 +3,20 @@ package by.epam.javawebtraining.kunitski.finaltask.carrental.command.impl;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.command.Command;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.command.PageName;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.CommandException;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceFactory;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl.UserServiceImpl;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.Validator;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.UserService;
-import com.google.protobuf.ServiceException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The command to register a user
+ */
 public class RegisterUserCommand implements Command {
 
 	private static final Logger LOG = LogManager.getLogger(RegisterUserCommand.class.getName());
@@ -56,6 +58,7 @@ public class RegisterUserCommand implements Command {
 	public String execute(HttpServletRequest request) throws CommandException {
 
 		LOG.debug(EXECUTE_STARTS_MSG);
+
 		if (validParameters(request)) {
 			request.getSession(true).setAttribute(SUCCESSFUL_REGISTER, true);
 			request.setAttribute(PROCESS_REQUEST_PARAM, REDIRECT_VALUE); //pass to jsp page
@@ -70,7 +73,9 @@ public class RegisterUserCommand implements Command {
 
 
 	private boolean validParameters(HttpServletRequest request) throws CommandException {
+
 		LOG.debug(VALID_PARAMETERS_STARTS_MSG);
+
 		String login = request.getParameter(LOGIN_PARAMETER);
 		String password = request.getParameter(PASSWORD_PARAMETER);
 		RoleType roleType = RoleType.valueOf(request.getParameter(ROLE_ID_PARAMETER));
@@ -143,11 +148,12 @@ public class RegisterUserCommand implements Command {
 		if (countFailedValidations > 0) {
 			LOG.debug(VALID_PARAMETERS_ENDS_MSG);
 			return false;
+
 		} else {
 			try {
 				UserService service = ServiceFactory.getInstance().getUserService();
-				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, roleType ,name, surname, phone,
-						email, passportID);
+				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, roleType ,name, surname,
+						phone, email, passportID);
 				uniqueLogin = validatorUniqueUser.isUniqueLogin();
 				uniqueEmail = validatorUniqueUser.isUniqueEmail();
 				uniquePassport = validatorUniqueUser.isUniquePassportID();

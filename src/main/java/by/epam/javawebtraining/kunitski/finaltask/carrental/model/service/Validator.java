@@ -1,17 +1,15 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Валидатор данных.
+ * Data validator
  * <p>
- * <p>
- * Валидатор данных. Валидирует такие данные, введенные пользователем, как
- * логин, пароль, имя, паспортные данные, адрес пользователя, номер телефона, e-mail,
- * марка и модель автомобиля, его номер, год впуска автомобиля, информация о заказе, дату
- * аренды автомобиля.
+ *  Validates such data entered by users, such as username, password, name, passport data, phone number,
+ * e-mail, car model, car intake year, car rental date.
  * </p>
  */
 public class Validator {
@@ -22,10 +20,7 @@ public class Validator {
 	private static final int NAME_LENGTH = 25;
 	private static final int PHONE_LENGTH = 30;
 	private static final int PASSPORT_LENGTH = 15;
-	private static final int ADDRESS_LENGTH = 70;
-	private static final int PLACE_LENGTH = 45;
-	private static final int DATE_LENGTH = 16;
-	private static final int CAR_INFO_LENGTH = 140;
+
 
 	private static final String PATTERN_LOGIN = "[A-Za-z0-9_]+";
 	private static final String PATTERN_PASSWORD = "\\S+";
@@ -36,12 +31,6 @@ public class Validator {
 	private static final String PATTERN_DAMAGE_PRICE = "(^[0-9]+\\.([0-9][0-9]|[0-9])$)|(^[0-9]+$)";
 	private static final String PATTERN_ORDER_INFO = "^\\S[^<>]*";
 	private static final String PATTERN_CAR_YEAR = "[1-3][0-9]{3}";
-//	private static final String PATTERN_CAR_GOV_NUMBER = "[0-9]{4}[A-CEHIKMOPTX]{2}-[0-7]";
-//	private static final String PATTERN_CAR_VIN_CODE = "[0-9A-Z]{17}";
-	private static final String PATTERN_DATE = "[2][0-9][0-9][0-9]\\-[0-1][0-9]\\-[0-3][0-9].+";
-//	private static final String PATTERN_ADDRESS = "[^<>]*";
-	private static final String PATTERN_CAR_INFO = "[^<>]*";
-//	private static final String PATTERN_PLACES = "[^<>]*";
 
 	private Validator() {
 
@@ -58,14 +47,18 @@ public class Validator {
 	 * @return true - login is correct, false is incorrect
 	 */
 	public boolean validateLogin(String login) {
-		Pattern pattern = Pattern.compile(PATTERN_LOGIN);
-		Matcher matcher = pattern.matcher(login);
-		boolean match = matcher.matches();
-		if ((login.length() <= LOGIN_LENGTH) && match && !login.isEmpty()) {
-			return true;
-		} else {
-			return false;
+
+		boolean result = false;
+
+		if (login != null) {
+			Pattern pattern = Pattern.compile(PATTERN_LOGIN);
+			Matcher matcher = pattern.matcher(login);
+			boolean match = matcher.matches();
+
+			result = (login.length() <= LOGIN_LENGTH) && match && !login.isEmpty();
 		}
+
+		return result;
 	}
 
 	/**
@@ -75,14 +68,17 @@ public class Validator {
 	 * @return true - password is correct, false is incorrect
 	 */
 	public boolean validatePassword(String password) {
-		Pattern pattern = Pattern.compile(PATTERN_PASSWORD);
-		Matcher matcher = pattern.matcher(password);
-		boolean match = matcher.matches();
-		if (match && !password.isEmpty()) {
-			return true;
-		} else {
-			return false;
+
+		boolean result = false;
+
+		if (password != null) {
+			Pattern pattern = Pattern.compile(PATTERN_PASSWORD);
+			Matcher matcher = pattern.matcher(password);
+			boolean match = matcher.matches();
+
+			result = match && !password.isEmpty();
 		}
+		return result;
 	}
 
 	/**
@@ -93,11 +89,14 @@ public class Validator {
 	 * @return true - password is correct, false is incorrect
 	 */
 	public boolean validateConfirmationPassword(String password, String confirmPassword) {
-		if (password.equals(confirmPassword)) {
-			return true;
-		} else {
-			return false;
+
+		boolean result = false;
+
+		if (password != null && confirmPassword != null) {
+
+			result = password.equals(confirmPassword);
 		}
+		return result;
 	}
 
 	/**
@@ -107,14 +106,17 @@ public class Validator {
 	 * @return true - email is correct, false is incorrect
 	 */
 	public boolean validateEmail(String email) {
-		Pattern pattern = Pattern.compile(PATTERN_EMAIL);
-		Matcher matcher = pattern.matcher(email);
-		boolean match = matcher.matches();
-		if ((email.length() <= EMAIL_LENGTH) && match && !email.isEmpty()) {
-			return true;
-		} else {
-			return false;
+
+		boolean result = false;
+
+		if (email != null) {
+			Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+			Matcher matcher = pattern.matcher(email);
+			boolean match = matcher.matches();
+
+			result = (email.length() <= EMAIL_LENGTH) && match && !email.isEmpty();
 		}
+		return result;
 	}
 
 	/**
@@ -124,14 +126,16 @@ public class Validator {
 	 * @return true - name is correct, false is incorrect
 	 */
 	public boolean validateName(String name) {
-		Pattern pattern = Pattern.compile(PATTERN_NAME);
-		Matcher matcher = pattern.matcher(name);
-		boolean match = matcher.matches();
-		if ((name.length() <= NAME_LENGTH) && match && !name.isEmpty()) {
-			return true;
-		} else {
-			return false;
+
+		boolean result = false;
+
+		if (name != null) {
+			Pattern pattern = Pattern.compile(PATTERN_NAME);
+			Matcher matcher = pattern.matcher(name);
+			boolean match = matcher.matches();
+			result = (name.length() <= NAME_LENGTH) && match && !name.isEmpty();
 		}
+		return result;
 	}
 
 	/**
@@ -141,14 +145,17 @@ public class Validator {
 	 * @return true - phone is correct, false is incorrect
 	 */
 	public boolean validatePhone(String phone) {
-		Pattern pattern = Pattern.compile(PATTERN_PHONE);
-		Matcher matcher = pattern.matcher(phone);
-		boolean match = matcher.matches();
-		if ((phone.length() <= PHONE_LENGTH) && match && !phone.isEmpty()) {
-			return true;
-		} else {
-			return false;
+
+		boolean result = false;
+
+		if (phone != null) {
+			Pattern pattern = Pattern.compile(PATTERN_PHONE);
+			Matcher matcher = pattern.matcher(phone);
+			boolean match = matcher.matches();
+
+			result = (phone.length() <= PHONE_LENGTH) && match && !phone.isEmpty();
 		}
+		return result;
 	}
 
 	/**
@@ -158,180 +165,133 @@ public class Validator {
 	 * @return true - passportID is correct, false is incorrect
 	 */
 	public boolean validatePassport(String passportID) {
-		Pattern pattern = Pattern.compile(PATTERN_PASSPORT);
-		Matcher matcher = pattern.matcher(passportID);
-		boolean match = matcher.matches();
-		if ((passportID.length() <= PASSPORT_LENGTH) && match && !passportID.isEmpty()) {
-			return true;
-		} else {
-			return false;
+
+		boolean result = false;
+
+		if (passportID != null) {
+			Pattern pattern = Pattern.compile(PATTERN_PASSPORT);
+			Matcher matcher = pattern.matcher(passportID);
+			boolean match = matcher.matches();
+
+			result = (passportID.length() <= PASSPORT_LENGTH) && match && !passportID.isEmpty();
 		}
+		return result;
 	}
 
 
-
 	/**
-	 * Валидация даты и времени.
+	 * Checking rental dates
 	 *
-	 * @param firstDate  первая дата
-	 * @param secondDate вторая дата
-	 * @return true - первая дата предшествует второй, а текущая дата предшествует - первой,
-	 * false - наоборот
+	 * @param firstDate  first date
+	 * @param secondDate second date
+	 * @return true - the first date is before the second, and the current date is before the first
 	 */
-	public boolean validateDate(String firstDate, String secondDate) {
-		if (firstDate.equals("null null") || (secondDate.equals("null null"))) {
-			return false;
+	public boolean validateDate(Date firstDate, Date secondDate) {
+		boolean result = false;
+
+		if (firstDate != null && secondDate != null) {
+			LocalDateTime d = LocalDateTime.now();
+			LocalDateTime date1 = firstDate.toLocalDate().atStartOfDay();
+			LocalDateTime date2 = secondDate.toLocalDate().atStartOfDay();
+
+			result = date1.isBefore(date2) && d.isBefore(date1);
 		}
-		if (firstDate.isEmpty() || secondDate.isEmpty()) {
-			return false;
-		}
-		Pattern pattern = Pattern.compile(PATTERN_DATE);
-		Matcher matcher1 = pattern.matcher(firstDate);
-		Matcher matcher2 = pattern.matcher(secondDate);
-		boolean match1 = matcher1.matches();
-		boolean match2 = matcher2.matches();
-		if (!match1) {
-			return false;
-		}
-		if (!match2) {
-			return false;
-		}
-		String tFirstDate = firstDate.replace(" ", "T");
-		String tSecondDate = secondDate.replace(" ", "T");
-		LocalDateTime date1 = LocalDateTime.parse(tFirstDate);
-		LocalDateTime date2 = LocalDateTime.parse(tSecondDate);
-		LocalDateTime dateNow = LocalDateTime.now();
-		if (date1.isBefore(date2) && dateNow.isBefore(date1)) {
-			return true;
-		} else {
-			return false;
-		}
+
+		return result;
 	}
 
 	/**
-	 * Валидация времени и даты, когда машина была пользователем в пользование.
+	 * Check the start date when user take car
 	 *
-	 * @param date дата и время взятия пользоателем автомобиля
-	 * @return true - дата и время не предшествуют реальному времени, false - наоборот
+	 * @param rentStartDate date when user take car
+	 * @return true - current date is before the rentStartDate
 	 */
-	public boolean validateRealDateFrom(String date) {
-		if (date.length() != DATE_LENGTH) {
-			return false;
+	public boolean validateRentStartDate(Date rentStartDate) {
+
+		boolean result = false;
+
+		if (rentStartDate != null) {
+
+			LocalDateTime localDateTime = rentStartDate.toLocalDate().atStartOfDay();
+			LocalDateTime dateNow = LocalDateTime.now();
+
+			result = dateNow.isBefore(localDateTime);
 		}
-		String tDate = date.replace(" ", "T");
-		LocalDateTime parsedDate = LocalDateTime.parse(tDate);
-		LocalDateTime dateNow = LocalDateTime.now();
-		if (dateNow.isBefore(parsedDate)) {
-			return true;
-		} else {
-			return false;
-		}
+		return result;
 	}
 
 
 	/**
-	 * Валидация цены
+	 * Check damage price
 	 *
-	 * @param damagePrice цена
-	 * @return true - цена корректна, false - цена не корректна
+	 * @param damagePrice damage price
+	 * @return true - price is correct, false - price is not correct
 	 */
 	public boolean validateDamagePrice(Double damagePrice) {
-		if (damagePrice >= 1000000) {
-			return false;
+
+		boolean result = false;
+
+		if (damagePrice != null) {
+			Pattern pattern = Pattern.compile(PATTERN_DAMAGE_PRICE);
+			Matcher matcher = pattern.matcher(damagePrice.toString());
+
+			result = matcher.matches();
 		}
-		Pattern pattern = Pattern.compile(PATTERN_DAMAGE_PRICE);
-		Matcher matcher = pattern.matcher(damagePrice.toString());
-		boolean match = matcher.matches();
-		if (match) {
-			return true;
-		} else {
-			return false;
-		}
+
+		return result;
 	}
 
 	/**
-	 * Валидация причины смены статуса заказа
+	 * Check the order info
 	 *
-	 * @param orderInfo причина смены статуса заказа
-	 * @return true - причина корректна, false - не корректна
+	 * @param orderInfo order info
+	 * @return true - order info is correct, false - order info is not correct
 	 */
 	public boolean validateOrderInfo(String orderInfo) {
-		if (orderInfo.isEmpty() && !(orderInfo.length() <= 140)) {
-			return false;
-		}
+
+		boolean result = false;
+
+		if (orderInfo != null) {
+
 		Pattern pattern = Pattern.compile(PATTERN_ORDER_INFO);
 		Matcher matcher = pattern.matcher(orderInfo);
-		boolean match = matcher.matches();
-		if (!match) {
-			return false;
-		} else {
-			return true;
+
+		result = matcher.matches();
 		}
+
+		return result;
 	}
 
 	/**
-	 * Валидация года выпуска автомобиля
+	 * Check the year issue of car
 	 *
-	 * @param year год выпуска автомобиля
-	 * @return true - год выпуска корректен, false - не корректен
+	 * @param year issue of car
+	 * @return true - issue of car is correct, false - issue of car is not correct
 	 */
 	public boolean validateCarYear(String year) {
-		if (year.isEmpty() && !(year.length() == 4)) {
-			return false;
+
+		boolean result = false;
+
+		if (year != null && (year.length() == 4)) {
+
+
+			Pattern pattern = Pattern.compile(PATTERN_CAR_YEAR);
+			Matcher matcher = pattern.matcher(year);
+
+			result = matcher.matches();
 		}
-		Pattern pattern = Pattern.compile(PATTERN_CAR_YEAR);
-		Matcher matcher = pattern.matcher(year);
-		boolean match = matcher.matches();
-		if (!match) {
-			return false;
-		} else {
-			return true;
-		}
+		return result;
 	}
 
 
-
-
 	/**
-	 * Валидация марки автомобиля
+	 * Check model of car
 	 *
-	 * @param mark марка автомобиля
-	 * @return true - марка корректна, false - не корректна
-	 */
-	public boolean validateMark(String mark) {
-		if (mark.isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 * Валидация модели автомобиля
-	 *
-	 * @param model модель автомобиля
-	 * @return true - модель корректна, false - не корректна
+	 * @param model model of car
+	 * @return true - model of car is correct, false - model of car is not correct
 	 */
 	public boolean validateModel(String model) {
-		if (model == null) {
-			return false;
-		} else if (model.isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	public boolean validateCarInfo(String info) {
-		Pattern pattern = Pattern.compile(PATTERN_CAR_INFO);
-		if (info != null) {
-			if (info.length() <= CAR_INFO_LENGTH) {
-				Matcher matcher = pattern.matcher(info);
-				boolean match = matcher.matches();
-				return match;
-			}
-		}
-		return true;
+		return model != null && !model.isEmpty();
 	}
 
 }

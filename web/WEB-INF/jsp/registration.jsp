@@ -24,12 +24,11 @@
     <fmt:message bundle="${locale}" key="local.reqLogin" var="reqLogin"/>
     <fmt:message bundle="${locale}" key="local.reqPassword" var="reqPassword"/>
     <fmt:message bundle="${locale}" key="local.reqConfirmPassword" var="reqConfirmPassword"/>
-    <fmt:message bundle="${locale}" key="local.reqLastName" var="reqLastName"/>
-    <fmt:message bundle="${locale}" key="local.reqFirstName" var="reqFirstName"/>
-    <fmt:message bundle="${locale}" key="local.reqMiddleName" var="reqMiddleName"/>
+    <fmt:message bundle="${locale}" key="local.reqName" var="reqName"/>
+    <fmt:message bundle="${locale}" key="local.reqSurname" var="reqSurname"/>
     <fmt:message bundle="${locale}" key="local.reqEMail" var="reqEMail"/>
     <fmt:message bundle="${locale}" key="local.reqPhone" var="reqPhone"/>
-    <fmt:message bundle="${locale}" key="local.reqPassport" var="reqPassport"/>
+    <fmt:message bundle="${locale}" key="local.reqPassportID" var="reqPassportID"/>
     <fmt:message bundle="${locale}" key="local.address" var="address"/>
     <fmt:message bundle="${locale}" key="local.register" var="register"/>
     <fmt:message bundle="${locale}" key="local.notUniqueLogin" var="notUniqueLogin"/>
@@ -107,17 +106,11 @@
     <c:if test="${requestScope.validFirstName == false}">
         <p class="text-danger input-lg">${invalidFirstName}</p>
     </c:if>
-    <c:if test="${requestScope.validMiddleName == false}">
-        <p class="text-danger input-lg">${invalidMiddleName}</p>
-    </c:if>
     <c:if test="${requestScope.validPhone == false}">
         <p class="text-danger input-lg"> ${invalidPhone}</p>
     </c:if>
     <c:if test="${requestScope.validPassport == false}">
         <p class="text-danger input-lg">${invalidPassport}</p>
-    </c:if>
-    <c:if test="${requestScope.validAddress == false}">
-        < class="text-danger input-lg">${invalidAddress}</p>
     </c:if>
 
     <c:if test="${requestScope.confirmationPassword == false}">
@@ -158,25 +151,19 @@
                 </div>
                 <div class="form-group">
                     <p>
-                        <abbr title="${messageName}"> ${reqLastName}</abbr>
+                        <abbr title="${messageName}"> ${reqSurname}</abbr>
                     </p>
-                    <input type="text" name="last-name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
+                    <input type="text" name="surname" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
                            title="${messageName}" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <p>
-                        <abbr title="${messageName}"> ${reqFirstName}</abbr>
+                        <abbr title="${messageName}"> ${reqName}</abbr>
                     </p>
-                    <input type="text" name="first-name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
+                    <input type="text" name="name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
                            title="${messageName}" class="form-control"/>
                 </div>
-                <div class="form-group">
-                    <p>
-                        <abbr title="${messageName}">${reqMiddleName}</abbr>
-                    </p>
-                    <input type="text" name="middle-name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
-                           title="${messageName}" class="form-control"/>
-                </div>
+
                 <div class="form-group">
                     <p>
                         <abbr title="${messagePhone}">${reqPhone}</abbr>
@@ -186,18 +173,12 @@
                 </div>
                 <div class="form-group">
                     <p>
-                        <abbr title="${messagePassport}">${reqPassport}</abbr>
+                        <abbr title="${messagePassport}">${reqPassportID}</abbr>
                     </p>
                     <input type="text" name="passport" value="" maxlength="15" required pattern="[A-Z0-9]+"
                            title="${messagePassport}" class="form-control"/>
                 </div>
-                <div class="form-group">
-                    <p>
-                        <abbr title="${mNoTags}">${address}</abbr>
-                    </p>
-                    <input type="text" name="address" maxlength="70" class="form-control" pattern="[^<>]*"
-                           title="${mNoTags}"/>
-                </div>
+
                 <hr/>
                 <input type="hidden" name="command" value="register">
                 <input type="hidden" name="processRequest" value="redirect">

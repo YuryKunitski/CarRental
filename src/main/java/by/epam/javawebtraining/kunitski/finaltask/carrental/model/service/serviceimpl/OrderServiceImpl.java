@@ -2,6 +2,7 @@ package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.servi
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.CarDAO;
@@ -13,7 +14,6 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.Us
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceConstant;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.OrderService;
-import com.google.protobuf.ServiceException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

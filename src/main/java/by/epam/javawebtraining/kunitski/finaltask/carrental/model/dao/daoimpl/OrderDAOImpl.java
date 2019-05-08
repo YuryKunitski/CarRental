@@ -64,8 +64,8 @@ public class OrderDAOImpl implements OrderDAO {
 			"INNER JOIN car_class AS cc ON cc.car_class_id = car.car_class_id " +
 			"ORDER BY o.order_id DESC LIMIT ? OFFSET ?;";
 
-	private static final String TAKE_ADMIN_ORDER_BY_ORDER_ID_QUERY = "SELECT o.order_id, u.login, u.name, u.surname, " +
-			"u.phone, u.email, u.passport_id, cm.model, cc.class, car.year_issue, car.price_per_day, car.status, " +
+	private static final String TAKE_ADMIN_ORDER_BY_ORDER_ID_QUERY = "SELECT o.order_id, u.user_id, u.login, u.name, u.surname, " +
+			"u.phone, u.email, u.passport_id, car.car_id, cm.model, cc.class, car.year_issue, car.price_per_day, " +
 			"car.image, o.rent_start_date, o.rent_end_date, o.damage_price, o.status, o.info, o.total_bill " +
 			"FROM car_rental.order AS o " +
 			"INNER JOIN car ON o.car_id= car.car_id " +
@@ -336,30 +336,31 @@ public class OrderDAOImpl implements OrderDAO {
 			rs = ps.executeQuery();
 			Order order = new Order();
 			Car car = new Car();
-			User user = new User();
+			User user = new User(); //u2 - car9
 			if (rs.next()) {
 				order.setOrderID(rs.getInt(1));
 
-				user.setLogin(rs.getString(2));
-				user.setName(rs.getString(3));
-				user.setSurName(rs.getString(4));
-				user.setPhone(rs.getString(5));
-				user.setEmail(rs.getString(6));
-				user.setPassportID(rs.getString(7));
+				user.setUserID(rs.getInt(2));
+				user.setLogin(rs.getString(3));
+				user.setName(rs.getString(4));
+				user.setSurName(rs.getString(5));
+				user.setPhone(rs.getString(6));
+				user.setEmail(rs.getString(7));
+				user.setPassportID(rs.getString(8));
 
-				car.setCarModel(rs.getString(8));
-				car.setCarClassType(CarClassType.valueOf(rs.getString(9).toUpperCase()));
-				car.setYearIssue(rs.getString(10));
-				car.setPricePerDay(rs.getDouble(11));
-				car.setCarStatus(rs.getString(12));
-				car.setImage(Base64.encode(rs.getBytes(13)));
+				car.setCarID(rs.getInt(9));
+				car.setCarModel(rs.getString(10));
+				car.setCarClassType(CarClassType.valueOf(rs.getString(11).toUpperCase()));
+				car.setYearIssue(rs.getString(12));
+				car.setPricePerDay(rs.getDouble(13));
+				car.setImage(Base64.encode(rs.getBytes(14)));
 
-				order.setRentalStartDate(rs.getDate(14));
-				order.setRentalEndDate(rs.getDate(15));
-				order.setDamagePrice(rs.getDouble(16));
-				order.setStatus(rs.getString(17));
-				order.setInfo(rs.getString(18));
-				order.setTotalBill(rs.getDouble(19));
+				order.setRentalStartDate(rs.getDate(15));
+				order.setRentalEndDate(rs.getDate(16));
+				order.setDamagePrice(rs.getDouble(17));
+				order.setStatus(rs.getString(18));
+				order.setInfo(rs.getString(19));
+				order.setTotalBill(rs.getDouble(20));
 
 				order.setCar(car);
 				order.setUser(user);
@@ -647,7 +648,7 @@ public class OrderDAOImpl implements OrderDAO {
 //		System.out.println(orderListByCarID.toString());
 //		List<Order> listAllOrders = orderDAO.takeAllOrders(10, 0);
 //		System.out.println(listAllOrders.toString());
-//		System.out.println(orderDAO.takeAdminOrderByOrderId(10));
+		System.out.println(orderDAO.takeAdminOrderByOrderId(2));
 //		orderDAO.updateStatusWithReason("rejected", 2, "customer has such much accidents");
 //		orderDAO.updateStatusWithoutReason("closed", 10);
 //		orderDAO.updateDamagePriceByOrderId(1, 80);

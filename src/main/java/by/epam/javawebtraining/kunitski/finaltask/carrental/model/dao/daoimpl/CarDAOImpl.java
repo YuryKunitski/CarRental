@@ -28,22 +28,22 @@ public class CarDAOImpl implements CarDAO {
 	private static final String ORDER_STATUS_APPROVED = "approved";
 
 	private static final String INSERT_CAR_QUERY = "INSERT INTO car (car_model_id, car_class_id, year_issue," +
-			" price_per_day, status, image) VALUES ((SELECT car_model.car_model_id FROM car_model WHERE model = ?),?,?,?,?,?);";
+			" price_per_day, image) VALUES ((SELECT car_model.car_model_id FROM car_model WHERE model = ?),?,?,?,?);";
 
 	private static final String TAKE_CAR_BY_ID_QUERY = "SELECT car.car_id, car_model.model, car_class.class, car.year_issue," +
-			" car.price_per_day, car.status, car.image FROM car_rental.car " +
+			" car.price_per_day, car.image FROM car_rental.car " +
 			"INNER JOIN car_model ON car_model.car_model_id = car.car_model_id " +
 			"INNER JOIN car_class ON car_class.car_class_id = car.car_class_id WHERE car_id=?;";
 
 	private static final String TAKE_ALL_CARS_QUERY = "SELECT car.car_id, car_model.model, car_class.class," +
-			" car.year_issue, car.price_per_day, car.status, car.image FROM car_rental.car " +
+			" car.year_issue, car.price_per_day, car.image FROM car_rental.car " +
 			"INNER JOIN car_model ON car_model.car_model_id = car.car_model_id " +
 			"INNER JOIN car_class ON car_class.car_class_id = car.car_class_id ORDER BY car_id DESC LIMIT ? OFFSET ?;";
 
 	private static final String DELETE_CAR_BY_ID = "DELETE FROM car WHERE car_id=?;";
 
 	private static final String TAKE_UNUSED_CARS_QUERY = "SELECT car.car_id, car_model.model, car_class.class, " +
-			"car.year_issue, car.price_per_day, car.status, car.image FROM car_rental.car " +
+			"car.year_issue, car.price_per_day, car.image FROM car_rental.car " +
 			"INNER JOIN car_model ON car_model.car_model_id = car.car_model_id " +
 			"INNER JOIN car_class ON car_class.car_class_id = car.car_class_id " +
 			"WHERE car_id NOT IN (SELECT car_id FROM car_rental.order AS o " +
@@ -51,7 +51,7 @@ public class CarDAOImpl implements CarDAO {
 			"ORDER BY car_id DESC LIMIT ? OFFSET ?;";
 
 	private static final String TAKE_UNUSED_CARS_BY_CLASS_QUERY = "SELECT car.car_id, car_model.model, car_class.class, " +
-			"car.year_issue, car.price_per_day, car.status, car.image FROM car_rental.car " +
+			"car.year_issue, car.price_per_day, car.image FROM car_rental.car " +
 			"INNER JOIN car_model ON car_model.car_model_id = car.car_model_id " +
 			"INNER JOIN car_class ON car_class.car_class_id = car.car_class_id " +
 			"WHERE car_id NOT IN (SELECT car_id FROM car_rental.order AS o " +
@@ -59,7 +59,7 @@ public class CarDAOImpl implements CarDAO {
 			"AND car_class.class = ? ORDER BY car_id DESC LIMIT ? OFFSET ?;";
 
 	private static final String TAKE_CARS_BY_CLASS_QUERY = "SELECT car.car_id, car_model.model, car_class.class," +
-			" car.year_issue, car.price_per_day, car.status, car.image FROM car_rental.car " +
+			" car.year_issue, car.price_per_day, car.image FROM car_rental.car " +
 			"INNER JOIN car_model ON car_model.car_model_id = car.car_model_id " +
 			"INNER JOIN car_class ON car_class.car_class_id = car.car_class_id " +
 			"WHERE car_class.class = ? ORDER BY car_id DESC LIMIT ? OFFSET ?;";
@@ -81,8 +81,7 @@ public class CarDAOImpl implements CarDAO {
 			ps.setInt(2, car.getCarClassType().getOrdinal());
 			ps.setString(3, car.getYearIssue());
 			ps.setDouble(4, car.getPricePerDay());
-			ps.setString(5, car.getCarStatus());
-			ps.setBlob(6, new ByteArrayInputStream(Base64.decode(car.getImage())));
+			ps.setBlob(5, new ByteArrayInputStream(Base64.decode(car.getImage())));
 			ps.executeUpdate();
 		} catch (Base64DecodingException | SQLException | ConnectionPoolException ex) {
 			throw new DAOException(DAOStringConstant.DAO_INSERT_CAR_ERROR_MSG, ex);
@@ -121,8 +120,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setCarStatus(rs.getString(6));
-				car.setImage(Base64.encode(rs.getBytes(7)));
+				car.setImage(Base64.encode(rs.getBytes(6)));
 
 			}
 			return car;
@@ -163,8 +161,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setCarStatus(rs.getString(6));
-				car.setImage(Base64.encode(rs.getBytes(7)));
+				car.setImage(Base64.encode(rs.getBytes(6)));
 				cars.add(car);
 			}
 			return cars;
@@ -243,8 +240,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setCarStatus(rs.getString(6));
-				car.setImage(Base64.encode(rs.getBytes(7)));
+				car.setImage(Base64.encode(rs.getBytes(6)));
 
 				cars.add(car);
 			}
@@ -296,8 +292,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setCarStatus(rs.getString(6));
-				car.setImage(Base64.encode(rs.getBytes(7)));
+				car.setImage(Base64.encode(rs.getBytes(6)));
 
 				cars.add(car);
 			}
@@ -341,8 +336,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setCarStatus(rs.getString(6));
-				car.setImage(Base64.encode(rs.getBytes(7)));
+				car.setImage(Base64.encode(rs.getBytes(6)));
 
 				cars.add(car);
 			}
@@ -406,19 +400,20 @@ public class CarDAOImpl implements CarDAO {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		CarDAO carDAO = DAOFactory.getInstance().getCarDAO();
-//		carDAO.insertCar(new Car(21,"ford_focus",CarClassType.ECONOM,"2008", 75.5, "used", ""));
-//		System.out.println(carDAO.takeCarById(15));
-//		List<Car> carList = carDAO.takeAllCars(5, 8);
-//		System.out.println(carList.toString());
+//		carDAO.insertCar(new Car(21,"ford_focus",CarClassType.ECONOM,"2008", 75.5, ""));
+		System.out.println(carDAO.takeCarById(15));
+		List<Car> carList = carDAO.takeAllCars(20, 0);
+		System.out.println("All cars - " + carList.toString());
 //		carDAO.deleteCarById(41);
 		List<Car> unusedCars = null;
 		try {
 			unusedCars = carDAO.takeUnUsedCarsByClass(new  java.sql.Date(format.parse( "2019-06-10").getTime()),
-					new java.sql.Date(format.parse( "2019-06-16").getTime()), CarClassType.ECONOM, 20,0);
+		new java.sql.Date(format.parse( "2019-06-16").getTime()), CarClassType.ECONOM,20,0);
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println(unusedCars.toString());
+		System.out.println("Unused cars by econom class - " + unusedCars.toString());
 //		List<Car> listCarByClass = carDAO.takeCarsByClass(CarClassType.BUSINESS, 20, 0);
 //		System.out.println(listCarByClass.toString());
 //		System.out.println(carDAO.takeCarById(5));

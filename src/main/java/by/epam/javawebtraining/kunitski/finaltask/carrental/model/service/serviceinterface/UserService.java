@@ -1,9 +1,9 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface;
 
+import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
-import com.google.protobuf.ServiceException;
 
 public interface UserService {
 

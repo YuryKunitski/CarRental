@@ -1,15 +1,14 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceConstant;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.UserService;
-import com.google.protobuf.ServiceException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

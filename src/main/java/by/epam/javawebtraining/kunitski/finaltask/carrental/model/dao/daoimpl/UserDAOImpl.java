@@ -323,11 +323,11 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		UserDAO userDAO = new UserDAOImpl();
-//		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Katy","Wolsen","989898","sdsd","df4"));
+		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Юрий","Юрьевич","989898","sdsd","df4"));
 //		userDAO.updateUser(new User(2,"Liza","1000", RoleType.CUSTOMER,"Lizaveta","Wolsen","989898","sdsd","df4"));
 //		System.out.println(userDAO.findUserById(2));
 //		userDAO.removeUserByID(1);
-		System.out.println(userDAO.findUserById(18));
+//		System.out.println(userDAO.findUserById(18));
 	}
 
 

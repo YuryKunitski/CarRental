@@ -17,6 +17,7 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
 
 	private static final Logger LOG = LogManager.getLogger(Controller.class.getName());
+
 	private static final String COMMAND_PARAMETER = "command";
 	private static final String PROCESS_REQUEST_PARAM = "processRequest";
 	private static final String FORWARD_PARAM = "forward";
@@ -40,7 +41,9 @@ public class Controller extends HttpServlet {
 	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
 		LOG.debug(PROCESS_REQUEST_MSG);
+
 		String commandName = null;
 		Command command = null;
 		String page = PageName.INDEX_PAGE;

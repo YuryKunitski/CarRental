@@ -9,6 +9,6 @@ public class CopyRightsTag extends SimpleTagSupport {
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = getJspContext().getOut();
-		out.println("© 2016 Car rental. All rights reserved.");
+		out.println("© 2019 Car rental. All rights reserved.");
 	}
 }

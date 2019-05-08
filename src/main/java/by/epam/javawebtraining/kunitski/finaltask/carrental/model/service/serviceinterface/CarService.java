@@ -1,9 +1,9 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
-import com.google.protobuf.ServiceException;
 
 import java.sql.Date;
 import java.util.List;

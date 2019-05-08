@@ -7,31 +7,21 @@ public class Car {
 	private CarClassType carClassType;
 	private String yearIssue;
 	private double pricePerDay;
-	private String carStatus;
 	private String image;
 
 
-//	public enum CarModelType{
-//		FORD_FOCUS, FORD_TRANSIT, MAZDA_6, MERCEDES_E650, PEUGEOT_208, PORSCHE_CAYENNE, RENO_LOGAN, VOLKSWAGEN_POLO,
-//		VOLKSWAGEN_TRANSPORTER, VOLVO_XC60;
-//	}
-//
-//	public enum CarClassType{
-//		ECONOM, BUSINESS, TRUCK;
-//	}
 
 	public Car(){
 
 	}
 
 	public Car(int carID, String carModel, CarClassType carClassType, String yearIssue, double pricePerDay,
-	           String carStatus, String image) {
+	           String image) {
 		this.carID = carID;
 		this.carModel = carModel;
 		this.carClassType = carClassType;
 		this.yearIssue = yearIssue;
 		this.pricePerDay = pricePerDay;
-		this.carStatus = carStatus;
 		this.image = image;
 	}
 
@@ -75,14 +65,6 @@ public class Car {
 		this.pricePerDay = pricePerDay;
 	}
 
-	public String getCarStatus() {
-		return carStatus;
-	}
-
-	public void setCarStatus(String available) {
-		carStatus = available;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -101,9 +83,8 @@ public class Car {
 		if (carID != car.carID) return false;
 		if (Double.compare(car.pricePerDay, pricePerDay) != 0) return false;
 		if (carModel != null ? !carModel.equals(car.carModel) : car.carModel != null) return false;
-//		if (carClass != null ? !carClass.equals(car.carClass) : car.carClass != null) return false;
+		if (carClassType != car.carClassType) return false;
 		if (yearIssue != null ? !yearIssue.equals(car.yearIssue) : car.yearIssue != null) return false;
-		if (carStatus != null ? !carStatus.equals(car.carStatus) : car.carStatus != null) return false;
 		return image != null ? image.equals(car.image) : car.image == null;
 
 	}
@@ -114,11 +95,10 @@ public class Car {
 		long temp;
 		result = carID;
 		result = 31 * result + (carModel != null ? carModel.hashCode() : 0);
-//		result = 31 * result + (carClass != null ? carClass.hashCode() : 0);
+		result = 31 * result + (carClassType != null ? carClassType.hashCode() : 0);
 		result = 31 * result + (yearIssue != null ? yearIssue.hashCode() : 0);
 		temp = Double.doubleToLongBits(pricePerDay);
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		result = 31 * result + (carStatus != null ? carStatus.hashCode() : 0);
 		result = 31 * result + (image != null ? image.hashCode() : 0);
 		return result;
 	}
@@ -131,7 +111,6 @@ public class Car {
 				", carClassType=" + carClassType +
 				", yearIssue='" + yearIssue + '\'' +
 				", pricePerDay=" + pricePerDay +
-				", carStatus='" + carStatus + '\'' +
 				", image='" + image + '\'' +
 				'}';
 	}
