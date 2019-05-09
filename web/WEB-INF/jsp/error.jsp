@@ -7,9 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ERROR 404</title>
+    <title>ERROR</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/car-rental-style.css" rel="stylesheet">
     <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -28,8 +27,8 @@
     <fmt:message bundle="${locale}" key="local.cars" var="cars"/>
     <fmt:message bundle="${locale}" key="local.info" var="info"/>
     <fmt:message bundle="${locale}" key="local.logOut" var="logOut"/>
-    <fmt:message bundle="${locale}" key="local.mERROR404" var="mError"/>
-    <fmt:message bundle="${locale}" key="local.mErrorMessage404" var="mErrorMessage"/>
+    <fmt:message bundle="${locale}" key="local.mERROR" var="mError"/>
+    <fmt:message bundle="${locale}" key="local.mErrorMessage" var="mErrorMessage"/>
     <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
 </head>
 <body>
@@ -50,12 +49,12 @@
                         <input type="submit" value="${home}" class="btn btn-link">
                     </form>
                 </li>
-                <li class="active">Error 404</li>
+                <li class="active">Error</li>
             </ol>
         </div>
     </div>
-
     <hr/>
+
     <%@include file="../jspf/footer.jspf" %>
 
 </div>

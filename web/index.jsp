@@ -32,14 +32,14 @@
   <fmt:message bundle="${locale}" key="local.logOut" var="logOut"/>
   <fmt:message bundle="${locale}" key="local.privateOffice" var="privateOffice"/>
   <fmt:message bundle="${locale}" key="local.orders" var="orders"/>
-  <fmt:message bundle="${locale}" key="local.cabriolet" var="cabriolet"/>
-  <fmt:message bundle="${locale}" key="local.cargo" var="cargo"/>
-  <fmt:message bundle="${locale}" key="local.coupe" var="coupe"/>
-  <fmt:message bundle="${locale}" key="local.jeep" var="jeep"/>
-  <fmt:message bundle="${locale}" key="local.smallClass" var="small"/>
-  <fmt:message bundle="${locale}" key="local.middleClass" var="middle"/>
-  <fmt:message bundle="${locale}" key="local.minibus" var="minibus"/>
-  <fmt:message bundle="${locale}" key="local.premium" var="premium"/>
+<%--  <fmt:message bundle="${locale}" key="local.cabriolet" var="cabriolet"/>--%>
+<%--  <fmt:message bundle="${locale}" key="local.cargo" var="cargo"/>--%>
+  <fmt:message bundle="${locale}" key="local.businessClass" var="business"/>
+<%--  <fmt:message bundle="${locale}" key="local.jeep" var="jeep"/>--%>
+  <fmt:message bundle="${locale}" key="local.economClass" var="econom"/>
+<%--  <fmt:message bundle="${locale}" key="local.middleClass" var="middle"/>--%>
+<%--  <fmt:message bundle="${locale}" key="local.minibus" var="minibus"/>--%>
+  <fmt:message bundle="${locale}" key="local.truck" var="truck"/>
   <fmt:message bundle="${locale}" key="local.vintage" var="vintage"/>
   <fmt:message bundle="${locale}" key="local.mSuccessfulRegister" var="mSuccessfulRegister"/>
   <fmt:message bundle="${locale}" key="local.mBestDeals" var="mBestDeals"/>
@@ -99,77 +99,45 @@
     </div>
   </div>
 
-  <div class="well">
+  <p class="well">
     <div class="row">
       <div class="col-lg-12">
         <h2 class="page-header">${cars}</h2>
       </div>
+
       <div class="col-md-4 col-sm-6 img-portfolio">
         <form action="Controller" method="get">
           <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/fFocus.jpg" alt="Small">
-
-            <p class="my-info">${small}</p>
+            <img class="img-responsive img-hover car-econom-img" src="img/economCar.jpg" alt="Econom" width="225" height="150">
+            <p class="my-info">${econom}</p>
           </button>
           <input type="hidden" name="command" value="view-type">
           <input type="hidden" name="carType" value="Small"/>
         </form>
       </div>
+
       <div class="col-md-4 col-sm-6 img-portfolio">
         <form action="Controller" method="get">
           <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/n370.jpg" alt="Coupe">
-
-            <p class="my-info">${coupe}</p>
+            <img class="img-responsive img-hover car-small-img" src="img/businessCar.jpg" alt="Business" width="225" height="150">
+            <p class="my-info">${business}</p>
           </button>
           <input type="hidden" name="command" value="view-type">
           <input type="hidden" name="carType" value="Coupe"/>
         </form>
       </div>
+
       <div class="col-md-4 col-sm-6 img-portfolio">
         <form action="Controller" method="get">
           <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/mbS.jpg" alt="Premium">
-
-            <p class="my-info">${premium}</p>
+            <img class="img-responsive img-hover car-small-img" src="img/truckCar.jpg" alt="Truck" width="225" height="150">
+            <p class="my-info">${truck}</p>
           </button>
           <input type="hidden" name="command" value="view-type">
           <input type="hidden" name="carType" value="Premium"/>
         </form>
       </div>
-      <div class="col-md-4 col-sm-6 img-portfolio">
-        <form action="Controller" method="get">
-          <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/p308cc.jpg" alt="Cabriolet">
 
-            <p class="my-info"> ${cabriolet}</p>
-          </button>
-          <input type="hidden" name="command" value="view-type">
-          <input type="hidden" name="carType" value="Cabriolet"/>
-        </form>
-      </div>
-      <div class="col-md-4 col-sm-6 img-portfolio">
-        <form action="Controller" method="get">
-          <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/mbSprinter.jpg" alt="Cargo">
-
-            <p class="my-info">${cargo}</p>
-          </button>
-          <input type="hidden" name="command" value="view-type">
-          <input type="hidden" name="carType" value="Cargo"/>
-        </form>
-      </div>
-      <div class="col-md-4 col-sm-6 img-portfolio">
-        <form action="Controller" method="get">
-          <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/g21.jpg" alt="Vintage">
-
-            <p class="my-info">${vintage}</p>
-          </button>
-          <input type="hidden" name="command" value="view-type">
-          <input type="hidden" name="carType" value="Vintage"/>
-        </form>
-      </div>
     </div>
   </div>
 

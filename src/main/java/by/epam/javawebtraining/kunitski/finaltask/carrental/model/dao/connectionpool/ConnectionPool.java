@@ -50,7 +50,6 @@ public class ConnectionPool {
 	/*
 	 * Initialization of connection pool.
 	 */
-
 	public void initConnectionPool() throws ConnectionPoolException {
 
 		LOG.debug(DAOStringConstant.INIT_STARTS_MSG);
@@ -66,7 +65,7 @@ public class ConnectionPool {
 				connectionQueue.add(pooledConnection);
 
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			LOG.error(DAOStringConstant.CON_POOL_EXC);
 			throw new ConnectionPoolException(DAOStringConstant.CON_POOL_EXC, e);
 
@@ -82,7 +81,6 @@ public class ConnectionPool {
 	/*
 	 * Take the connetion from pool.
 	 */
-
 	public Connection takeConnection() throws ConnectionPoolException {
 
 		LOG.debug(DAOStringConstant.TAKE_CONNECTION_STARTS_MSG);
@@ -126,8 +124,6 @@ public class ConnectionPool {
 	/*
 	 * Close connection pool.
 	 */
-
-
 	public void closeConnection(Connection con, Statement st) throws ConnectionPoolException {
 		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_MSG);
 		try {
@@ -144,7 +140,7 @@ public class ConnectionPool {
 			}
 		} catch (SQLException ex) {
 			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
-			throw new ConnectionPoolException( ex);
+			throw new ConnectionPoolException(ex);
 		}
 	}
 
@@ -158,13 +154,11 @@ public class ConnectionPool {
 			if (rs != null)
 				rs.close();
 		} catch (SQLException ex) {
-		LOG.error(DAOStringConstant.CLOSE_CON_EXC);
+			LOG.error(DAOStringConstant.CLOSE_CON_EXC);
 			throw new ConnectionPoolException(ex);
 		}
 
 	}
-
-
 
 
 	private void closeConnectionsQueue(BlockingQueue<Connection> queue) throws SQLException {
@@ -172,14 +166,18 @@ public class ConnectionPool {
 		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_QUERY_STARTS_MSG);
 
 		Connection connection = null;
+
 		while ((connection = queue.poll()) != null) {
-			((PooledConnection) connection).close();
+			if (!connection.getAutoCommit()) {
+				connection.commit();
+			}
+			((PooledConnection) connection).reallyClose();
 		}
 
 		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_QUERY_ENDS_MSG);
 	}
 
-	private class PooledConnection implements Connection{
+	private class PooledConnection implements Connection {
 
 		private Connection connection;
 

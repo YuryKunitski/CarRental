@@ -1,13 +1,16 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl;
 
+import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceConstant;
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -141,6 +144,21 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(ex);
 		}
 		return result;
+	}
+
+	public static void main(String[] args) {
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		try {
+			connectionPool.initConnectionPool();
+		} catch (ConnectionPoolException e) {
+			e.printStackTrace();
+		}
+		UserService service = ServiceFactory.getInstance().getUserService();
+		try {
+			service.register("Rusel","1",RoleType.CUSTOMER,"Руслан","Русланович","+37529 1111111","rus@mail.ru","RR3");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

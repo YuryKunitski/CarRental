@@ -30,29 +30,31 @@ public class RegisterUserCommand implements Command {
 	private static final String PASSWORD_PARAMETER = "password";
 	private static final String ROLE_ID_PARAMETER = "role_id";
 	private static final String CONFIRM_PASSWORD_PARAMETER = "confirm-password";
-	private static final String E_MAIL = "email";
+	private static final String E_MAIL = "e-mail";
 	private static final String NAME = "name";
 	private static final String SURNAME = "surname";
 	private static final String PHONE = "phone";
-	private static final String PASSPORT = "passport";
+	private static final String PASSPORT_ID = "passportID";
 	private static final String LOGIN_VALID = "validLogin";
 	private static final String PASSWORD_VALID = "validPassword";
 	private static final String CONFIRM_PASSWORD_VALID = "validConfirmPassword";
 	private static final String CONFIRMATION_PASSWORD = "confirmationPassword";
 	private static final String E_MAIL_VALID = "validEmail";
-	private static final String LAST_NAME_VALID = "validLastName";
-	private static final String FIRST_NAME_VALID = "validFirstName";
-	private static final String MIDDLE_NAME_VALID = "validMiddleName";
+	private static final String NAME_VALID = "validName";
+	private static final String SURNAME_VALID = "validSurname";
+//	private static final String MIDDLE_NAME_VALID = "validMiddleName";
 	private static final String PHONE_VALID = "validPhone";
-	private static final String PASSPORT_VALID = "validPassport";
+	private static final String PASSPORT_ID_VALID = "validPassportID";
 	private static final String UNIQUE_LOGIN = "uniqueLogin";
 	private static final String UNIQUE_EMAIL = "uniqueEmail";
-	private static final String UNIQUE_PASSPORT = "uniquePassport";
+	private static final String UNIQUE_PASSPORT_ID = "uniquePassportID";
 	private static final String SUCCESSFUL_REGISTER = "successfulRegister";
 	private static final String PROCESS_REQUEST_PARAM = "processRequest";
 
 	private static final String FORWARD_VALUE = "forward";
 	private static final String REDIRECT_VALUE = "redirect";
+
+	private static final RoleType CUSTOMER_ROLE = RoleType.CUSTOMER;
 
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException {
@@ -78,13 +80,12 @@ public class RegisterUserCommand implements Command {
 
 		String login = request.getParameter(LOGIN_PARAMETER);
 		String password = request.getParameter(PASSWORD_PARAMETER);
-		RoleType roleType = RoleType.valueOf(request.getParameter(ROLE_ID_PARAMETER));
 		String confirmPassword = request.getParameter(CONFIRM_PASSWORD_PARAMETER);
 		String email = request.getParameter(E_MAIL);
 		String name = request.getParameter(NAME);
 		String surname = request.getParameter(SURNAME);
 		String phone = request.getParameter(PHONE);
-		String passportID = request.getParameter(PASSPORT);
+		String passportID = request.getParameter(PASSPORT_ID);
 
 
 		boolean uniqueLogin = false;
@@ -100,11 +101,11 @@ public class RegisterUserCommand implements Command {
 		request.setAttribute(CONFIRM_PASSWORD_VALID, true);
 		request.setAttribute(CONFIRMATION_PASSWORD, true);
 		request.setAttribute(E_MAIL_VALID, true);
-		request.setAttribute(LAST_NAME_VALID, true);
-		request.setAttribute(FIRST_NAME_VALID, true);
-		request.setAttribute(MIDDLE_NAME_VALID, true);
+		request.setAttribute(NAME_VALID, true);
+		request.setAttribute(SURNAME_VALID, true);
+//		request.setAttribute(MIDDLE_NAME_VALID, true);
 		request.setAttribute(PHONE_VALID, true);
-		request.setAttribute(PASSPORT_VALID, true);
+		request.setAttribute(PASSPORT_ID_VALID, true);
 
 
 		if (!validator.validateLogin(login)) {
@@ -128,11 +129,11 @@ public class RegisterUserCommand implements Command {
 			countFailedValidations++;
 		}
 		if (!validator.validateName(name)) {
-			request.setAttribute(LAST_NAME_VALID, false);
+			request.setAttribute(NAME_VALID, false);
 			countFailedValidations++;
 		}
 		if (!validator.validateName(surname)) {
-			request.setAttribute(FIRST_NAME_VALID, false);
+			request.setAttribute(SURNAME_VALID, false);
 			countFailedValidations++;
 		}
 
@@ -141,7 +142,7 @@ public class RegisterUserCommand implements Command {
 			countFailedValidations++;
 		}
 		if (!validator.validatePassport(passportID)) {
-			request.setAttribute(PASSPORT_VALID, false);
+			request.setAttribute(PASSPORT_ID_VALID, false);
 			countFailedValidations++;
 		}
 
@@ -152,14 +153,14 @@ public class RegisterUserCommand implements Command {
 		} else {
 			try {
 				UserService service = ServiceFactory.getInstance().getUserService();
-				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, roleType ,name, surname,
+				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, CUSTOMER_ROLE ,name, surname,
 						phone, email, passportID);
 				uniqueLogin = validatorUniqueUser.isUniqueLogin();
 				uniqueEmail = validatorUniqueUser.isUniqueEmail();
 				uniquePassport = validatorUniqueUser.isUniquePassportID();
 				request.setAttribute(UNIQUE_LOGIN, uniqueLogin);
 				request.setAttribute(UNIQUE_EMAIL, uniqueEmail);
-				request.setAttribute(UNIQUE_PASSPORT, uniquePassport);
+				request.setAttribute(UNIQUE_PASSPORT_ID, uniquePassport);
 				if (!(uniqueLogin && uniqueEmail && uniquePassport)) {
 					LOG.debug(VALID_PARAMETERS_ENDS_MSG);
 					return false;

@@ -1378,3 +1378,20 @@
 2019-05-07 14:46:42 DEBUG ConnectionPool:102 - ConnectionPool : takeConnection : ends
 2019-05-07 14:46:45 DEBUG ConnectionPool:132 - ConnectionPool : closeConnection
 2019-05-07 14:46:45 DEBUG UserDAOImpl:79 - UserDAO : registrate user : ends
+2019-05-09 16:01:33 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-09 16:01:42 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-09 16:01:42 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-09 16:01:42 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-09 16:01:42 DEBUG UserServiceImpl:70 - UserServiceImpl : register : starts
+2019-05-09 16:01:42 DEBUG UserDAOImpl:179 - UserDAOdb : findUser : starts
+2019-05-09 16:01:42 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-09 16:01:42 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-09 16:01:42 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-09 16:01:42 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-09 16:01:42 DEBUG UserDAOImpl:228 - UserDAOdb : findUser : ends
+2019-05-09 16:01:42 DEBUG UserDAOImpl:45 - UserDAO : registrate user : starts
+2019-05-09 16:01:42 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-09 16:01:42 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-09 16:01:44 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-09 16:01:44 DEBUG UserDAOImpl:79 - UserDAO : registrate user : ends
+2019-05-09 16:01:44 DEBUG UserServiceImpl:79 - UserServiceImpl : register : ends

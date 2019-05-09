@@ -29,28 +29,24 @@
     <fmt:message bundle="${locale}" key="local.reqEMail" var="reqEMail"/>
     <fmt:message bundle="${locale}" key="local.reqPhone" var="reqPhone"/>
     <fmt:message bundle="${locale}" key="local.reqPassportID" var="reqPassportID"/>
-    <fmt:message bundle="${locale}" key="local.address" var="address"/>
     <fmt:message bundle="${locale}" key="local.register" var="register"/>
     <fmt:message bundle="${locale}" key="local.notUniqueLogin" var="notUniqueLogin"/>
     <fmt:message bundle="${locale}" key="local.notUniqueEmail" var="notUniqueEmail"/>
-    <fmt:message bundle="${locale}" key="local.notUniquePassport" var="notUniquePassport"/>
+    <fmt:message bundle="${locale}" key="local.notUniquePassportID" var="notUniquePassportID"/>
     <fmt:message bundle="${locale}" key="local.messageLogin" var="messageLogin"/>
     <fmt:message bundle="${locale}" key="local.messagePassword" var="messagePassword"/>
     <fmt:message bundle="${locale}" key="local.messageConfirmPassword" var="messageConfirmPassword"/>
     <fmt:message bundle="${locale}" key="local.messageEmail" var="messageEmail"/>
     <fmt:message bundle="${locale}" key="local.messageName" var="messageName"/>
     <fmt:message bundle="${locale}" key="local.messagePhone" var="messagePhone"/>
-    <fmt:message bundle="${locale}" key="local.messagePassport" var="messagePassport"/>
-    <fmt:message bundle="${locale}" key="local.messageAddress" var="messageAddress"/>
+    <fmt:message bundle="${locale}" key="local.messagePassportID" var="messagePassport"/>
     <fmt:message bundle="${locale}" key="local.invalidLogin" var="invalidLogin"/>
     <fmt:message bundle="${locale}" key="local.invalidPassword" var="invalidPassword"/>
     <fmt:message bundle="${locale}" key="local.invalidEmail" var="invalidEmail"/>
-    <fmt:message bundle="${locale}" key="local.invalidLastName" var="invalidLastName"/>
-    <fmt:message bundle="${locale}" key="local.invalidFirstName" var="invalidFirstName"/>
-    <fmt:message bundle="${locale}" key="local.invalidMiddleName" var="invalidMiddleName"/>
+    <fmt:message bundle="${locale}" key="local.invalidSurname" var="invalidSurname"/>
+    <fmt:message bundle="${locale}" key="local.invalidName" var="invalidName"/>
     <fmt:message bundle="${locale}" key="local.invalidPhone" var="invalidPhone"/>
-    <fmt:message bundle="${locale}" key="local.invalidPassport" var="invalidPassport"/>
-    <fmt:message bundle="${locale}" key="local.invalidAddress" var="invalidAddress"/>
+    <fmt:message bundle="${locale}" key="local.invalidPassportID" var="invalidPassportID"/>
     <fmt:message bundle="${locale}" key="local.messageConfirmationPassword" var="notConfirmedPassword"/>
     <fmt:message bundle="${locale}" key="local.home" var="home"/>
     <fmt:message bundle="${locale}" key="local.cars" var="cars"/>
@@ -88,7 +84,7 @@
         <p class="text-danger input-lg">${notUniqueEmail}</p>
     </c:if>
     <c:if test="${requestScope.uniquePassport == false}">
-        <p class="text-danger input-lg">${notUniquePassport}</p>
+        <p class="text-danger input-lg">${notUniquePassportID}</p>
     </c:if>
 
     <c:if test="${requestScope.validLogin == false}">
@@ -100,17 +96,17 @@
     <c:if test="${requestScope.validEmail == false}">
         <p class="text-danger input-lg">${invalidEmail}</p>
     </c:if>
-    <c:if test="${requestScope.validLastName == false}">
-        <p class="text-danger input-lg">${invalidLastName}</p>
+    <c:if test="${requestScope.validName == false}">
+        <p class="text-danger input-lg">${invalidName}</p>
     </c:if>
-    <c:if test="${requestScope.validFirstName == false}">
-        <p class="text-danger input-lg">${invalidFirstName}</p>
+    <c:if test="${requestScope.validSurname == false}">
+        <p class="text-danger input-lg">${invalidSurname}</p>
     </c:if>
     <c:if test="${requestScope.validPhone == false}">
         <p class="text-danger input-lg"> ${invalidPhone}</p>
     </c:if>
-    <c:if test="${requestScope.validPassport == false}">
-        <p class="text-danger input-lg">${invalidPassport}</p>
+    <c:if test="${requestScope.validPassportID == false}">
+        <p class="text-danger input-lg">${invalidPassportID}</p>
     </c:if>
 
     <c:if test="${requestScope.confirmationPassword == false}">
@@ -145,7 +141,7 @@
                     <p>
                         <abbr title="${messageEmail}">${reqEMail}</abbr>
                     </p>
-                    <input type="text" name="e-mail" axlength="60" required
+                    <input type="text" name="e-mail" maxlength="60" required
                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="${messageEmail}"
                            class="form-control"/>
                 </div>
@@ -153,14 +149,14 @@
                     <p>
                         <abbr title="${messageName}"> ${reqSurname}</abbr>
                     </p>
-                    <input type="text" name="surname" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
+                    <input type="text" name="name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
                            title="${messageName}" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <p>
                         <abbr title="${messageName}"> ${reqName}</abbr>
                     </p>
-                    <input type="text" name="name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
+                    <input type="text" name="surname" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
                            title="${messageName}" class="form-control"/>
                 </div>
 
@@ -175,7 +171,7 @@
                     <p>
                         <abbr title="${messagePassport}">${reqPassportID}</abbr>
                     </p>
-                    <input type="text" name="passport" value="" maxlength="15" required pattern="[A-Z0-9]+"
+                    <input type="text" name="passportID" value="" maxlength="15" required pattern="[A-Z0-9]+"
                            title="${messagePassport}" class="form-control"/>
                 </div>
 
@@ -191,8 +187,8 @@
     <%@include file="../jspf/footer.jspf" %>
 </div>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
+<%--<script src="../../js/jquery.js"></script>--%>
+<%--<script src="../../js/bootstrap.min.js"></script>--%>
 
 </body>
 </html>
