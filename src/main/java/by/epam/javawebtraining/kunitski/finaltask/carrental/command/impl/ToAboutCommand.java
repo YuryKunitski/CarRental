@@ -8,6 +8,10 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+
+/**
+ * The command that shows information about all application
+ */
 public class ToAboutCommand implements Command {
 
 	private static final Logger LOG = LogManager.getLogger(ToAboutCommand.class.getName());

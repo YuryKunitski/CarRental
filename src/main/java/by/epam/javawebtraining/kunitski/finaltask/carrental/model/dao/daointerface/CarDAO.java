@@ -64,7 +64,7 @@ public interface CarDAO {
 	 * @return list of free cars
 	 * @throws DAOException
 	 */
-	List<Car> takeUnUsedCarsByClass(Date supposedDateFrom, Date supposedDateTo, CarClassType carClassType,
+	List<Car> takeUnUsedCarsByClass(String supposedDateFrom, String supposedDateTo, CarClassType carClassType,
 	                                int startPage, int carsOnPage) throws DAOException;
 
 	/**
@@ -83,4 +83,20 @@ public interface CarDAO {
 	 * @throws DAOException
 	 */
 	public int countAllCars() throws DAOException;
+
+	/**
+	 * Getting count of all car classes
+	 *
+	 * @return count of all car classes
+	 * @throws DAOException
+	 */
+	public int countAllClassCars(CarClassType carClassType) throws DAOException;
+
+	/**
+	 * Getting all car classes
+	 *
+	 * @return list of car classes
+	 * @throws DAOException
+	 */
+	public List<CarClassType> takeCarClass() throws DAOException;
 }

@@ -9,9 +9,9 @@
 <head>
     <title>User Success</title>
     <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/car-rental-style.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<%--    <link href="css/bootstrap.min.css" rel="stylesheet">--%>
+<%--    <link href="css/car-rental-style.css" rel="stylesheet">--%>
+<%--    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.mSuccessfulPaymentForOrder" var="mSuccessfulPayment"/>

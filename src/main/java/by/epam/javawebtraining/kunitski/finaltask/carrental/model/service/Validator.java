@@ -28,6 +28,7 @@ public class Validator {
 	private static final String PATTERN_NAME = "[A-Za-zА-Яа-я-]+";
 	private static final String PATTERN_PHONE = "[0-9-+\\s()]+";
 	private static final String PATTERN_PASSPORT = "[A-Z0-9]+";
+	private static final String PATTERN_DATE = "[2][0-9][0-9][0-9]\\-[0-1][0-9]\\-[0-3][0-9].+";
 	private static final String PATTERN_DAMAGE_PRICE = "(^[0-9]+\\.([0-9][0-9]|[0-9])$)|(^[0-9]+$)";
 	private static final String PATTERN_ORDER_INFO = "^\\S[^<>]*";
 	private static final String PATTERN_CAR_YEAR = "[1-3][0-9]{3}";
@@ -186,18 +187,34 @@ public class Validator {
 	 * @param secondDate second date
 	 * @return true - the first date is before the second, and the current date is before the first
 	 */
-	public boolean validateDate(Date firstDate, Date secondDate) {
-		boolean result = false;
+	public boolean validateDate(String firstDate, String secondDate) {
 
-		if (firstDate != null && secondDate != null) {
-			LocalDateTime d = LocalDateTime.now();
-			LocalDateTime date1 = firstDate.toLocalDate().atStartOfDay();
-			LocalDateTime date2 = secondDate.toLocalDate().atStartOfDay();
-
-			result = date1.isBefore(date2) && d.isBefore(date1);
+		if (firstDate == null || secondDate == null) {
+			return false;
 		}
 
-		return result;
+		if (firstDate.isEmpty() || secondDate.isEmpty()) {
+			return false;
+		}
+
+		Pattern pattern = Pattern.compile(PATTERN_DATE);
+		Matcher matcher1 = pattern.matcher(firstDate);
+		Matcher matcher2 = pattern.matcher(secondDate);
+		boolean match1 = matcher1.matches();
+		boolean match2 = matcher2.matches();
+		if (!match1) {
+			return false;
+		}
+		if (!match2) {
+			return false;
+		}
+		String tFirstDate = firstDate.replace(" ", "T");
+		String tSecondDate = secondDate.replace(" ", "T");
+		LocalDateTime date1 = LocalDateTime.parse(tFirstDate);
+		LocalDateTime date2 = LocalDateTime.parse(tSecondDate);
+		LocalDateTime dateNow = LocalDateTime.now();
+
+		return  (date1.isBefore(date2) && dateNow.isBefore(date1));
 	}
 
 	/**
@@ -293,5 +310,6 @@ public class Validator {
 	public boolean validateModel(String model) {
 		return model != null && !model.isEmpty();
 	}
+
 
 }

@@ -28,8 +28,8 @@ public class ServiceConstant {
 	public static final String SERVICE_TAKE_MARKS_ENDS_MSG = "CarService : takeMarks : ends";
 	public static final String SERVICE_TAKE_MODELS_STARTS_MSG = "CarService : takeModels : starts";
 	public static final String SERVICE_TAKE_MODELS_ENDS_MSG = "CarService : takeModels : ends";
-	public static final String SERVICE_TAKE_CAR_TYPES_STARTS_MSG = "CarService : takeCarTypes : starts";
-	public static final String SERVICE_TAKE_CAR_TYPES_ENDS_MSG = "CarService : takeCarTypes : ends";
+	public static final String SERVICE_TAKE_CAR_CLASS_STARTS_MSG = "CarService : takeCarClass : starts";
+	public static final String SERVICE_TAKE_CAR_CLASS_ENDS_MSG = "CarService : takeCarClass : ends";
 	public static final String SERVICE_TAKE_CARS_BY_CLASS_START_MSG = "CarService : takeCarsByClass : starts";
 	public static final String SERVICE_TAKE_CARS_BY_ClASS_END_MSG = "CarService : takeCarsByClass : ends";
 	public static final String SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_START_MSG = "CarService : takeCarsByTypeAndDate : starts";

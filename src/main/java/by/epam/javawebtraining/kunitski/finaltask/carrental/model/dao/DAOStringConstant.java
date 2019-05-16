@@ -43,6 +43,11 @@ public class DAOStringConstant {
 	public static final String DAO_DELETE_CAR_BY_ID_ENDS_MSG = "CarDAOdb : deleteCarById : ends";
 	public static final String DAO_COUNT_ALL_CARS_ENDS_MSG = "CarDAOdb : countAllCars : ends";
 	public static final String DAO_TAKE_CAR_BY_ID_ENDS_MSG = "CarDAOdb : takeCarById : ends";
+	public static final String DAO_TAKE_CAR_CLASS_STARTS_MSG = "CarDAOdb : takeCarClass : starts";
+	public static final String DAO_TAKE_CAR_CLASS_ENDS_MSG = "CarDAOdb : takeCarClass : ends";
+	public static final String DAO_COUNT_ALL_CLASS_CARS_STARTS_MSG = "CarDAOdb : countAllTypeCars : starts";
+	public static final String DAO_COUNT_ALL_CLASS_CARS_ENDS_MSG = "CarDAOdb : countAllTypeCars : ends";
+
 
 	public static final String DAO_TAKE_CARS_BY_CLASS_ERROR_MSG = "CarDAOdb : takeCarsByClass : ERROR";
 	public static final String DAO_TAKE_CARS_BY_CLASS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeCarsByCLass : close connection error";
@@ -60,6 +65,11 @@ public class DAOStringConstant {
 	public static final String DAO_COUNT_ALL_CARS_CLOSE_CON_ERROR_MSG = "CarDAOdb : countAllCars : close connection error";
 	public static final String DAO_TAKE_CAR_BY_ID_ERROR_MSG = "CarDAOdb : TakeCarById : ERROR";
 	public static final String DAO_TAKE_CAR_BY_ID_CLOSE_CON_ERROR_MSG = "CarDAOdb : TakeCarById : close connection error";
+	public static final String DAO_TAKE_CAR_CLASS_ERROR_MSG = "CarDAOdb : takeCarClass : ERROR";
+	public static final String DAO_TAKE_CAR_CLASS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeCarClass : close connection error";
+	public static final String DAO_COUNT_ALL_CLASS_CARS_ERROR_MSG = "CarDAOdb : countAllTypeCars : ERROR";
+	public static final String DAO_COUNT_ALL_CLASS_CARS_CLOSE_CON_ERROR_MSG = "CarDAOdb : countAllTypeCars : close connection error";
+
 
 	/**
 	 * String constants for OrderDAOdb

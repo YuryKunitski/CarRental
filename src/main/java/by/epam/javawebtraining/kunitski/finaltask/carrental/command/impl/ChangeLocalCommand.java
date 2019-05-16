@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Command to change locale
+ * The command to change locale
  */
 public class ChangeLocalCommand implements Command {
 

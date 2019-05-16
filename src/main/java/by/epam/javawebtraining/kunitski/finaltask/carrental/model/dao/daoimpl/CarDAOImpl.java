@@ -66,6 +66,10 @@ public class CarDAOImpl implements CarDAO {
 
 	private static final String COUNT_ALL_CARS_QUERY = "SELECT COUNT(car_id) FROM car;";
 
+	private static final String TAKE_ALL_CLASS = "SELECT class FROM car_rental.car_class;";
+
+	private static final String COUNT_ALL_CAR_CLASS = "SELECT COUNT(car_id) FROM car WHERE car_class_id = ?;";
+
 
 	@Override
 	public void insertCar(Car car) throws DAOException {
@@ -150,8 +154,8 @@ public class CarDAOImpl implements CarDAO {
 
 			connection = connectionPooldb.takeConnection();
 			ps = connection.prepareStatement(TAKE_ALL_CARS_QUERY);
-			ps.setInt(1, toStartPage);
-			ps.setInt(2, carsOnPage);
+			ps.setInt(1, carsOnPage);
+			ps.setInt(2, toStartPage);
 			rs = ps.executeQuery();
 			List<Car> cars = new ArrayList<>();
 			while (rs.next()) {
@@ -260,7 +264,7 @@ public class CarDAOImpl implements CarDAO {
 	}
 
 	@Override
-	public List<Car> takeUnUsedCarsByClass(Date supposedDateFrom, Date supposedDateTo, CarClassType carClassType,
+	public List<Car> takeUnUsedCarsByClass(String supposedDateFrom, String supposedDateTo, CarClassType carClassType,
 	                                       int startPage, int carsOnPage) throws DAOException {
 
 		LOG.debug(DAOStringConstant.DAO_TAKE_UNUSED_CARS_BY_CLASS_STARTS_MSG);
@@ -276,10 +280,10 @@ public class CarDAOImpl implements CarDAO {
 			ps = connection.prepareStatement(TAKE_UNUSED_CARS_BY_CLASS_QUERY);
 
 			ps.setString(1, ORDER_STATUS_APPROVED);
-			ps.setDate(2, supposedDateFrom);
-			ps.setDate(3, supposedDateTo);
-			ps.setDate(4, supposedDateFrom);
-			ps.setDate(5, supposedDateTo);
+			ps.setString(2, supposedDateFrom);
+			ps.setString(3, supposedDateTo);
+			ps.setString(4, supposedDateFrom);
+			ps.setString(5, supposedDateTo);
 			ps.setString(6, carClassType.toString());
 			ps.setInt(7, startPage);
 			ps.setInt(8, carsOnPage);
@@ -390,6 +394,78 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	@Override
+	public int countAllClassCars(CarClassType carClassType) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_COUNT_ALL_CLASS_CARS_STARTS_MSG);
+
+		int carsAmount = 0;
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+
+			connection = connectionPool.takeConnection();
+			ps = connection.prepareStatement(COUNT_ALL_CAR_CLASS);
+			ps.setInt(1, carClassType.getOrdinal());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				carsAmount = rs.getInt(1);
+			}
+			return carsAmount;
+		} catch (SQLException | ConnectionPoolException ex) {
+			throw new DAOException(DAOStringConstant.DAO_COUNT_ALL_CLASS_CARS_ERROR_MSG, ex);
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, ps, rs);
+				}
+				LOG.debug(DAOStringConstant.DAO_COUNT_ALL_CLASS_CARS_ENDS_MSG);
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(DAOStringConstant.DAO_COUNT_ALL_CLASS_CARS_CLOSE_CON_ERROR_MSG, ex);
+			}
+		}
+	}
+
+	@Override
+	public List<CarClassType> takeCarClass() throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_TAKE_CAR_CLASS_STARTS_MSG);
+
+		List<CarClassType> carClasses = new ArrayList<>();
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+
+			connection = connectionPool.takeConnection();
+			st = connection.createStatement();
+			rs = st.executeQuery(TAKE_ALL_CLASS);
+			while (rs.next()) {
+				CarClassType carClass = CarClassType.valueOf(rs.getString(1).toUpperCase());
+				carClasses.add(carClass);
+			}
+
+			return carClasses;
+
+		} catch (ConnectionPoolException | SQLException ex) {
+			throw new DAOException(DAOStringConstant.DAO_TAKE_CAR_CLASS_ERROR_MSG, ex);
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, st, rs);
+				}
+				LOG.debug(DAOStringConstant.DAO_TAKE_CAR_CLASS_ENDS_MSG);
+
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(DAOStringConstant.DAO_TAKE_CAR_CLASS_CLOSE_CON_ERROR_MSG, ex);
+			}
+		}
+	}
+
+
 	public static void main(String[] args) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		try {
@@ -397,23 +473,22 @@ public class CarDAOImpl implements CarDAO {
 		} catch (ConnectionPoolException e) {
 			e.printStackTrace();
 		}
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+//		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		CarDAO carDAO = DAOFactory.getInstance().getCarDAO();
 //		carDAO.insertCar(new Car(21,"ford_focus",CarClassType.ECONOM,"2008", 75.5, ""));
-		System.out.println(carDAO.takeCarById(15));
-		List<Car> carList = carDAO.takeAllCars(20, 0);
-		System.out.println("All cars - " + carList.toString());
+//		System.out.println(carDAO.takeCarById(15));
+		List<Car> carList = carDAO.takeAllCars(0, 9);
+		System.out.println("All cars - " + carList.size());
 //		carDAO.deleteCarById(41);
-		List<Car> unusedCars = null;
-		try {
-			unusedCars = carDAO.takeUnUsedCarsByClass(new  java.sql.Date(format.parse( "2019-06-10").getTime()),
-		new java.sql.Date(format.parse( "2019-06-16").getTime()), CarClassType.ECONOM,20,0);
+//		List<Car> unusedCars = null;
+//			unusedCars = carDAO.takeUnUsedCarsByClass("2019-06-10",
+//		 "2019-06-16", CarClassType.ECONOM,20,0);
+//		System.out.println(unusedCars.toString());
 
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Unused cars by econom class - " + unusedCars.toString());
+//		System.out.println("Unused cars by econom class - " + unusedCars.toString());
+//		List<CarClassType> carClassTypes = carDAO.takeCarClass();
+//		System.out.println(carDAO.countAllClassCars(CarClassType.BUSINESS));
 //		List<Car> listCarByClass = carDAO.takeCarsByClass(CarClassType.BUSINESS, 20, 0);
 //		System.out.println(listCarByClass.toString());
 //		System.out.println(carDAO.takeCarById(5));

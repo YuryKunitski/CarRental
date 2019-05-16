@@ -41,13 +41,13 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <c:if test="${sessionScope.user.type.equals('user')}">
+                    <c:if test="${sessionScope.role == 'CUSTOMER'}">
                         <form action="Controller" method="get">
                             <input type="hidden" name="command" value="to-priv-office-user">
                             <button type="submit" class="btn btn-link btn-nav"><h4>${privateOffice}</h4></button>
                         </form>
                     </c:if>
-                    <c:if test="${sessionScope.user.type.equals('admin')}">
+                    <c:if test="${sessionScope.role == 'ADMINISTRATOR'}">
                         <form action="Controller" method="get">
                             <input type="hidden" name="command" value="to-priv-office-admin">
                             <button type="submit" class="btn btn-link btn-nav"><h4>${privateOffice}</h4></button>

@@ -10,9 +10,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Car Rental</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/car-rental-style.css" rel="stylesheet">
-  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<%--  <link href="css/bootstrap.min.css" rel="stylesheet">--%>
+<%--  <link href="css/car-rental-style.css" rel="stylesheet">--%>
+<%--  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
   <fmt:setLocale value="${sessionScope.locale}"/>
   <fmt:setBundle basename="localization.local" var="locale"/>
   <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
@@ -32,15 +32,9 @@
   <fmt:message bundle="${locale}" key="local.logOut" var="logOut"/>
   <fmt:message bundle="${locale}" key="local.privateOffice" var="privateOffice"/>
   <fmt:message bundle="${locale}" key="local.orders" var="orders"/>
-<%--  <fmt:message bundle="${locale}" key="local.cabriolet" var="cabriolet"/>--%>
-<%--  <fmt:message bundle="${locale}" key="local.cargo" var="cargo"/>--%>
   <fmt:message bundle="${locale}" key="local.businessClass" var="business"/>
-<%--  <fmt:message bundle="${locale}" key="local.jeep" var="jeep"/>--%>
-  <fmt:message bundle="${locale}" key="local.economClass" var="econom"/>
-<%--  <fmt:message bundle="${locale}" key="local.middleClass" var="middle"/>--%>
-<%--  <fmt:message bundle="${locale}" key="local.minibus" var="minibus"/>--%>
+  <fmt:message bundle="${locale}" key="local.economyClass" var="econom"/>
   <fmt:message bundle="${locale}" key="local.truck" var="truck"/>
-  <fmt:message bundle="${locale}" key="local.vintage" var="vintage"/>
   <fmt:message bundle="${locale}" key="local.mSuccessfulRegister" var="mSuccessfulRegister"/>
   <fmt:message bundle="${locale}" key="local.mBestDeals" var="mBestDeals"/>
   <fmt:message bundle="${locale}" key="local.mLowPrices" var="mLowPrices"/>
@@ -61,19 +55,16 @@
 
   <div class="carousel-inner">
     <div class="item active">
-<%--      <div class="fill" style="background-image:url('img/main1Img.jpg');"></div>--%>
       <div class="carousel-caption">
         <h2>${mBestDeals}</h2>
       </div>
     </div>
     <div class="item">
-<%--      <div class="fill" style="background-image:url('img/main2Img.jpg');"></div>--%>
       <div class="carousel-caption">
         <h2>${mLowPrices}</h2>
       </div>
     </div>
     <div class="item">
-<%--      <div class="fill" style="background-image:url('img/main3Img.jpg');"></div>--%>
       <div class="carousel-caption">
         <h2>${mCustomersSupport}</h2>
       </div>
@@ -108,7 +99,7 @@
       <div class="col-md-4 col-sm-6 img-portfolio">
         <form action="Controller" method="get">
           <button class="btn btn-default">
-            <img class="img-responsive img-hover car-econom-img" src="img/economCar.jpg" alt="Econom" width="225" height="150">
+            <img class="img-responsive img-hover car-small-img" src="img/economCar.jpg" alt="Econom" >
             <p class="my-info">${econom}</p>
           </button>
           <input type="hidden" name="command" value="view-type">
@@ -119,7 +110,7 @@
       <div class="col-md-4 col-sm-6 img-portfolio">
         <form action="Controller" method="get">
           <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/businessCar.jpg" alt="Business" width="225" height="150">
+            <img class="img-responsive img-hover car-small-img" src="img/businessCar.jpg" alt="Business" >
             <p class="my-info">${business}</p>
           </button>
           <input type="hidden" name="command" value="view-type">
@@ -130,7 +121,7 @@
       <div class="col-md-4 col-sm-6 img-portfolio">
         <form action="Controller" method="get">
           <button class="btn btn-default">
-            <img class="img-responsive img-hover car-small-img" src="img/truckCar.jpg" alt="Truck" width="225" height="150">
+            <img class="img-responsive img-hover car-small-img" src="img/truckCar.jpg" alt="Truck" >
             <p class="my-info">${truck}</p>
           </button>
           <input type="hidden" name="command" value="view-type">
@@ -156,18 +147,18 @@
 </div>
 
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
+    <!-- jQuery -->
+<%--<script src="js/jquery.js"></script>--%>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+<%--<script src="js/bootstrap.min.js"></script>--%>
 
-<!-- Script to Activate the Carousel -->
-<script>
-  $('.carousel').carousel({
-    interval: 5000 //changes the speed
-  })
-</script>
+    <!-- Script to Activate the Carousel -->
+<%--<script>--%>
+<%--  $('.carousel').carousel({--%>
+<%--    interval: 5000 //changes the speed--%>
+<%--  })--%>
+<%--</script>--%>
 
 </body>
 </html>
