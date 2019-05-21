@@ -39,7 +39,7 @@
 
 <div class="container">
 
-    <c:if test="${sessionScope.user.type.equals('user')}">
+    <c:if test="${sessionScope.role == 'CUSTOMER'}">
         <div class="col-lg-12">
             <h1 class="page-header"></h1>
 
@@ -94,7 +94,7 @@
             </c:if>
         </h2>
     </div>
-    <c:if test="${!sessionScope.user.type.equals('user')}">
+    <c:if test="${sessionScope.role != 'CUSTOMER'}">
         <form action="Controller" method="get">
             <input type="hidden" name="command" value="to-home-page">
             <input type="submit" value="${home}" class="btn btn-info">
@@ -106,8 +106,8 @@
 
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<%--<script src="js/jquery.js"></script>--%>
+<%--<script src="js/bootstrap.min.js"></script>--%>
 
 </body>
 </html>

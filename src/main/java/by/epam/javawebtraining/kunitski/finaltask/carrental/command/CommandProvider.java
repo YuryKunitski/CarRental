@@ -26,8 +26,8 @@ public class CommandProvider {
 		commands.put(CommandName.VIEW_CAR, new ViewCarCommand());
 //		commands.put(CommandName.TO_MAKE_ORDER, new ToMakeOrderCommand());
 //		commands.put(CommandName.MAKE_ORDER, new MakeOrderCommand());
-//		commands.put(CommandName.VIEW_ORDERS_USER, new ViewOrdersUserCommand());
-//		commands.put(CommandName.VIEW_ORDER_USER, new ViewOrderUserCommand());
+		commands.put(CommandName.VIEW_ORDERS_USER, new ViewOrdersUserCommand());
+		commands.put(CommandName.VIEW_ORDER_USER, new ViewOrderUserCommand());
 		commands.put(CommandName.VIEW_ORDERS_ADMIN, new ViewOrdersAdminCommand());
 		commands.put(CommandName.VIEW_ORDER_ADMIN, new ViewOrderAdminCommand());
 		commands.put(CommandName.UPDATE_STATUS, new UpdateStatusCommand());
@@ -38,10 +38,10 @@ public class CommandProvider {
 		commands.put(CommandName.TO_PRIV_OFFICE_ADMIN, new ToPrivateOfficeAdminCommand());
 		commands.put(CommandName.TO_PRIV_OFFICE_USER, new ToPrivateOfficeUserCommand());
 		commands.put(CommandName.TO_HOME_PAGE, new ToHomePageCommand());
-//		commands.put(CommandName.CANCEL_ORDER, new CancelOrderCommand());
-//		commands.put(CommandName.TO_PAYMENT_PAGE, new ToPaymentCommand());
-//		commands.put(CommandName.PAY, new PayCommand());
-//		commands.put(CommandName.PAY_FOR_DAMAGE, new PayForDamageCommand());
+		commands.put(CommandName.CANCEL_ORDER, new CancelOrderCommand());
+		commands.put(CommandName.TO_PAYMENT_PAGE, new ToPaymentCommand());
+		commands.put(CommandName.PAY, new PayCommand());
+		commands.put(CommandName.PAY_FOR_DAMAGE, new PayForDamageCommand());
 //		commands.put(CommandName.VIEW_ALL_USERS, new ViewAllUsersCommand());
 //		commands.put(CommandName.VIEW_USER, new ViewUserCommand());
 //		commands.put(CommandName.TO_ADD_CAR, new ToAddCarCommand());

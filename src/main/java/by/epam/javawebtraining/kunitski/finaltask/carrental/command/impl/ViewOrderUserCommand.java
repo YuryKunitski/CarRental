@@ -12,16 +12,18 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ViewOrderAdminCommand implements Command {
+/**
+ * The command for the user to receive one of his order
+ */
+public class ViewOrderUserCommand implements Command {
 
-	private static final Logger LOG = LogManager.getLogger(ViewOrderAdminCommand.class.getName());
+	private static final Logger LOG = LogManager.getLogger(ViewOrderUserCommand.class.getName());
 
-	private static final String EXECUTE_STARTS = "ViewOrderAdminCommand : execute : starts";
-	private static final String EXECUTE_ENDS = "ViewOrderAdminCommand : execute : ends";
+	private static final String EXECUTE_STARTS = "ViewOrderUserCommand : execute : starts";
+	private static final String EXECUTE_ENDS = "ViewOrderUserCommand : execute : ends";
 
 	private static final String SELECTED_ORDER_ID_PARAM = "selectedOrderId";
 	private static final String SELECTED_ORDER_PARAM = "selectedOrder";
-	private static final String ORDER_ID_PARAM = "orderId";
 	private static final String PROCESS_REQUEST_PARAM = "processRequest";
 
 	private static final String FORWARD_VALUE = "forward";
@@ -32,20 +34,20 @@ public class ViewOrderAdminCommand implements Command {
 		LOG.debug(EXECUTE_STARTS);
 
 		int orderId = Integer.parseInt(request.getParameter(SELECTED_ORDER_ID_PARAM));
-		request.setAttribute(ORDER_ID_PARAM, orderId);
 		OrderService service = ServiceFactory.getInstance().getOrderService();
+		request.setAttribute(SELECTED_ORDER_ID_PARAM, orderId);
+		request.getSession().setAttribute(SELECTED_ORDER_ID_PARAM, orderId);
 		Order order = null;
 
 		try {
-			order = service.takeAdminOrderByOrderId(orderId);
+			order = service.findOrderByOrderId(orderId);
 
-			request.setAttribute(SELECTED_ORDER_PARAM, order);
-			request.setAttribute(SELECTED_ORDER_ID_PARAM, orderId);
+			request.getSession().setAttribute(SELECTED_ORDER_PARAM, order);
 			request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);
 
 			LOG.debug(EXECUTE_ENDS);
 
-			return PageName.ADMIN_ORDER;
+			return PageName.USER_ORDER;
 
 		} catch (ServiceException ex) {
 			throw new CommandException(ex);

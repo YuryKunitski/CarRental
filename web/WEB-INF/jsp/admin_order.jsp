@@ -168,15 +168,7 @@
             <br/>
             <hr/>
 
-<%--            <c:if test="${requestScope.selectedOrder.status.equals('delivered') &&--%>
-<%--                                    requestScope.selectedOrder.realDateFrom == null}">--%>
-<%--                <h4 class="text-primary"><c:out value="${selectFrom}"/></h4>--%>
-<%--            </c:if>--%>
-<%--            --%>
-<%--            <c:if test="${requestScope.selectedOrder.status.equals('returned') &&--%>
-<%--                                requestScope.selectedOrder.realDateTo == null}">--%>
-<%--                <h4 class="text-primary"><c:out value="${selectTo}"/></h4>--%>
-<%--            </c:if>--%>
+
 
             <c:if test="${requestScope.invalidInfo == true}">
                 <h4 class="text-danger my-info">${invalidReason}</h4>
@@ -201,29 +193,18 @@
 
             <br/>
 
-<%--            <c:if test="${!requestScope.selectedOrder.status.equals('rejected') &&--%>
-<%--                        !requestScope.selectedOrder.status.equals('canceled') &&--%>
-<%--                        !requestScope.selectedOrder.status.equals('closed') &&--%>
-<%--                        !requestScope.selectedOrder.status.equals('accepted') &&--%>
-<%--                        !requestScope.selectedOrder.status.equals('expectsComp')}">--%>
+
 
                 <c:if test="${!requestScope.selectedOrder.status.equals('closed')}">
 
                 <form action="Controller" method="post" class="col-lg-4">
                     <select name="statusOrder" class="form-control">
-<%--                        <c:if test="${requestScope.selectedOrder.status.equals('undefined')}">--%>
                             <option value="approved">${sApproved}</option>
                             <option value="rejected">${sRejected}</option>
                             <option value="closed">${sClosed}</option>
                             <option value="undefined">${sUndefined}</option>
-<%--                        </c:if>--%>
                     </select>
                     <br/>
-<%--??????????????????--%>
-<%--                    <c:if test="${!(requestScope.selectedOrder.status.equals('closed') &&--%>
-<%--                        requestScope.selectedOrder.rentalStartDate == null) &&--%>
-<%--                        !(requestScope.selectedOrder.status.equals('closed') &&--%>
-<%--                        requestScope.selectedOrder.rentalEndDate == null)}">--%>
 
                         <p>${reason}:</p>
                         <textarea name="order-info" cols="40" rows="3" required
@@ -234,8 +215,8 @@
                         <input type="hidden" name="orderId" value="${requestScope.selectedOrder.orderID}">
                         <input type="hidden" name="command" value="update-status">
                         <input type="submit" value="${changeStatus}" class="btn btn-primary"/>
-<%--                    </c:if>--%>
-<%--????????????????????????--%>
+
+
                 </form>
             </c:if>
 
@@ -248,43 +229,18 @@
                 <p> ${mRealDateTo} <c:out value="${requestScope.selectedOrder.rentalEndDate}"/></p>
 
 
-<%--&lt;%&ndash;                <c:if test="${requestScope.selectedOrder.status.equals('delivered') && requestScope.selectedOrder.realDateFrom == null}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                    <c:if test="${requestScope.invalidDateFrom == true}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        <p class="text-danger">${mInvalidDate}</p>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                    </c:if>&ndash;%&gt;--%>
-<%--                    <form action="Controller" method="get">--%>
-<%--                        <input type="hidden" name="command" value="to-date">--%>
-<%--                        <input type="hidden" name="setDateFrom" value="true">--%>
-<%--                        <input type="hidden" name="selectedOrderId" value="${requestScope.selectedOrder.orderID}">--%>
-<%--                        <input type="submit" value="${mSetDateFrom}" class="btn btn-primary">--%>
-<%--                        <br/>--%>
-<%--                    </form>--%>
-<%--                </c:if>--%>
 
-<%--                <c:if test="${requestScope.selectedOrder.realDateFrom != null &&--%>
-<%--                                requestScope.selectedOrder.status.equals('returned') && requestScope.selectedOrder.realDateTo == null}">--%>
-<%--                    <c:if test="${requestScope.invalidDateTo == true}">--%>
-<%--                        <p class="text-danger">${mInvalidDate}</p>--%>
-<%--                    </c:if>--%>
-<%--                    <p>${mRealDateTo}</p>--%>
-
-<%--                    <form action="Controller" method="get">--%>
-<%--                        <input type="hidden" name="command" value="to-date">--%>
-<%--                        <input type="hidden" name="setDateTo" value="true">--%>
-<%--                        <input type="hidden" name="selectedOrderId" value="${requestScope.selectedOrder.orderID}">--%>
-<%--                        <input type="submit" value="${mSetDateTo}" class="btn btn-primary">--%>
-<%--                    </form>--%>
-<%--                    <br/>--%>
-<%--                </c:if>--%>
 
                 <c:if test="${requestScope.selectedOrder.damagePrice != null}">
                     <p> ${mDmgPrice}: <c:out value="${requestScope.selectedOrder.damagePrice}"/> ${byn}</p>
                 </c:if>
 
                 <c:if test="${requestScope.selectedOrder.status.equals('approved')}">
-<%--                    <c:if test="${requestScope.invalidDamagePrice == true}">--%>
-<%--                        <p class="text-danger">${invalidDmgPrice}</p>--%>
-<%--                    </c:if>--%>
+
+                    <c:if test="${requestScope.invalidDamagePrice == true}">
+                        <p class="text-danger">${invalidDmgPrice}</p>
+                    </c:if>
+
                     <form action="Controller" method="post">
                         <input type="text" name="damage-price" min=""
                                pattern="(^[0-9]+\.([0-9][0-9]|[0-9])$)|(^[0-9]+$)" class="form-control"
