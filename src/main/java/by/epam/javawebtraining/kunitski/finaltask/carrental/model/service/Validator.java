@@ -1,6 +1,7 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,7 +29,7 @@ public class Validator {
 	private static final String PATTERN_NAME = "[A-Za-zА-Яа-я-]+";
 	private static final String PATTERN_PHONE = "[0-9-+\\s()]+";
 	private static final String PATTERN_PASSPORT = "[A-Z0-9]+";
-	private static final String PATTERN_DATE = "[2][0-9][0-9][0-9]\\-[0-1][0-9]\\-[0-3][0-9].+";
+	private static final String PATTERN_DATE = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
 	private static final String PATTERN_DAMAGE_PRICE = "(^[0-9]+\\.([0-9][0-9]|[0-9])$)|(^[0-9]+$)";
 	private static final String PATTERN_ORDER_INFO = "^\\S[^<>]*";
 	private static final String PATTERN_CAR_YEAR = "[1-3][0-9]{3}";
@@ -189,6 +190,7 @@ public class Validator {
 	 */
 	public boolean validateDate(String firstDate, String secondDate) {
 
+
 		if (firstDate == null || secondDate == null) {
 			return false;
 		}
@@ -202,17 +204,18 @@ public class Validator {
 		Matcher matcher2 = pattern.matcher(secondDate);
 		boolean match1 = matcher1.matches();
 		boolean match2 = matcher2.matches();
+
 		if (!match1) {
 			return false;
 		}
+
 		if (!match2) {
 			return false;
 		}
-		String tFirstDate = firstDate.replace(" ", "T");
-		String tSecondDate = secondDate.replace(" ", "T");
-		LocalDateTime date1 = LocalDateTime.parse(tFirstDate);
-		LocalDateTime date2 = LocalDateTime.parse(tSecondDate);
-		LocalDateTime dateNow = LocalDateTime.now();
+
+		LocalDate date1 = LocalDate.parse(firstDate);
+		LocalDate date2 = LocalDate.parse(secondDate);
+		LocalDate dateNow = LocalDate.now();
 
 		return  (date1.isBefore(date2) && dateNow.isBefore(date1));
 	}
@@ -265,7 +268,7 @@ public class Validator {
 	 * @return true - order info is correct, false - order info is not correct
 	 */
 	public boolean validateOrderInfo(String orderInfo) {
-
+		System.out.println("validate info");
 		boolean result = false;
 
 		if (orderInfo != null) {
@@ -275,7 +278,7 @@ public class Validator {
 
 		result = matcher.matches();
 		}
-
+		System.out.println("validate info - " + result);
 		return result;
 	}
 

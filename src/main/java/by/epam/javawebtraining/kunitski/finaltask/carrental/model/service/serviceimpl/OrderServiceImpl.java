@@ -136,13 +136,19 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public List<Order> takeAllOrders(int pageNumber, int ordersOnPage) throws ServiceException {
+
 		LOG.debug(ServiceConstant.SERVICE_TAKE_ALL_ORDERS_STARTS_MSG);
+
 		List<Order> orders = null;
 		int startPage = orderToStartPage(pageNumber, ordersOnPage);
+
 		try {
 			orders = ORDER_DAO.takeAllOrders(startPage, ordersOnPage);
+
 			LOG.debug(ServiceConstant.SERVICE_TAKE_ALL_ORDERS_ENDS_MSG);
+
 			return orders;
+
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
 		}
@@ -218,6 +224,36 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			ORDER_DAO.updateDamagePriceByOrderId(orderId, damagePrice);
 			LOG.debug(ServiceConstant.SERVICE_UPDATE_DAMAGE_PRICE_BY_ID_ENDS_MSG);
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+	}
+
+	/**
+	 * Count pages all orders
+	 *
+	 * @param amountOrdersOnPage amount orders on page
+	 * @throws DAOException exception count pages all orders
+	 */
+@Override
+	public int countPageAmountAllOrders(int amountOrdersOnPage) throws ServiceException {
+
+		LOG.debug(ServiceConstant.SERVICE_COUNT_PAGE_AMOUNT_ALL_ORDERS_STARTS_MSG);
+
+		int pageAmount = 0;
+		int ordersAmount = 0;
+
+		try {
+			ordersAmount = ORDER_DAO.countAllOrders();
+			if (ordersAmount % amountOrdersOnPage != 0) {
+				pageAmount = (ordersAmount / amountOrdersOnPage) + 1;
+			} else {
+				pageAmount = (ordersAmount / amountOrdersOnPage);
+			}
+
+			LOG.debug(ServiceConstant.SERVICE_COUNT_PAGE_AMOUNT_ALL_ORDERS_ENDS_MSG);
+
+			return pageAmount;
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
 		}

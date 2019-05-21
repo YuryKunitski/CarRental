@@ -55,8 +55,8 @@ public class OrderDAOImpl implements OrderDAO {
 			"INNER JOIN car_class AS cc ON car.car_class_id = cc.car_class_id " +
 			"WHERE o.order_id=?;";
 
-	private static final String TAKE_ALL_ORDERS_QUERY = "SELECT o.order_id, u.login, u.name, u.surname, cm.model, " +
-			"cc.class, o.status, o.damage_price, o.total_bill " +
+	private static final String TAKE_ALL_ORDERS_QUERY = "SELECT o.order_id, u.login, u.name, u.surname, cm.model," +
+			" o.rent_start_date, o.rent_end_date, cc.class, o.status, o.damage_price, o.total_bill " +
 			"FROM car_rental.order AS o " +
 			"INNER JOIN car ON o.car_id= car.car_id " +
 			"INNER JOIN car_rental.user AS u ON o.user_id = u.user_id " +
@@ -281,8 +281,8 @@ public class OrderDAOImpl implements OrderDAO {
 		try {
 			connection = connectionPool.takeConnection();
 			PreparedStatement ps = connection.prepareStatement(TAKE_ALL_ORDERS_QUERY);
-			ps.setInt(1, toStartPage);
-			ps.setInt(2, ordersOnPage);
+			ps.setInt(1, ordersOnPage);
+			ps.setInt(2, toStartPage);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -294,10 +294,15 @@ public class OrderDAOImpl implements OrderDAO {
 				user.setName(rs.getString(3));
 				user.setSurName(rs.getString(4));
 				car.setCarModel(rs.getString(5));
-				car.setCarClassType(CarClassType.valueOf(rs.getString(6).toUpperCase()));
-				order.setStatus(rs.getString(7));
-				order.setDamagePrice(rs.getDouble(8));
-				order.setTotalBill(rs.getDouble(9));
+
+				order.setRentalStartDate(rs.getDate(6));
+				order.setRentalEndDate(rs.getDate(7));
+
+				car.setCarClassType(CarClassType.valueOf(rs.getString(8).toUpperCase()));
+
+				order.setStatus(rs.getString(9));
+				order.setDamagePrice(rs.getDouble(10));
+				order.setTotalBill(rs.getDouble(11));
 
 				order.setCar(car);
 				order.setUser(user);

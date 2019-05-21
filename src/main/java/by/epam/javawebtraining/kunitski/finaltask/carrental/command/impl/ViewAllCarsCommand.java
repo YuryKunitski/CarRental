@@ -54,7 +54,7 @@ public class ViewAllCarsCommand implements Command {
 
 		try {
 			cars = service.takeAllCars(pageNumber, AMOUNT_CARS_ON_PAGE);
-			Set<Car> setCars = new HashSet<>(cars);
+
 			if (cars.size() == 0) {
 				request.setAttribute(NO_CARS_PARAM, true);
 			}
@@ -63,7 +63,7 @@ public class ViewAllCarsCommand implements Command {
 
 			request.setAttribute(AMOUNT_PAGES_PARAM, amountPages);
 
-			request.getSession().setAttribute(ALL_CARS_PARAM, setCars);
+			request.getSession().setAttribute(ALL_CARS_PARAM, cars);
 			request.getSession().setAttribute(ALL_CLASSES_PARAM, carClasses);
 
 			request.setAttribute(PAGE_NUMBER_PARAM, pageNumber);

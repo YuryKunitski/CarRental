@@ -27,7 +27,7 @@ public class ViewUnusedClassCars implements Command {
 
 	private static final String PAGE_NUMBER_PARAM = "pageNumber";
 	private static final String CAR_CLASS_PARAM = "carClass";
-	private static final String INVALID_TYPE_PARAM = "invalidType";
+	private static final String INVALID_ClASS_PARAM = "invalidClass";
 	private static final String SUPPOSED_DATE_FROM_PARAM = "supposedDateFrom";
 	private static final String SUPPOSED_DATE_TO_PARAM = "supposedDateTo";
 	private static final String INVALID_DATE_PARAM = "invalidDate";
@@ -37,7 +37,7 @@ public class ViewUnusedClassCars implements Command {
 	private static final String COMMAND_PARAM = "command";
 	private static final String PROCESS_REQUEST_PARAM = "processRequest";
 
-	private static final String VIEW_TYPE_UNUSED_VALUE = "view-type-unused";
+	private static final String VIEW_CLASS_UNUSED_VALUE = "view-class-unused";
 	private static final String FORWARD_VALUE = "forward";
 
 
@@ -59,11 +59,8 @@ public class ViewUnusedClassCars implements Command {
 
 		if (request.getParameter(CAR_CLASS_PARAM) != null) {
 			carClass = CarClassType.valueOf(request.getParameter(CAR_CLASS_PARAM));
-			request.getSession().setAttribute(CAR_CLASS_PARAM, carClass.toString());
-		} else if (request.getSession().getAttribute(CAR_CLASS_PARAM) != null) {
-			carClass = CarClassType.valueOf((String) request.getSession().getAttribute(CAR_CLASS_PARAM));
 		} else {
-			request.setAttribute(INVALID_TYPE_PARAM, true);
+			request.setAttribute(INVALID_ClASS_PARAM, true);
 		}
 		String supposedDateFrom = null;
 		String supposedDateTo = null;
@@ -86,24 +83,34 @@ public class ViewUnusedClassCars implements Command {
 			request.setAttribute(NO_CARS_PARAM, true);
 
 			LOG.debug(EXECUTE_ENDS);
-
 			return PageName.ALL_CARS;
 		}
 
 		List<Car> cars = null;
 		try {
-			cars = service.takeUnysedCarsByClassAndDate(carClass, supposedDateFrom, supposedDateTo, pageNumber,
-					AMOUNT_CARS_ON_PAGE);
+			if (carClass != null) {
+				cars = service.takeUnysedCarsByClassAndDate(carClass, supposedDateFrom, supposedDateTo, pageNumber,
+						AMOUNT_CARS_ON_PAGE);
+			} else {
+				cars = service.takeUnusedCarsByDate(supposedDateFrom, supposedDateTo, pageNumber, AMOUNT_CARS_ON_PAGE);
+			}
 
 			if (cars.size() == 0) {
 				request.setAttribute(NO_CARS_PARAM, true);
 			}
-			amountPages = service.countPageAmountUnusedClassCars(supposedDateFrom, supposedDateTo, carClass,
-					AMOUNT_CARS_ON_PAGE, pageNumber);
+
+			if (carClass != null) {
+				amountPages = service.countPageAmountUnusedClassCars(supposedDateFrom, supposedDateTo, carClass,
+						AMOUNT_CARS_ON_PAGE);
+			} else {
+				amountPages = service.countPageAmountUnusedCars(supposedDateFrom, supposedDateTo,
+						AMOUNT_CARS_ON_PAGE);
+			}
+
+			request.getSession().setAttribute(ALL_CARS_PARAM, cars);
 
 			request.setAttribute(AMOUNT_PAGES_PARAM, amountPages);
-			request.setAttribute(ALL_CARS_PARAM, cars);
-			request.setAttribute(COMMAND_PARAM, VIEW_TYPE_UNUSED_VALUE);
+			request.setAttribute(COMMAND_PARAM, VIEW_CLASS_UNUSED_VALUE);
 			request.setAttribute(CAR_CLASS_PARAM, carClass);
 			request.setAttribute(PAGE_NUMBER_PARAM, pageNumber);
 			request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);

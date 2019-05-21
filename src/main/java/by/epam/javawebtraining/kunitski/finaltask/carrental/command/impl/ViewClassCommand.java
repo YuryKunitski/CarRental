@@ -41,13 +41,14 @@ public class ViewClassCommand implements Command {
 
 		LOG.debug(EXECUTE_STARTS);
 
-		int amountPages = 0;
+
 		int pageNumber = DEFAULT_PAGE_NUMBER;
 
 		if (request.getParameter(PAGE_NUBMER_PARAM) != null) {
 			pageNumber = Integer.parseInt(request.getParameter(PAGE_NUBMER_PARAM));
 		}
 
+		int amountPages = 0;
 		CarClassType classType = CarClassType.valueOf(request.getParameter(CAR_CLASS_PARAM));
 		CarService service = ServiceFactory.getInstance().getCarService();
 		List<Car> cars = null;

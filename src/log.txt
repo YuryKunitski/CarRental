@@ -1570,3 +1570,469 @@
 2019-05-15 21:13:58 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
 2019-05-15 21:13:58 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
 2019-05-15 21:13:58 DEBUG CarDAOImpl:180 - CarDAOdb : takeAllCars : ends
+2019-05-17 21:35:00 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 21:35:09 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 21:35:09 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 21:35:10 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 21:35:10 DEBUG CarServiceImpl:161 - CarService : takeAllCars : starts
+2019-05-17 21:35:10 DEBUG CarServiceImpl:323 - CarService : carToStartPage : starts
+2019-05-17 21:35:10 DEBUG CarServiceImpl:324 - CarService : carToStartPage : ends
+2019-05-17 21:35:10 DEBUG CarDAOImpl:148 - CarDAOdb : takeAllCars : starts
+2019-05-17 21:35:10 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 21:35:10 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 21:35:10 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 21:35:10 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 21:35:10 DEBUG CarDAOImpl:180 - CarDAOdb : takeAllCars : ends
+2019-05-17 21:35:10 DEBUG CarServiceImpl:168 - CarService : takeAllCars : ends
+2019-05-17 21:36:08 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 21:36:11 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 21:36:11 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 21:36:11 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 21:36:11 DEBUG CarServiceImpl:161 - CarService : takeAllCars : starts
+2019-05-17 21:36:11 DEBUG CarServiceImpl:323 - CarService : carToStartPage : starts
+2019-05-17 21:36:11 DEBUG CarServiceImpl:324 - CarService : carToStartPage : ends
+2019-05-17 21:36:11 DEBUG CarDAOImpl:148 - CarDAOdb : takeAllCars : starts
+2019-05-17 21:36:11 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 21:36:11 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 21:36:11 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 21:36:11 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 21:36:11 DEBUG CarDAOImpl:180 - CarDAOdb : takeAllCars : ends
+2019-05-17 21:36:11 DEBUG CarServiceImpl:168 - CarService : takeAllCars : ends
+2019-05-17 21:36:29 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 21:36:32 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 21:36:32 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 21:36:32 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 21:36:32 DEBUG CarServiceImpl:161 - CarService : takeAllCars : starts
+2019-05-17 21:36:32 DEBUG CarServiceImpl:323 - CarService : carToStartPage : starts
+2019-05-17 21:36:32 DEBUG CarServiceImpl:324 - CarService : carToStartPage : ends
+2019-05-17 21:36:32 DEBUG CarDAOImpl:148 - CarDAOdb : takeAllCars : starts
+2019-05-17 21:36:32 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 21:36:32 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 21:36:32 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 21:36:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 21:36:32 DEBUG CarDAOImpl:180 - CarDAOdb : takeAllCars : ends
+2019-05-17 21:36:32 DEBUG CarServiceImpl:168 - CarService : takeAllCars : ends
+2019-05-17 21:39:43 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 21:39:46 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 21:39:46 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 21:39:46 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 21:39:46 DEBUG CarServiceImpl:161 - CarService : takeAllCars : starts
+2019-05-17 21:39:46 DEBUG CarServiceImpl:323 - CarService : carToStartPage : starts
+2019-05-17 21:39:46 DEBUG CarServiceImpl:324 - CarService : carToStartPage : ends
+2019-05-17 21:39:46 DEBUG CarDAOImpl:148 - CarDAOdb : takeAllCars : starts
+2019-05-17 21:39:46 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 21:39:46 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 21:39:46 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 21:39:46 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 21:39:46 DEBUG CarDAOImpl:180 - CarDAOdb : takeAllCars : ends
+2019-05-17 21:39:46 DEBUG CarServiceImpl:168 - CarService : takeAllCars : ends
+2019-05-17 21:54:57 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 21:55:02 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 21:55:02 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 21:55:02 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 21:55:02 DEBUG CarServiceImpl:92 - CarService : takeCarsByClass : starts
+2019-05-17 21:55:02 DEBUG CarServiceImpl:323 - CarService : carToStartPage : starts
+2019-05-17 21:55:02 DEBUG CarServiceImpl:324 - CarService : carToStartPage : ends
+2019-05-17 21:55:02 DEBUG CarDAOImpl:321 - CarDAOdb : takeCarsByClass : starts
+2019-05-17 21:55:02 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 21:55:02 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 21:55:02 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 21:55:02 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 21:55:02 DEBUG CarDAOImpl:355 - CarDAOdb : takeCarsByClass : ends
+2019-05-17 21:55:02 DEBUG CarServiceImpl:97 - CarService : takeCarsByClass : ends
+2019-05-17 21:55:27 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 21:55:31 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 21:55:31 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 21:55:31 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 21:55:31 DEBUG CarServiceImpl:92 - CarService : takeCarsByClass : starts
+2019-05-17 21:55:31 DEBUG CarServiceImpl:323 - CarService : carToStartPage : starts
+2019-05-17 21:55:31 DEBUG CarServiceImpl:324 - CarService : carToStartPage : ends
+2019-05-17 21:55:31 DEBUG CarDAOImpl:321 - CarDAOdb : takeCarsByClass : starts
+2019-05-17 21:55:31 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 21:55:31 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 21:55:31 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 21:55:31 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 21:55:31 DEBUG CarDAOImpl:355 - CarDAOdb : takeCarsByClass : ends
+2019-05-17 21:55:31 DEBUG CarServiceImpl:97 - CarService : takeCarsByClass : ends
+2019-05-17 22:14:53 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 22:14:57 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 22:14:57 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 22:14:57 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 22:14:57 DEBUG CarServiceImpl:93 - CarService : takeCarsByClass : starts
+2019-05-17 22:14:57 DEBUG CarServiceImpl:328 - CarService : carToStartPage : starts
+2019-05-17 22:14:57 DEBUG CarServiceImpl:329 - CarService : carToStartPage : ends
+2019-05-17 22:14:57 DEBUG CarDAOImpl:321 - CarDAOdb : takeCarsByClass : starts
+2019-05-17 22:14:57 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 22:14:57 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 22:14:57 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 22:14:57 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 22:14:57 DEBUG CarDAOImpl:355 - CarDAOdb : takeCarsByClass : ends
+2019-05-17 22:14:57 DEBUG CarServiceImpl:100 - CarService : takeCarsByClass : ends
+2019-05-17 22:15:12 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-17 22:15:16 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-17 22:15:16 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-17 22:15:16 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-17 22:15:16 DEBUG CarServiceImpl:93 - CarService : takeCarsByClass : starts
+2019-05-17 22:15:16 DEBUG CarServiceImpl:328 - CarService : carToStartPage : starts
+2019-05-17 22:15:16 DEBUG CarServiceImpl:329 - CarService : carToStartPage : ends
+2019-05-17 22:15:16 DEBUG CarDAOImpl:321 - CarDAOdb : takeCarsByClass : starts
+2019-05-17 22:15:16 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-17 22:15:16 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-17 22:15:16 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-17 22:15:16 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-17 22:15:16 DEBUG CarDAOImpl:355 - CarDAOdb : takeCarsByClass : ends
+2019-05-17 22:15:16 DEBUG CarServiceImpl:100 - CarService : takeCarsByClass : ends
+2019-05-18 21:23:28 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 21:23:32 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 21:23:32 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 21:23:32 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 21:23:32 DEBUG CarServiceImpl:143 - CarService : takeCarsByTypeAndDate : starts
+2019-05-18 21:23:32 DEBUG CarServiceImpl:331 - CarService : carToStartPage : starts
+2019-05-18 21:23:32 DEBUG CarServiceImpl:332 - CarService : carToStartPage : ends
+2019-05-18 21:23:32 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 21:23:32 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 21:23:32 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 21:23:32 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 21:23:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 21:23:32 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 21:23:32 DEBUG CarServiceImpl:149 - CarService : takeCarsByTypeAndDate : ends
+2019-05-18 21:24:18 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 21:24:22 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 21:24:22 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 21:24:22 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 21:24:22 DEBUG CarServiceImpl:143 - CarService : takeCarsByTypeAndDate : starts
+2019-05-18 21:24:22 DEBUG CarServiceImpl:331 - CarService : carToStartPage : starts
+2019-05-18 21:24:22 DEBUG CarServiceImpl:332 - CarService : carToStartPage : ends
+2019-05-18 21:24:22 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 21:24:22 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 21:24:22 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 21:24:23 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 21:24:23 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 21:24:23 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 21:24:23 DEBUG CarServiceImpl:149 - CarService : takeCarsByTypeAndDate : ends
+2019-05-18 21:37:29 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 21:37:32 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 21:37:32 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 21:37:32 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 21:37:32 DEBUG CarServiceImpl:143 - CarService : takeCarsByTypeAndDate : starts
+2019-05-18 21:37:32 DEBUG CarServiceImpl:331 - CarService : carToStartPage : starts
+2019-05-18 21:37:32 DEBUG CarServiceImpl:332 - CarService : carToStartPage : ends
+2019-05-18 21:37:32 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 21:37:32 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 21:37:32 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 21:37:32 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 21:37:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 21:37:32 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 21:37:32 DEBUG CarServiceImpl:149 - CarService : takeCarsByTypeAndDate : ends
+2019-05-18 22:37:51 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 22:37:54 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 22:37:54 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 22:37:54 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 22:37:54 DEBUG CarServiceImpl:298 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-18 22:37:54 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 22:37:54 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 22:37:54 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 22:37:54 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 22:37:54 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 22:37:54 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 22:37:54 DEBUG CarServiceImpl:310 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-18 22:38:28 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 22:38:31 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 22:38:31 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 22:38:31 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 22:38:31 DEBUG CarServiceImpl:298 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-18 22:38:31 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 22:38:31 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 22:38:31 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 22:38:32 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 22:38:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 22:38:32 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 22:38:32 DEBUG CarServiceImpl:310 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-18 22:40:17 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 22:40:21 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 22:40:21 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 22:40:21 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 22:40:21 DEBUG CarServiceImpl:298 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-18 22:40:21 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 22:40:21 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 22:40:21 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 22:40:21 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 22:40:21 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 22:40:21 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 22:40:21 DEBUG CarServiceImpl:310 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-18 22:40:41 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 22:40:45 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 22:40:45 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 22:40:45 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 22:40:45 DEBUG CarServiceImpl:298 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-18 22:40:45 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 22:40:45 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 22:40:45 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 22:40:45 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 22:40:45 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 22:40:45 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 22:40:45 DEBUG CarServiceImpl:310 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-18 22:41:05 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 22:41:08 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 22:41:08 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 22:41:08 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 22:41:08 DEBUG CarServiceImpl:298 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-18 22:41:08 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 22:41:08 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 22:41:08 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 22:41:08 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 22:41:08 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 22:41:08 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 22:41:08 DEBUG CarServiceImpl:310 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-18 22:57:14 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-18 22:57:17 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-18 22:57:17 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-18 22:57:17 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-18 22:57:17 DEBUG CarServiceImpl:298 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-18 22:57:17 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-18 22:57:17 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-18 22:57:17 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-18 22:57:17 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-18 22:57:17 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-18 22:57:17 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-18 22:57:17 DEBUG CarServiceImpl:310 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-19 13:02:50 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 13:02:55 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 13:02:55 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 13:02:55 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 13:02:55 DEBUG CarServiceImpl:139 - CarService : takeCarsByClassAndDate : starts
+2019-05-19 13:02:55 DEBUG CarServiceImpl:327 - CarService : carToStartPage : starts
+2019-05-19 13:02:55 DEBUG CarServiceImpl:328 - CarService : carToStartPage : ends
+2019-05-19 13:02:55 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-19 13:02:55 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 13:02:55 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 13:02:56 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 13:02:56 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 13:02:56 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-19 13:02:56 DEBUG CarServiceImpl:145 - CarService : takeCarsByClassAndDate : ends
+2019-05-19 13:20:43 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 13:20:48 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 13:20:48 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 13:20:48 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 13:20:48 DEBUG CarServiceImpl:139 - CarService : takeCarsByClassAndDate : starts
+2019-05-19 13:20:48 DEBUG CarServiceImpl:327 - CarService : carToStartPage : starts
+2019-05-19 13:20:48 DEBUG CarServiceImpl:328 - CarService : carToStartPage : ends
+2019-05-19 13:20:48 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-19 13:20:48 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 13:20:48 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 13:20:49 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 13:20:49 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 13:20:49 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-19 13:20:49 DEBUG CarServiceImpl:145 - CarService : takeCarsByClassAndDate : ends
+2019-05-19 13:49:11 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 13:49:15 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 13:49:15 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 13:49:15 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 13:49:15 DEBUG CarServiceImpl:139 - CarService : takeCarsByClassAndDate : starts
+2019-05-19 13:49:15 DEBUG CarServiceImpl:327 - CarService : carToStartPage : starts
+2019-05-19 13:49:15 DEBUG CarServiceImpl:328 - CarService : carToStartPage : ends
+2019-05-19 13:49:15 DEBUG CarDAOImpl:270 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-19 13:49:15 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 13:49:15 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 13:49:15 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 13:49:15 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 13:49:15 DEBUG CarDAOImpl:311 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-19 13:49:15 DEBUG CarServiceImpl:145 - CarService : takeCarsByClassAndDate : ends
+2019-05-19 15:02:46 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:02:50 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:02:50 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 15:02:50 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:02:50 DEBUG CarServiceImpl:302 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-19 15:02:50 DEBUG CarDAOImpl:272 - CarDAOdb : takeUnusedCarsByClass : starts
+2019-05-19 15:02:50 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:02:50 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:02:50 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:02:50 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:02:50 DEBUG CarDAOImpl:314 - CarDAOdb : takeUnusedCarsByClass : ends
+2019-05-19 15:02:50 DEBUG CarServiceImpl:314 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-19 15:16:58 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:17:01 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:17:01 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:17:01 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:17:01 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:17:01 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:17:01 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:17:01 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:17:01 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:17:16 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:17:21 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:17:21 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:17:21 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:17:21 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:17:21 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:17:21 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:17:21 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:17:21 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:20:31 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:20:35 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:20:35 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:20:35 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:20:35 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:20:35 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:20:35 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:20:35 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:20:35 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:20:49 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:20:52 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:20:52 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:20:52 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:20:52 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:20:52 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:20:53 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:20:53 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:20:53 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:21:05 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:21:09 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:21:09 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:21:09 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:21:09 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:21:09 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:21:09 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:21:09 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:21:09 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:21:21 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:21:24 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:21:24 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:21:24 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:21:24 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:21:24 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:21:25 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:21:25 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:21:25 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:21:39 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:21:42 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:21:42 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:21:42 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:21:42 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:21:42 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:21:42 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:21:42 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:21:42 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:21:54 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:21:57 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:21:57 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:21:57 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:21:57 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:21:57 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:21:57 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:21:57 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:21:57 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:22:16 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:22:20 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:22:20 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:22:20 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:22:20 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:22:20 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:22:20 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:22:20 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:22:20 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:22:43 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:22:46 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:22:46 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:22:46 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:22:46 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:22:46 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:22:46 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:22:46 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:22:46 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 15:22:58 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 15:23:01 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 15:23:01 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 15:23:01 DEBUG CarDAOImpl:221 - CarDAOdb : takeUnusedCars : starts
+2019-05-19 15:23:01 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 15:23:01 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 15:23:01 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 15:23:01 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 15:23:01 DEBUG CarDAOImpl:263 - CarDAOdb : takeUnusedCars : ends
+2019-05-19 20:09:19 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:09:23 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:09:23 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:09:23 DEBUG CarDAOImpl:411 - CarDAOdb : countUnusedClassCars : starts
+2019-05-19 20:09:23 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:09:23 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:09:24 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:09:24 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:09:24 DEBUG CarDAOImpl:442 - CarDAOdb : countUnusedClassCars : ends
+2019-05-19 20:10:08 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:10:11 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:10:11 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:10:11 DEBUG CarDAOImpl:411 - CarDAOdb : countUnusedClassCars : starts
+2019-05-19 20:10:11 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:10:11 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:10:12 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:10:12 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:10:12 DEBUG CarDAOImpl:442 - CarDAOdb : countUnusedClassCars : ends
+2019-05-19 20:14:03 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:14:06 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:14:06 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 20:14:06 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:14:06 DEBUG CarServiceImpl:304 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-19 20:14:06 DEBUG CarDAOImpl:411 - CarDAOdb : countUnusedClassCars : starts
+2019-05-19 20:14:06 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:14:06 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:14:06 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:14:06 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:14:06 DEBUG CarDAOImpl:442 - CarDAOdb : countUnusedClassCars : ends
+2019-05-19 20:14:06 DEBUG CarServiceImpl:316 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-19 20:22:52 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:22:57 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:22:57 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:22:57 DEBUG CarDAOImpl:416 - CarDAOdb : countUnusedCars : starts
+2019-05-19 20:22:57 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:22:57 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:22:57 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:22:57 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:22:57 DEBUG CarDAOImpl:446 - CarDAOdb : countUnusedCars : ends
+2019-05-19 20:26:02 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:26:05 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:26:05 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 20:26:05 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:26:05 DEBUG CarServiceImpl:336 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-19 20:26:05 DEBUG CarDAOImpl:416 - CarDAOdb : countUnusedCars : starts
+2019-05-19 20:26:05 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:26:05 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:26:06 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:26:06 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:26:06 DEBUG CarDAOImpl:446 - CarDAOdb : countUnusedCars : ends
+2019-05-19 20:26:06 DEBUG CarServiceImpl:350 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-19 20:26:35 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:26:39 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:26:39 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 20:26:39 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:26:39 DEBUG CarServiceImpl:336 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-19 20:26:39 DEBUG CarDAOImpl:416 - CarDAOdb : countUnusedCars : starts
+2019-05-19 20:26:39 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:26:39 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:26:39 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:26:39 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:26:39 DEBUG CarDAOImpl:446 - CarDAOdb : countUnusedCars : ends
+2019-05-19 20:26:39 DEBUG CarServiceImpl:350 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-19 20:55:27 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:55:30 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:55:30 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 20:55:30 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:55:30 DEBUG CarServiceImpl:336 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-19 20:55:30 DEBUG CarDAOImpl:416 - CarDAOdb : countUnusedCars : starts
+2019-05-19 20:55:30 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:55:30 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:55:30 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:55:30 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:55:30 DEBUG CarDAOImpl:446 - CarDAOdb : countUnusedCars : ends
+2019-05-19 20:55:30 DEBUG CarServiceImpl:350 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-19 20:59:28 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-19 20:59:32 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-19 20:59:32 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-19 20:59:32 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-19 20:59:32 DEBUG CarServiceImpl:336 - CarService : countPageAmountUnusedTypeCars : starts
+2019-05-19 20:59:32 DEBUG CarDAOImpl:416 - CarDAOdb : countUnusedCars : starts
+2019-05-19 20:59:32 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-19 20:59:32 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-19 20:59:32 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-19 20:59:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-19 20:59:32 DEBUG CarDAOImpl:446 - CarDAOdb : countUnusedCars : ends
+2019-05-19 20:59:32 DEBUG CarServiceImpl:350 - CarService : countPageAmountUnusedTypeCars : ends

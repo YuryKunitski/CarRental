@@ -15,11 +15,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class CarServiceImpl implements CarService {
 
@@ -89,34 +85,43 @@ public class CarServiceImpl implements CarService {
 	 */
 	@Override
 	public List<Car> takeCarsByClass(CarClassType classType, int pageNumber, int carsOnPage) throws ServiceException {
+
 		LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_CLASS_START_MSG);
+
 		int startPage = carToStartPage(pageNumber, carsOnPage);
 		List<Car> cars = null;
 		try {
 			cars = CAR_DAO.takeCarsByClass(classType, startPage, carsOnPage);
+
 			LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_ClASS_END_MSG);
+
 			return cars;
+
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
 		}
 	}
 
 	/**
-	 * Getting a list of all unused cars on some free time interval by class
+	 * Getting a list of all unused cars on some free date interval by class
 	 *
-	 * @param dateFrom date and time of car rental by user from
-	 * @param dateTo   date and time of car rental by user to
+	 * @param dateFrom date of car rental by user from
+	 * @param dateTo   date of car rental by user to
 	 * @return list of free cars
 	 * @throws ServiceException
 	 */
 	@Override
-	public List<Car> takeUnusedCarsByDate(Date dateFrom, Date dateTo,
+	public List<Car> takeUnusedCarsByDate(String dateFrom, String dateTo,
 	                                              int pageNumber, int carsOnPage) throws ServiceException {
-		LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_START_MSG);
+
+		LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_DATE_START_MSG);
+
 		int startPage = carToStartPage(pageNumber, carsOnPage);
 		try {
 			List<Car> cars = CAR_DAO.takeUnusedCars(dateFrom, dateTo, startPage, carsOnPage);
-			LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_END_MSG);
+
+			LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_DATE_END_MSG);
+
 			return cars;
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
@@ -134,14 +139,17 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public List<Car> takeUnysedCarsByClassAndDate(CarClassType classType, String dateFrom, String dateTo,
 	                                        int pageNumber, int carsOnPage) throws ServiceException {
-		LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_START_MSG);
+
+		LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_CLASS_AND_DATE_START_MSG);
+
 		int startPage = carToStartPage(pageNumber, carsOnPage);
 		try {
 			List<Car> cars = CAR_DAO.takeUnUsedCarsByClass(dateFrom, dateTo, classType, startPage, carsOnPage);
 
-			LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_END_MSG);
+			LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_CLASS_AND_DATE_END_MSG);
 
 			return cars;
+
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
 		}
@@ -207,11 +215,11 @@ public class CarServiceImpl implements CarService {
 	 */
 	public List<Car> takeCarsByClassAndDate(CarClassType carClassType, String dateFrom, String dateTo,
 	                                        int pageNumber, int carsOnPage) throws ServiceException {
-		LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_START_MSG);
+		LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_CLASS_AND_DATE_START_MSG);
 		int startPage = carToStartPage(pageNumber, carsOnPage);
 		try {
 			List<Car> cars = CAR_DAO.takeUnUsedCarsByClass(dateFrom, dateTo, carClassType, startPage, carsOnPage);
-			LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_END_MSG);
+			LOG.debug(ServiceConstant.SERVICE_TAKE_CARS_BY_CLASS_AND_DATE_END_MSG);
 			return cars;
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
@@ -265,8 +273,10 @@ public class CarServiceImpl implements CarService {
 
 		int pageAmount = 0;
 		int carsAmount = 0;
+
 		try {
 			carsAmount = CAR_DAO.countAllClassCars(carClassType);
+
 			if (carsAmount%amountCarsOnPage != 0) {
 				pageAmount = (carsAmount / amountCarsOnPage) + 1;
 			} else {
@@ -275,6 +285,7 @@ public class CarServiceImpl implements CarService {
 			LOG.debug(ServiceConstant.SERVICE_COUNT_PAGE_AMOUNT_TYPE_ENDS_MSG);
 
 			return pageAmount;
+
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
 		}
@@ -288,15 +299,15 @@ public class CarServiceImpl implements CarService {
 	 * @throws ServiceException counting pages of amount unused class of cars
 	 */
 	@Override
-	public int countPageAmountUnusedClassCars(String dateFrom, String dateTo, CarClassType carClassType, int amountCarsOnPage,
-	                                          int pageNumber) throws ServiceException {
+	public int countPageAmountUnusedClassCars(String dateFrom, String dateTo, CarClassType carClassType,
+	                                          int amountCarsOnPage) throws ServiceException {
 
 		LOG.debug(ServiceConstant.SERVICE_COUNT_PAGE_AMOUNT_UNUSED_CARS_MSG_START);
 
 		int pageAmount = 0;
 		int carsAmount = 0;
 		try {
-			carsAmount = CAR_DAO.takeUnUsedCarsByClass(dateFrom, dateTo, carClassType, pageNumber, amountCarsOnPage).size();
+			carsAmount = CAR_DAO.countUnusedClassCars(carClassType, dateFrom, dateTo);
 
 			if (carsAmount%amountCarsOnPage != 0) {
 				pageAmount = (carsAmount / amountCarsOnPage) + 1;
@@ -313,7 +324,40 @@ public class CarServiceImpl implements CarService {
 	}
 
 	/**
-	 * Working with pages
+	 * Counting pages of amount unused cars
+	 *
+	 * @param amountCarsOnPage count cars on page
+	 * @return page amount
+	 * @throws ServiceException counting pages of amount unused cars
+	 */
+	@Override
+	public int countPageAmountUnusedCars(String dateFrom, String dateTo, int amountCarsOnPage) throws ServiceException {
+
+		LOG.debug(ServiceConstant.SERVICE_COUNT_PAGE_AMOUNT_UNUSED_CARS_MSG_START);
+
+		int pageAmount = 0;
+		int carsAmount = 0;
+
+		try {
+			carsAmount = CAR_DAO.countUnusedCars(dateFrom, dateTo);
+
+			if (carsAmount%amountCarsOnPage != 0) {
+				pageAmount = (carsAmount / amountCarsOnPage) + 1;
+			} else {
+				pageAmount = (carsAmount / amountCarsOnPage);
+			}
+
+			LOG.debug(ServiceConstant.SERVICE_COUNT_PAGE_AMOUNT_UNUSED_CARS_MSG_END);
+
+			return pageAmount;
+
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+	}
+
+	/**
+	 * The number of cars that we skip on current page
 	 *
 	 * @param pageNumber number of page
 	 * @param carsOnPage count of car on page
@@ -339,8 +383,13 @@ public class CarServiceImpl implements CarService {
 		CarService carService = ServiceFactory.getInstance().getCarService();
 //
 		try {
-		List<Car> carList = carService.takeAllCars(1,9);
-			System.out.println(carList.size());
+//		List<Car> carList = carService.takeUnysedCarsByClassAndDate(CarClassType.BUSINESS, "2019-05-20",
+//				"2019-05-25", 1, 9);
+//			System.out.println(carList);
+
+			int countPage = carService.countPageAmountUnusedCars( "2019-05-20", "2019-05-25",
+					9);
+			System.out.println(countPage);
 //			System.out.println(carService.takeUnysedCarsByClassAndDate(CarClassType.ECONOM, new  Date(format.parse( "2019-06-10").getTime()),
 //					new Date(format.parse( "2019-06-16").getTime()), 15, 1 ).toString());
 		} catch (ServiceException e) {

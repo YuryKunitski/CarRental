@@ -47,6 +47,10 @@ public class DAOStringConstant {
 	public static final String DAO_TAKE_CAR_CLASS_ENDS_MSG = "CarDAOdb : takeCarClass : ends";
 	public static final String DAO_COUNT_ALL_CLASS_CARS_STARTS_MSG = "CarDAOdb : countAllTypeCars : starts";
 	public static final String DAO_COUNT_ALL_CLASS_CARS_ENDS_MSG = "CarDAOdb : countAllTypeCars : ends";
+	public static final String DAO_COUNT_UNUSED_CLASS_CARS_STARTS_MSG = "CarDAOdb : countUnusedClassCars : starts";
+	public static final String DAO_COUNT_UNUSED_CLASS_CARS_ENDS_MSG = "CarDAOdb : countUnusedClassCars : ends";
+	public static final String DAO_COUNT_UNUSED_CARS_STARTS_MSG = "CarDAOdb : countUnusedCars : starts";
+	public static final String DAO_COUNT_UNUSED_CARS_ENDS_MSG = "CarDAOdb : countUnusedCars : ends";
 
 
 	public static final String DAO_TAKE_CARS_BY_CLASS_ERROR_MSG = "CarDAOdb : takeCarsByClass : ERROR";
@@ -69,6 +73,10 @@ public class DAOStringConstant {
 	public static final String DAO_TAKE_CAR_CLASS_CLOSE_CON_ERROR_MSG = "CarDAOdb : takeCarClass : close connection error";
 	public static final String DAO_COUNT_ALL_CLASS_CARS_ERROR_MSG = "CarDAOdb : countAllTypeCars : ERROR";
 	public static final String DAO_COUNT_ALL_CLASS_CARS_CLOSE_CON_ERROR_MSG = "CarDAOdb : countAllTypeCars : close connection error";
+	public static final String DAO_COUNT_UNUSED_CLASS_CARS_ERROR_MSG = "CarDAOdb : countUnusedClassCars : ERROR";
+	public static final String DAO_COUNT_UNUSED_CLASS_CARS_CLOSE_CON_ERROR_MSG = "CarDAOdb : countUnusedClassCars : close connection error";
+	public static final String DAO_COUNT_UNUSED_CARS_ERROR_MSG = "CarDAOdb : countUnusedCars : ERROR";
+	public static final String DAO_COUNT_UNUSED_CARS_CLOSE_CON_ERROR_MSG = "CarDAOdb : countUnusedCars : close connection error";
 
 
 	/**

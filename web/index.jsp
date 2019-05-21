@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib prefix="cr" uri="/WEB-INF/custom.tld" %>
+<%--<%@taglib prefix="cr" uri="/WEB-INF/custom.tld" %>--%>
 
 <!DOCTYPE html>
 <html>
@@ -102,8 +102,8 @@
             <img class="img-responsive img-hover car-small-img" src="img/economCar.jpg" alt="Econom" >
             <p class="my-info">${econom}</p>
           </button>
-          <input type="hidden" name="command" value="view-type">
-          <input type="hidden" name="carType" value="Small"/>
+          <input type="hidden" name="command" value="view-class">
+          <input type="hidden" name="carClass" value="ECONOM"/>
         </form>
       </div>
 
@@ -113,8 +113,8 @@
             <img class="img-responsive img-hover car-small-img" src="img/businessCar.jpg" alt="Business" >
             <p class="my-info">${business}</p>
           </button>
-          <input type="hidden" name="command" value="view-type">
-          <input type="hidden" name="carType" value="Coupe"/>
+          <input type="hidden" name="command" value="view-class">
+          <input type="hidden" name="carClass" value="BUSINESS"/>
         </form>
       </div>
 
@@ -124,8 +124,8 @@
             <img class="img-responsive img-hover car-small-img" src="img/truckCar.jpg" alt="Truck" >
             <p class="my-info">${truck}</p>
           </button>
-          <input type="hidden" name="command" value="view-type">
-          <input type="hidden" name="carType" value="Premium"/>
+          <input type="hidden" name="command" value="view-class">
+          <input type="hidden" name="carClass" value="TRUCK"/>
         </form>
       </div>
 

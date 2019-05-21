@@ -83,6 +83,14 @@ public interface OrderService {
 	 */
 	 void updateDamagePriceByOrderId(int orderId, double damagePrice) throws ServiceException;
 
+	/**
+	 * Count pages all orders
+	 *
+	 * @param amountOrdersOnPage amount orders on page
+	 * @throws DAOException exception count pages all orders
+	 */
+	public int countPageAmountAllOrders(int amountOrdersOnPage) throws ServiceException;
+
 
 
 }

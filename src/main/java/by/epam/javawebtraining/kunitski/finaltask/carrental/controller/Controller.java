@@ -30,11 +30,13 @@ public class Controller extends HttpServlet {
 
 	public Controller() {}
 
+@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LOG.debug(DO_GET_MSG);
 		processRequest(request, response);
 	}
 
+@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LOG.debug(DO_POST_MSG);
 		processRequest(request, response);

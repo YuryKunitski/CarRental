@@ -52,7 +52,7 @@ public interface CarService {
 	 * @return list of free cars
 	 * @throws ServiceException
 	 */
-	 List<Car> takeUnusedCarsByDate(Date dateFrom, Date dateTo,
+	 List<Car> takeUnusedCarsByDate(String dateFrom, String dateTo,
 	                                              int pageNumber, int carsOnPage) throws ServiceException;
 
 	/**
@@ -103,14 +103,22 @@ public interface CarService {
 	public int countPageAmountClassCars(CarClassType carClassType, int amountCarsOnPage) throws ServiceException;
 
 	/**
+	 * Counting pages of amount unused cars
+	 *
+	 * @param amountCarsOnPage count cars on page
+	 * @return page amount
+	 * @throws ServiceException counting pages of amount unused cars
+	 */
+	public int countPageAmountUnusedCars(String dateFrom, String dateTo, int amountCarsOnPage) throws ServiceException;
+
+	/**
 	 * Counting pages of amount unused class of cars
 	 *
 	 * @param amountCarsOnPage count cars on page
 	 * @return page amount
 	 * @throws ServiceException counting pages of amount unused class of cars
 	 */
-	public int countPageAmountUnusedClassCars(String dateFrom, String dateTo, CarClassType carClassType, int amountCarsOnPage,
-	                                          int pageNumber) throws ServiceException;
+	public int countPageAmountUnusedClassCars(String dateFrom, String dateTo, CarClassType carClassType, int amountCarsOnPage) throws ServiceException;
 
 
 }

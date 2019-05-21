@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib prefix="cr" uri="/WEB-INF/custom.tld" %>
+<%--<%@taglib prefix="cr" uri="/WEB-INF/custom.tld" %>--%>
 
 <!DOCTYPE html>
 <html>
@@ -9,9 +9,9 @@
     <title>All cars</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-<%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+<%--        <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
+<%--        <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
+    <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
@@ -45,6 +45,8 @@
     <fmt:message bundle="${locale}" key="local.noCars" var="mNoCars"/>
     <fmt:message bundle="${locale}" key="local.mPage" var="mPage"/>
     <fmt:message bundle="${locale}" key="local.mForMakingOrderTakeCar" var="mForMakingOrder"/>
+    <fmt:message bundle="${locale}" key="local.allFreeCars" var="allFreeCars"/>
+    <fmt:message bundle="${locale}" key="local.freeCars" var="unusedCars"/>
 </head>
 <body>
 
@@ -77,6 +79,7 @@
                 <div class="btn-group" data-toggle="buttons">
                     <c:forEach var="varClass" items="${sessionScope.allClasses}">
                         <label class="btn btn-default">
+
                             <input type="radio" name="carClass" value="${varClass}" autocomplete="off">
 
                             <c:if test="${varClass == 'BUSINESS'}">
@@ -96,7 +99,7 @@
                 </div>
 
                 <hr/>
-                <c:if test="${requestScope.invalidType == true}">
+                <c:if test="${requestScope.invalidClass == true}">
                     <p class="text-danger">
                         <c:out value="${selectClass}"/>
                     </p>
@@ -157,13 +160,28 @@
             ${truck}
         </c:if>
 
+        <c:if test="${requestScope.carClass == null && requestScope.command == 'view-class-unused'}">
+            ${allFreeCars} ${sessionScope.supposedDateFrom} / ${sessionScope.supposedDateTo}
+        </c:if>
+
+        <c:if test="${requestScope.carClass == 'BUSINESS' && requestScope.command == 'view-class-unused'}">
+            ${unusedCars} ${sessionScope.supposedDateFrom} / ${sessionScope.supposedDateTo}
+        </c:if>
+        <c:if test="${requestScope.carClass == 'ECONOM' && requestScope.command == 'view-class-unused'}">
+            ${unusedCars} ${sessionScope.supposedDateFrom} / ${sessionScope.supposedDateTo}
+        </c:if>
+        <c:if test="${requestScope.carClass == 'TRUCK' && requestScope.command == 'view-class-unused'}">
+            ${unusedCars} ${sessionScope.supposedDateFrom} / ${sessionScope.supposedDateTo}
+        </c:if>
+
+
     </h2>
 
     <div class="row well">
         <c:if test="${requestScope.noCars == true}">
             <p>${mNoCars}</p>
         </c:if>
-        <c:if test="${requestScope.noCars !=true}">
+        <c:if test="${requestScope.noCars != true}">
             <c:forEach var="car" items="${sessionScope.allCars}">
                 <div class="col-md-4 img-portfolio">
                     <form action="Controller" method="get">
@@ -181,8 +199,8 @@
         </c:if>
     </div>
 
-<%--    <div class="btn-group">--%>
-<%--        <c:if test="${requestScope.command == null && requestScope.noCars == true}">--%>
+    <div class="btn-group">
+        <c:if test="${requestScope.command == null && requestScope.noCars != false}">
             <c:forEach var="i" begin="1" end="${requestScope.amountPages}">
                 <form action="Controller" method="get" class="btn pag">
                     <input type="hidden" name="command" value="view-all-cars">
@@ -190,35 +208,56 @@
                     <c:if test="${requestScope.pageNumber == i}">
                         <input type="submit" value="${i}" class="btn btn-default active"/>
                     </c:if>
-                    <c:if test="${requestScope.pageNumber!=i}">
+                    <c:if test="${requestScope.pageNumber != i}">
                         <input type="submit" value="${i}" class="btn btn-default"/>
                     </c:if>
                 </form>
             </c:forEach>
             <p><c:out value="${mPage}: ${requestScope.pageNumber}"/></p>
-<%--        </c:if>--%>
+        </c:if>
 
-<%--        <c:if test="${requestScope.command != null && requestScope.noCars != false && requestScope.carType != null}">--%>
-<%--            <ul class="pagination">--%>
-<%--                <c:forEach var="i" begin="1" end="${requestScope.amountPages}">--%>
-<%--                    <li>--%>
-<%--                        <form action="Controller" method="get" class="btn pag">--%>
-<%--                            <input type="hidden" name="carType" value="${requestScope.carType}">--%>
-<%--                            <input type="hidden" name="command" value="${requestScope.command}">--%>
-<%--                            <input type="hidden" name="pageNumber" value="${i}"/>--%>
-<%--                            <c:if test="${requestScope.pageNumber==i}">--%>
-<%--                                <input type="submit" value="${i}" class="btn btn-default active"/>--%>
-<%--                            </c:if>--%>
-<%--                            <c:if test="${requestScope.pageNumber!=i}">--%>
-<%--                                <input type="submit" value="${i}" class="btn btn-default"/>--%>
-<%--                            </c:if>--%>
-<%--                        </form>--%>
-<%--                    </li>--%>
-<%--                </c:forEach>--%>
-<%--                <p><c:out value="${mPage}: ${requestScope.pageNumber}"/></p>--%>
-<%--            </ul>--%>
-<%--        </c:if>--%>
-<%--    </div>--%>
+        <c:if test="${requestScope.command != null && requestScope.noCars != false && requestScope.carClass != null}">
+            <ul class="pagination">
+                <c:forEach var="i" begin="1" end="${requestScope.amountPages}">
+                    <li>
+                        <form action="Controller" method="get" class="btn pag">
+                            <input type="hidden" name="carClass" value="${requestScope.carClass}">
+                            <input type="hidden" name="command" value="${requestScope.command}">
+                            <input type="hidden" name="pageNumber" value="${i}"/>
+                            <c:if test="${requestScope.pageNumber == i}">
+                                <input type="submit" value="${i}" class="btn btn-default active"/>
+                            </c:if>
+                            <c:if test="${requestScope.pageNumber != i}">
+                                <input type="submit" value="${i}" class="btn btn-default"/>
+                            </c:if>
+                        </form>
+                    </li>
+                </c:forEach>
+                <p><c:out value="${mPage}: ${requestScope.pageNumber}"/></p>
+            </ul>
+        </c:if>
+
+        <c:if test="${requestScope.command != null && requestScope.noCars != false && requestScope.carClass == null}">
+            <ul class="pagination">
+                <c:forEach var="i" begin="1" end="${requestScope.amountPages}">
+                    <li>
+                        <form action="Controller" method="get" class="btn pag">
+                            <input type="hidden" name="command" value="${requestScope.command}">
+                            <input type="hidden" name="pageNumber" value="${i}"/>
+                            <c:if test="${requestScope.pageNumber == i}">
+                                <input type="submit" value="${i}" class="btn btn-default active"/>
+                            </c:if>
+                            <c:if test="${requestScope.pageNumber != i}">
+                                <input type="submit" value="${i}" class="btn btn-default"/>
+                            </c:if>
+                        </form>
+                    </li>
+                </c:forEach>
+                <p><c:out value="${mPage}: ${requestScope.pageNumber}"/></p>
+            </ul>
+        </c:if>
+
+    </div>
 
     <hr/>
     <%@include file="../jspf/footer.jspf" %>

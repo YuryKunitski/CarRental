@@ -32,8 +32,10 @@ public class ServiceConstant {
 	public static final String SERVICE_TAKE_CAR_CLASS_ENDS_MSG = "CarService : takeCarClass : ends";
 	public static final String SERVICE_TAKE_CARS_BY_CLASS_START_MSG = "CarService : takeCarsByClass : starts";
 	public static final String SERVICE_TAKE_CARS_BY_ClASS_END_MSG = "CarService : takeCarsByClass : ends";
-	public static final String SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_START_MSG = "CarService : takeCarsByTypeAndDate : starts";
-	public static final String SERVICE_TAKE_CARS_BY_TYPE_AND_DATE_END_MSG = "CarService : takeCarsByTypeAndDate : ends";
+	public static final String SERVICE_TAKE_CARS_BY_CLASS_AND_DATE_START_MSG = "CarService : takeCarsByClassAndDate : starts";
+	public static final String SERVICE_TAKE_CARS_BY_CLASS_AND_DATE_END_MSG = "CarService : takeCarsByClassAndDate : ends";
+	public static final String SERVICE_TAKE_CARS_BY_DATE_START_MSG = "CarService : takeCarsByDate : starts";
+	public static final String SERVICE_TAKE_CARS_BY_DATE_END_MSG = "CarService : takeCarsByDate : ends";
 	public static final String SERVICE_TAKE_ALL_CARS_STARTS_MSG = "CarService : takeAllCars : starts";
 	public static final String SERVICE_TAKE_ALL_CARS_ENDS_MSG = "CarService : takeAllCars : ends";
 	public static final String SERVICE_INSERT_CAR_STARTS_MSG = "CarService : insertCar : starts";
