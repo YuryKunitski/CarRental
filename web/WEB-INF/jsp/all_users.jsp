@@ -7,12 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin orders</title>
+    <title>Users</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-<%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
+    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.locbutton.name.en" var="en_button"/>
@@ -25,29 +25,20 @@
     <fmt:message bundle="${locale}" key="local.cars" var="cars"/>
     <fmt:message bundle="${locale}" key="local.info" var="info"/>
     <fmt:message bundle="${locale}" key="local.privateOffice" var="privateOffice"/>
-    <fmt:message bundle="${locale}" key="local.orders" var="mOrders"/>
-    <fmt:message bundle="${locale}" key="local.toPrivOffice" var="toPrivOffice"/>
+    <fmt:message bundle="${locale}" key="local.mUsers" var="mUsers"/>
+    <fmt:message bundle="${locale}" key="local.userNumber" var="nUser"/>
+    <fmt:message bundle="${locale}" key="local.mLogin" var="mLogin"/>
+    <fmt:message bundle="${locale}" key="local.mType" var="mType"/>
     <fmt:message bundle="${locale}" key="local.mLastName" var="mLastName"/>
     <fmt:message bundle="${locale}" key="local.mFirstName" var="mFirstName"/>
-    <fmt:message bundle="${locale}" key="local.mMiddleName" var="mMiddleName"/>
-    <fmt:message bundle="${locale}" key="local.carClass" var="carClass"/>
-    <fmt:message bundle="${locale}" key="local.model" var="mModel"/>
-    <fmt:message bundle="${locale}" key="local.mStatus" var="mStatus"/>
-    <fmt:message bundle="${locale}" key="local.startDate" var="dateFrom"/>
-    <fmt:message bundle="${locale}" key="local.endDate" var="dateTo"/>
-    <fmt:message bundle="${locale}" key="local.orderInfo" var="info"/>
-    <fmt:message bundle="${locale}" key="local.price" var="price"/>
-    <fmt:message bundle="${locale}" key="local.BYN" var="byn"/>
-    <fmt:message bundle="${locale}" key="local.mDamagePrice" var="mDmgPrice"/>
-    <fmt:message bundle="${locale}" key="local.mOrderNumber" var="mOrderNumber"/>
-    <fmt:message bundle="${locale}" key="local.statusApproved" var="approved"/>
-    <fmt:message bundle="${locale}" key="local.statusUndefined" var="undefined"/>
-    <fmt:message bundle="${locale}" key="local.statusRejected" var="rejected"/>
-    <fmt:message bundle="${locale}" key="local.statusClosed" var="closed"/>
-    <fmt:message bundle="${locale}" key="local.statusPaid" var="paid"/>
+    <fmt:message bundle="${locale}" key="local.mPhone" var="mPhone"/>
+    <fmt:message bundle="${locale}" key="local.eMail" var="email"/>
+    <fmt:message bundle="${locale}" key="local.mUserType" var="mUserType"/>
+    <fmt:message bundle="${locale}" key="local.mAdminType" var="mAdmin"/>
     <fmt:message bundle="${locale}" key="local.mDetails" var="mDetails"/>
-    <fmt:message bundle="${locale}" key="local.noOrders" var="mNoOrders"/>
+    <fmt:message bundle="${locale}" key="local.toPrivOffice" var="toPrivOffice"/>
     <fmt:message bundle="${locale}" key="local.mPage" var="mPage"/>
+    <fmt:message bundle="${locale}" key="local.mNoUsers" var="mNoUsers"/>
     <fmt:message bundle="${locale}" key="local.viewOrders" var="viewOrders"/>
     <fmt:message bundle="${locale}" key="local.viewUsers" var="viewUsers"/>
     <fmt:message bundle="${locale}" key="local.addCar" var="addCar"/>
@@ -60,7 +51,8 @@
     <c:if test="${sessionScope.role == 'ADMINISTRATOR'}">
         <div class="col-lg-12">
             <h1 class="page-header">
-                    ${mOrders}</h1>
+                    ${mUsers}
+            </h1>
             <ol class="breadcrumb">
                 <li>
                     <form action="Controller" method="get" class="btn btn-link">
@@ -74,87 +66,62 @@
                         <input type="submit" value="${privateOffice}" class="btn btn-link">
                     </form>
                 </li>
-                <li class="active">${mOrders}</li>
+                <li class="active">${mUsers}</li>
             </ol>
         </div>
 
 
         <c:if test="${requestScope.noOrders == true }">
-            <p>${mNoOrders}</p>
+            <p>${mNoUsers}</p>
         </c:if>
 
         <div class="well col-lg-12">
-            <c:forEach var="order" items="${sessionScope.orders}">
-
+            <c:forEach var="user" items="${sessionScope.allUsers}">
                 <div class="div-order">
 
                     <table border="1" width="100%">
                         <thead>
                         <tr>
-                            <th>${mOrderNumber}</th>
+                            <th>${nUser}</th>
+                            <th>${mLogin}</th>
                             <th>${mLastName}</th>
                             <th>${mFirstName}</th>
-                            <th>${carClass}</th>
-                            <th>${mModel}</th>
-                            <th>${dateFrom}</th>
-                            <th>${dateTo}</th>
-                            <th>${mStatus}</th>
-                            <th>${price}, ${byn}</th>
-                            <th>${mDmgPrice}, ${byn}</th>
+                            <th>${email}</th>
+                            <th>${mPhone}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td><c:out value="${order.orderID}"/></td>
-                            <td><c:out value="${order.user.surName}"/></td>
-                            <td><c:out value="${order.user.name}"/></td>
-                            <td><c:out value="${order.car.carClassType}"/></td>
-                            <td><c:out value="${order.car.carModel}"/></td>
-                            <td><c:out value="${order.rentalStartDate}"/></td>
-                            <td><c:out value="${order.rentalEndDate}"/></td>
-
-                            <td>
-                                <c:if test="${order.status.equals('approved')}">
-                                    ${approved}
-                                </c:if>
-                                <c:if test="${order.status.equals('undefined')}">
-                                    ${undefined}
-                                </c:if>
-                                <c:if test="${order.status.equals('rejected')}">
-                                    ${rejected}
-                                </c:if>
-                                <c:if test="${order.status.equals('closed')}">
-                                    ${closed}
-                                </c:if>
-                                <c:if test="${order.status.equals('paid')}">
-                                    ${paid}
-                                </c:if>
-                            </td>
-
-                            <td><c:out value="${order.totalBill}"/></td>
-                            <td><c:out value="${order.damagePrice}"/></td>
+                            <td><c:out value="${user.userID}"/></td>
+                            <td><c:out value="${user.login}"/></td>
+                            <td><c:out value="${user.surName}"/></td>
+                            <td><c:out value="${user.name}"/></td>
+                            <td><c:out value="${user.email}"/></td>
+                            <td><c:out value="${user.phone}"/></td>
                         </tr>
                         </tbody>
                     </table>
+
                     <br/>
 
-                    <div>
+                    <div class="btn-block">
                         <form action="Controller" method="get">
-                            <input type="hidden" name="selectedOrderId" value="${order.orderID}">
-                            <input type="hidden" name="command" value="view-order-admin">
+                            <input type="hidden" name="selectedUserId" value="${user.userID}">
+                            <input type="hidden" name="command" value="view-user">
                             <input type="submit" value="${mDetails}" class="btn btn-info"/>
                         </form>
                     </div>
                 </div>
                 <hr/>
-            </c:forEach>
-        </div>
 
+            </c:forEach>
+
+        </div>
 
         <div class="btn-group">
             <c:forEach var="i" begin="1" end="${requestScope.amountPages}">
                 <form action="Controller" method="get" class="btn pag">
-                    <input type="hidden" name="command" value="view-orders-admin">
+                    <input type="hidden" name="command" value="view-all-users">
                     <input type="hidden" name="pageNumber" value="${i}"/>
                     <c:if test="${requestScope.pageNumber == i}">
                         <input type="submit" value="${i}" class="btn btn-default active"/>
@@ -164,8 +131,8 @@
                     </c:if>
                 </form>
             </c:forEach>
+            <p><c:out value="${mPage}: ${requestScope.pageNumber}"/></p>
         </div>
-        <p><c:out value="${mPage}: ${requestScope.pageNumber}"/></p>
     </c:if>
 
     <c:if test="${sessionScope.role != 'ADMINISTRATOR'}">
@@ -180,5 +147,6 @@
     <hr/>
     <%@include file="../jspf/footer.jspf" %>
 </div>
+
 </body>
 </html>

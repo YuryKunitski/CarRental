@@ -14,13 +14,11 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class CarDAOImpl implements CarDAO {
 
@@ -29,6 +27,8 @@ public class CarDAOImpl implements CarDAO {
 
 	private static final String INSERT_CAR_QUERY = "INSERT INTO car (car_model_id, car_class_id, year_issue," +
 			" price_per_day, image) VALUES ((SELECT car_model.car_model_id FROM car_model WHERE model = ?),?,?,?,?);";
+
+	private static final String INSERT_MODEL_QUERY = "INSERT INTO car_model (model) VALUE (?);";
 
 	private static final String TAKE_CAR_BY_ID_QUERY = "SELECT car.car_id, car_model.model, car_class.class, car.year_issue," +
 			" car.price_per_day, car.image FROM car_rental.car " +
@@ -80,6 +80,7 @@ public class CarDAOImpl implements CarDAO {
 			"WHERE( o.status = ? AND (o.rent_start_date BETWEEN ? AND ?) " +
 			"OR (o.rent_end_date BETWEEN ? AND ?)));";
 
+	private static final String CHECK_MODEL_QUERY = "SELECT COUNT(model) FROM car_rental.car_model WHERE model = ?;";
 
 	@Override
 	public void insertCar(Car car) throws DAOException {
@@ -87,28 +88,80 @@ public class CarDAOImpl implements CarDAO {
 		LOG.debug(DAOStringConstant.DAO_INSERT_CAR_STARTS_MSG);
 		Connection connection = null;
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
-		PreparedStatement ps = null;
+		PreparedStatement psCar = null;
+		PreparedStatement psModel = null;
+
 		try {
+
 			connection = connectionPool.takeConnection();
-			ps = connection.prepareStatement(INSERT_CAR_QUERY);
-			ps.setString(1, car.getCarModel());
-			ps.setInt(2, car.getCarClassType().getOrdinal());
-			ps.setString(3, car.getYearIssue());
-			ps.setDouble(4, car.getPricePerDay());
-			ps.setBlob(5, new ByteArrayInputStream(Base64.decode(car.getImage())));
-			ps.executeUpdate();
-		} catch (Base64DecodingException | SQLException | ConnectionPoolException ex) {
+			connection.setAutoCommit(false);
+
+			if (isNotExistModel(car.getCarModel())) {
+				psModel = connection.prepareStatement(INSERT_MODEL_QUERY);
+				psModel.setString(1, car.getCarModel());
+				psModel.executeUpdate();
+			}
+
+			psCar = connection.prepareStatement(INSERT_CAR_QUERY);
+			psCar.setString(1, car.getCarModel());
+			psCar.setInt(2, car.getCarClassType().getOrdinal());
+			psCar.setString(3, car.getYearIssue());
+			psCar.setDouble(4, car.getPricePerDay());
+			psCar.setString(5, car.getImage());
+
+			psCar.executeUpdate();
+			connection.commit();
+
+		} catch (SQLException | ConnectionPoolException ex) {
 			throw new DAOException(DAOStringConstant.DAO_INSERT_CAR_ERROR_MSG, ex);
 		} finally {
 			try {
-				if (connectionPool != null) {
-					connectionPool.closeConnection(connection, ps);
+
+				if (psModel != null) {
+					try {
+						psModel.close();
+					} catch (SQLException ex) {
+						throw new DAOException(DAOStringConstant.DAO_INSERT_CAR_ERROR_MSG, ex);
+					}
 				}
+
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, psCar);
+				}
+
 				LOG.debug(DAOStringConstant.DAO_INSERT_CAR_ENDS_MSG);
 			} catch (ConnectionPoolException ex) {
 				throw new DAOException(DAOStringConstant.DAO_INSERT_CAR_CLOSE_CON_ERROR_MSG, ex);
 			}
 		}
+	}
+
+	private boolean isNotExistModel(String model) throws DAOException {
+
+		boolean result = true;
+
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			connection = connectionPool.takeConnection();
+			ps = connection.prepareStatement(CHECK_MODEL_QUERY);
+			ps.setString(1, model);
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				if (rs.getInt(1) > 0) {
+					result = false;
+				}
+			}
+
+		} catch (ConnectionPoolException | SQLException ex) {
+			throw new DAOException(DAOStringConstant.DAO_INSERT_CAR_CLOSE_CON_ERROR_MSG, ex);
+		}
+
+		return result;
 	}
 
 	@Override
@@ -134,7 +187,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setImage(Base64.encode(rs.getBytes(6)));
+				car.setImage(rs.getString(6));
 
 			}
 			return car;
@@ -177,7 +230,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setImage(Base64.encode(rs.getBytes(6)));
+				car.setImage(rs.getString(6));
 				cars.add(car);
 			}
 			return cars;
@@ -250,13 +303,15 @@ public class CarDAOImpl implements CarDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+
 				Car car = new Car();
+
 				car.setCarID(rs.getInt(1));
 				car.setCarModel(rs.getString(2));
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setImage(Base64.encode(rs.getBytes(6)));
+				car.setImage(rs.getString(6));
 
 				cars.add(car);
 			}
@@ -304,17 +359,20 @@ public class CarDAOImpl implements CarDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+
 				Car car = new Car();
+
 				car.setCarID(rs.getInt(1));
 				car.setCarModel(rs.getString(2));
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setImage(Base64.encode(rs.getBytes(6)));
+				car.setImage(rs.getString(6));
 
 				cars.add(car);
 			}
 			return cars;
+
 		} catch (ConnectionPoolException | SQLException ex) {
 			throw new DAOException(DAOStringConstant.DAO_TAKE_UNUSED_CARS_BY_CLASS_ERROR_MSG, ex);
 		} finally {
@@ -356,7 +414,7 @@ public class CarDAOImpl implements CarDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setImage(Base64.encode(rs.getBytes(6)));
+				car.setImage(rs.getString(6));
 
 				cars.add(car);
 			}
@@ -572,8 +630,9 @@ public class CarDAOImpl implements CarDAO {
 		}
 //		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-		CarDAO carDAO = DAOFactory.getInstance().getCarDAO();
-		int x = carDAO.countUnusedCars("2019-05-20", "2019-05-25");
-		System.out.println(x);
+//		CarDAO carDAO = DAOFactory.getInstance().getCarDAO();
+//		carDAO.insertCar(new Car(1, "uazik", CarClassType.TRUCK, "1999",
+//				99.9, " "));
+		System.out.println(new CarDAOImpl().isNotExistModel("mercede_e650"));
 	}
 }

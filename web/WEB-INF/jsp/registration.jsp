@@ -149,14 +149,14 @@
                     <p>
                         <abbr title="${messageName}"> ${reqSurname}</abbr>
                     </p>
-                    <input type="text" name="name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
+                    <input type="text" name="surname" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
                            title="${messageName}" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <p>
                         <abbr title="${messageName}"> ${reqName}</abbr>
                     </p>
-                    <input type="text" name="surname" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
+                    <input type="text" name="name" value="" maxlength="25" required pattern="[A-Za-zА-Яа-я-]+"
                            title="${messageName}" class="form-control"/>
                 </div>
 

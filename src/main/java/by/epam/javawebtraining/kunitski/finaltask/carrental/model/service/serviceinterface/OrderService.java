@@ -19,7 +19,7 @@ public interface OrderService {
 	 * @throws ServiceException sent data to DAO for input an order
 	 */
 
-	 boolean addOrder(int userId, int carId, Date rentalStartDate, Date rentalEndDate) throws ServiceException;
+	 boolean addOrder(int userId, int carId, String rentalStartDate, String rentalEndDate) throws ServiceException;
 
 	/**
 	 * Data transfer to the DAO to find for an order by the user's id who made the order

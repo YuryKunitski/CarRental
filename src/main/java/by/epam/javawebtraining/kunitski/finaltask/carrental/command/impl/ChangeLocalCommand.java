@@ -42,14 +42,19 @@ public class ChangeLocalCommand implements Command {
 		}
 		HttpSession session = request.getSession(true);
 		session.setAttribute(LOCALE_PARAM, language);
+
 		if (session.getAttribute(TYPE_PARAM) != null) {
 			if (session.getAttribute(TYPE_PARAM).equals(USER_VALUE)) {
 				request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);
+
 				LOG.debug(EXECUTE_ENDS_MSG);
+
 				return PageName.INDEX_PAGE;
 			} else if (session.getAttribute(TYPE_PARAM).equals(ADMIN_VALUE)) {
 				request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);
+
 				LOG.debug(EXECUTE_ENDS_MSG);
+
 				return PageName.INDEX_PAGE;
 			} else {
 				request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);
@@ -58,7 +63,9 @@ public class ChangeLocalCommand implements Command {
 			}
 		} else {
 			request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);
+
 			LOG.debug(EXECUTE_ENDS_MSG);
+
 			return PageName.INDEX_PAGE;
 		}
 	}

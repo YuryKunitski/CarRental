@@ -1,5 +1,7 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service;
 
+import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * Data validator
  * <p>
- *  Validates such data entered by users, such as username, password, name, passport data, phone number,
+ * Validates such data entered by users, such as username, password, name, passport data, phone number,
  * e-mail, car model, car intake year, car rental date.
  * </p>
  */
@@ -30,9 +32,11 @@ public class Validator {
 	private static final String PATTERN_PHONE = "[0-9-+\\s()]+";
 	private static final String PATTERN_PASSPORT = "[A-Z0-9]+";
 	private static final String PATTERN_DATE = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
-	private static final String PATTERN_DAMAGE_PRICE = "(^[0-9]+\\.([0-9][0-9]|[0-9])$)|(^[0-9]+$)";
+	private static final String PATTERN_PRICE = "(^[0-9]+\\.([0-9][0-9]|[0-9])$)|(^[0-9]+$)";
 	private static final String PATTERN_ORDER_INFO = "^\\S[^<>]*";
+
 	private static final String PATTERN_CAR_YEAR = "[1-3][0-9]{3}";
+	private static final String PATTERN_CAR_MODEL = "[A-Za-z0-9_]+";
 
 	private Validator() {
 
@@ -43,7 +47,7 @@ public class Validator {
 	}
 
 	/**
-	 * Check login
+	 * Validation login
 	 *
 	 * @param login user's login
 	 * @return true - login is correct, false is incorrect
@@ -52,19 +56,19 @@ public class Validator {
 
 		boolean result = false;
 
-		if (login != null) {
+		if (login != null && !login.isEmpty()) {
 			Pattern pattern = Pattern.compile(PATTERN_LOGIN);
 			Matcher matcher = pattern.matcher(login);
 			boolean match = matcher.matches();
 
-			result = (login.length() <= LOGIN_LENGTH) && match && !login.isEmpty();
+			result = (login.length() <= LOGIN_LENGTH) && match;
 		}
 
 		return result;
 	}
 
 	/**
-	 * Check password
+	 * Validation password
 	 *
 	 * @param password user's password
 	 * @return true - password is correct, false is incorrect
@@ -73,12 +77,12 @@ public class Validator {
 
 		boolean result = false;
 
-		if (password != null) {
+		if (password != null && !password.isEmpty()) {
 			Pattern pattern = Pattern.compile(PATTERN_PASSWORD);
 			Matcher matcher = pattern.matcher(password);
 			boolean match = matcher.matches();
 
-			result = match && !password.isEmpty();
+			result = match;
 		}
 		return result;
 	}
@@ -102,7 +106,7 @@ public class Validator {
 	}
 
 	/**
-	 * Check user's email
+	 * Validation user's email
 	 *
 	 * @param email user's e-mail
 	 * @return true - email is correct, false is incorrect
@@ -111,18 +115,18 @@ public class Validator {
 
 		boolean result = false;
 
-		if (email != null) {
+		if (email != null && !email.isEmpty()) {
 			Pattern pattern = Pattern.compile(PATTERN_EMAIL);
 			Matcher matcher = pattern.matcher(email);
 			boolean match = matcher.matches();
 
-			result = (email.length() <= EMAIL_LENGTH) && match && !email.isEmpty();
+			result = (email.length() <= EMAIL_LENGTH) && match;
 		}
 		return result;
 	}
 
 	/**
-	 * Check name or surname
+	 * Validation name or surname
 	 *
 	 * @param name user's name
 	 * @return true - name is correct, false is incorrect
@@ -131,17 +135,18 @@ public class Validator {
 
 		boolean result = false;
 
-		if (name != null) {
+		if (name != null && !name.isEmpty()) {
 			Pattern pattern = Pattern.compile(PATTERN_NAME);
 			Matcher matcher = pattern.matcher(name);
 			boolean match = matcher.matches();
-			result = (name.length() <= NAME_LENGTH) && match && !name.isEmpty();
+
+			result = (name.length() <= NAME_LENGTH) && match;
 		}
 		return result;
 	}
 
 	/**
-	 * Check user's phone
+	 * Validation user's phone
 	 *
 	 * @param phone user's phone
 	 * @return true - phone is correct, false is incorrect
@@ -150,18 +155,18 @@ public class Validator {
 
 		boolean result = false;
 
-		if (phone != null) {
+		if (phone != null && !phone.isEmpty()) {
 			Pattern pattern = Pattern.compile(PATTERN_PHONE);
 			Matcher matcher = pattern.matcher(phone);
 			boolean match = matcher.matches();
 
-			result = (phone.length() <= PHONE_LENGTH) && match && !phone.isEmpty();
+			result = (phone.length() <= PHONE_LENGTH) && match;
 		}
 		return result;
 	}
 
 	/**
-	 * Check passportID
+	 * Validation passportID
 	 *
 	 * @param passportID user's passportID
 	 * @return true - passportID is correct, false is incorrect
@@ -170,19 +175,19 @@ public class Validator {
 
 		boolean result = false;
 
-		if (passportID != null) {
+		if (passportID != null && !passportID.isEmpty()) {
 			Pattern pattern = Pattern.compile(PATTERN_PASSPORT);
 			Matcher matcher = pattern.matcher(passportID);
 			boolean match = matcher.matches();
 
-			result = (passportID.length() <= PASSPORT_LENGTH) && match && !passportID.isEmpty();
+			result = (passportID.length() <= PASSPORT_LENGTH) && match;
 		}
 		return result;
 	}
 
 
 	/**
-	 * Checking rental dates
+	 * Validation rental dates
 	 *
 	 * @param firstDate  first date
 	 * @param secondDate second date
@@ -217,16 +222,16 @@ public class Validator {
 		LocalDate date2 = LocalDate.parse(secondDate);
 		LocalDate dateNow = LocalDate.now();
 
-		return  (date1.isBefore(date2) && dateNow.isBefore(date1));
+		return (date1.isBefore(date2) && dateNow.isBefore(date1));
 	}
 
 	/**
-	 * Check the start date when user take car
+	 * Validation the start date when user take car
 	 *
 	 * @param rentStartDate date when user take car
 	 * @return true - current date is before the rentStartDate
 	 */
-	public boolean validateRentStartDate(Date rentStartDate) {
+	public boolean validateStartAndEndDate(Date rentStartDate) {
 
 		boolean result = false;
 
@@ -242,7 +247,7 @@ public class Validator {
 
 
 	/**
-	 * Check damage price
+	 * Validation damage price
 	 *
 	 * @param damagePrice damage price
 	 * @return true - price is correct, false - price is not correct
@@ -252,7 +257,7 @@ public class Validator {
 		boolean result = false;
 
 		if (damagePrice != null) {
-			Pattern pattern = Pattern.compile(PATTERN_DAMAGE_PRICE);
+			Pattern pattern = Pattern.compile(PATTERN_PRICE);
 			Matcher matcher = pattern.matcher(damagePrice.toString());
 
 			result = matcher.matches();
@@ -262,28 +267,28 @@ public class Validator {
 	}
 
 	/**
-	 * Check the order info
+	 * Validation the order info
 	 *
 	 * @param orderInfo order info
 	 * @return true - order info is correct, false - order info is not correct
 	 */
 	public boolean validateOrderInfo(String orderInfo) {
-		System.out.println("validate info");
+
 		boolean result = false;
 
 		if (orderInfo != null) {
 
-		Pattern pattern = Pattern.compile(PATTERN_ORDER_INFO);
-		Matcher matcher = pattern.matcher(orderInfo);
+			Pattern pattern = Pattern.compile(PATTERN_ORDER_INFO);
+			Matcher matcher = pattern.matcher(orderInfo);
 
-		result = matcher.matches();
+			result = matcher.matches();
 		}
-		System.out.println("validate info - " + result);
+
 		return result;
 	}
 
 	/**
-	 * Check the year issue of car
+	 * Validation the year issue of car
 	 *
 	 * @param year issue of car
 	 * @return true - issue of car is correct, false - issue of car is not correct
@@ -300,19 +305,72 @@ public class Validator {
 
 			result = matcher.matches();
 		}
+
 		return result;
 	}
 
 
 	/**
-	 * Check model of car
+	 * Validation model of car
 	 *
 	 * @param model model of car
 	 * @return true - model of car is correct, false - model of car is not correct
 	 */
-	public boolean validateModel(String model) {
-		return model != null && !model.isEmpty();
+	public boolean validateCarModel(String model) {
+
+		boolean result = false;
+
+		if (model != null && !model.isEmpty()) {
+
+			Pattern pattern = Pattern.compile(PATTERN_CAR_MODEL);
+			Matcher matcher = pattern.matcher(model);
+
+			result =  matcher.matches();
+		}
+
+		return result;
 	}
 
+
+	/**
+	 * Validation the car class
+	 *
+	 * @param carClass issue of car
+	 * @return true - issue of car is correct, false - issue of car is not correct
+	 */
+	public boolean validateCarClass(String carClass) {
+
+		boolean result = false;
+		CarClassType[] classTypes = CarClassType.values();
+
+		if (carClass != null) {
+
+			for (CarClassType c : classTypes) {
+
+				if (carClass.equalsIgnoreCase(c.toString())) {
+					result = true;
+				}
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Validation the car image
+	 *
+	 * @param imageName issue of car
+	 * @return true - image of car is correct, false - image of car is not correct
+	 */
+	public boolean validateCarImage(String imageName) {
+
+		boolean result = false;
+
+		if (imageName != null && !imageName.isEmpty()){
+			result = true;
+		}
+
+		return result;
+	}
 
 }

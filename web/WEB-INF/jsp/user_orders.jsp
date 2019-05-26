@@ -10,8 +10,8 @@
     <title>Orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
 <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
@@ -38,6 +38,7 @@
     <fmt:message bundle="${locale}" key="local.statusApproved" var="sApproved"/>
     <fmt:message bundle="${locale}" key="local.statusUndefined" var="sUndefined"/>
     <fmt:message bundle="${locale}" key="local.statusClosed" var="sClosed"/>
+    <fmt:message bundle="${locale}" key="local.statusPaid" var="sPaid"/>
     <fmt:message bundle="${locale}" key="local.mDetails" var="mDetails"/>
     <fmt:message bundle="${locale}" key="local.noOrders" var="mNoOrders"/>
     <fmt:message bundle="${locale}" key="local.mPage" var="mPage"/>
@@ -111,6 +112,9 @@
                                     </c:if>
                                     <c:if test="${order.status.equals('closed')}">
                                         ${sClosed}
+                                    </c:if>
+                                    <c:if test="${order.status.equals('paid')}">
+                                        ${sPaid}
                                     </c:if>
                                 </td>
                                 <td><c:out value="${order.totalBill}"/></td>

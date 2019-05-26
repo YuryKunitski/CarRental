@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @throws ServiceException sent data to DAO for input an order
 	 */
 	@Override
-	public boolean addOrder(int userId, int carId, Date rentalStartDate, Date rentalEndDate) throws ServiceException {
+	public boolean addOrder(int userId, int carId, String rentalStartDate, String rentalEndDate) throws ServiceException {
 
 		LOG.debug(ServiceConstant.SERVICE_ADD_ORDER_STARTS_MSG);
 		UserDAO userDao = DAOFactory.getInstance().getUserDAO();
@@ -64,23 +64,23 @@ public class OrderServiceImpl implements OrderService {
 			order.setStatus(ORDER_STATUS_DEFOULT);
 			order.setTotalBill(calculateTotalBill(car, countRentDays, discCoeff));
 
-			List<Integer> carIds = ORDER_DAO.findUsedCarsID(order);
-			boolean carUsed = false;
+			List<Integer> usedCarsIds = ORDER_DAO.findUsedCarsID(order);
+			boolean carFree = true;
 
-			for (Integer id : carIds) {
+			for (Integer id : usedCarsIds) {
 				if (id == carId) {
-					carUsed = true;
+					carFree = false;
 					break;
 				}
 			}
-			if (!carUsed) {
+			if (carFree) {
 				ORDER_DAO.addOrder(order);
-				LOG.debug(ServiceConstant.SERVICE_ADD_ORDER_ENDS_MSG);
-				return true;
-			} else {
-				LOG.debug(ServiceConstant.SERVICE_ADD_ORDER_ENDS_MSG);
-				return false;
 			}
+
+			LOG.debug(ServiceConstant.SERVICE_ADD_ORDER_ENDS_MSG);
+
+			return carFree;
+
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
 		}
@@ -88,6 +88,7 @@ public class OrderServiceImpl implements OrderService {
 
 	/**
 	 * Data transfer to the DAO to find for an order by the user's id who made the order
+	 *
 	 * @param userId user's id
 	 * @return list of orders made by a specific user
 	 * @throws ServiceException find for an order by the user's id
@@ -214,7 +215,7 @@ public class OrderServiceImpl implements OrderService {
 	/**
 	 * Changing damage price
 	 *
-	 * @param orderId order's id
+	 * @param orderId     order's id
 	 * @param damagePrice damage price
 	 * @throws DAOException exception changing damage price
 	 */
@@ -235,7 +236,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param amountOrdersOnPage amount orders on page
 	 * @throws DAOException exception count pages all orders
 	 */
-@Override
+	@Override
 	public int countPageAmountAllOrders(int amountOrdersOnPage) throws ServiceException {
 
 		LOG.debug(ServiceConstant.SERVICE_COUNT_PAGE_AMOUNT_ALL_ORDERS_STARTS_MSG);
@@ -261,19 +262,36 @@ public class OrderServiceImpl implements OrderService {
 
 	/**
 	 * Calculate the count of rent days by dates
+	 *
 	 * @param rentalStartDate start rent days
-	 * @param rentalEndDate end rent days
+	 * @param rentalEndDate   end rent days
 	 * @return count of rent days
 	 */
-	private int countRentDays(Date rentalStartDate, Date rentalEndDate) {
+	private int countRentDays(String rentalStartDate, String rentalEndDate) {
 
-		return (int) (rentalEndDate.getTime() - rentalStartDate.getTime()) / (24 * 60 * 60 * 1000);
+		int result = 0;
+		Date dateFrom = null;
+		Date dateTo = null;
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			dateFrom = format.parse(rentalStartDate);
+			dateTo = format.parse(rentalEndDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (dateFrom != null && dateTo != null) {
+			result = (int) (dateTo.getTime() - dateFrom.getTime()) / (24 * 60 * 60 * 1000);
+		}
+
+		return result;
 	}
 
 	/**
 	 * Calculate the count of rent days by dates
-	 * @param car selected car
-	 * @param countRentDays count of rent days
+	 *
+	 * @param car                 selected car
+	 * @param countRentDays       count of rent days
 	 * @param discountCoefficient coefficient of discount
 	 * @return total bill of order
 	 */
@@ -282,7 +300,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	/**
-	 * @param pageNumber number of page
+	 * Calculate number of orders before current page
+	 * @param pageNumber   number of page
 	 * @param ordersOnPage count of order on page
 	 * @return count of order to start page
 	 */
@@ -299,16 +318,14 @@ public class OrderServiceImpl implements OrderService {
 		} catch (ConnectionPoolException e) {
 			e.printStackTrace();
 		}
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		OrderService orderService = ServiceFactory.getInstance().getOrderService();
 
 		try {
-			System.out.println(orderService.addOrder(18, 5, format.parse("2019-05-13"),
-					format.parse("2019-05-15")));
+			System.out.println(orderService.addOrder(20, 13, "2019-06-03",
+					"2019-06-23"));
+
 		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}

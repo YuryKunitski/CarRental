@@ -10,8 +10,8 @@
     <title>Orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
 <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
@@ -36,6 +36,7 @@
     <fmt:message bundle="${locale}" key="local.mMakeOrder" var="mMakeOrder"/>
     <fmt:message bundle="${locale}" key="local.mAllOrders" var="mAllOrders"/>
     <fmt:message bundle="${locale}" key="local.mOrder" var="mOrder"/>
+    <fmt:message bundle="${locale}" key="local.BYN" var="byn"/>
 </head>
 <body>
 
@@ -84,7 +85,7 @@
             <c:if test="${sessionScope.paymentType.equals('order')}">
                 <h3>${mOrderPrice}: </h3>
 
-                <h3>${sessionScope.selectedOrder.totalBill}$</h3>
+                <h3>${sessionScope.selectedOrder.totalBill}${byn}</h3>
 
                 <form action="Controller" method="post">
                     <input type="hidden" name="command" value="pay">
@@ -95,7 +96,7 @@
             <c:if test="${sessionScope.paymentType.equals('damage')}">
                 <h3>${mDmgPrice}: </h3>
 
-                <h3>${sessionScope.selectedOrder.damagePrice}$</h3>
+                <h3>${sessionScope.selectedOrder.damagePrice}${byn}</h3>
 
                 <form action="Controller" method="post">
                     <input type="hidden" name="command" value="pay-for-damage">

@@ -22,7 +22,7 @@ public class PayCommand implements Command {
 	private static final String EXECUTE_ENDS_MSG = "PayCommand : execute : ends";
 
 	private static final String SELECTED_ORDER_ID_PARAM = "selectedOrderId";
-	private static final String STATUS_VALUE = "approved";
+	private static final String STATUS_VALUE = "paid";
 	private static final String SUCCESSFUL_PAYMENT = "successfulPayment";
 	private static final String PROCESS_REQUEST_PARAM = "processRequest";
 

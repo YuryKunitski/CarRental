@@ -2036,3 +2036,271 @@
 2019-05-19 20:59:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
 2019-05-19 20:59:32 DEBUG CarDAOImpl:446 - CarDAOdb : countUnusedCars : ends
 2019-05-19 20:59:32 DEBUG CarServiceImpl:350 - CarService : countPageAmountUnusedTypeCars : ends
+2019-05-21 21:41:43 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-21 21:41:43 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-21 21:41:47 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-21 21:41:47 DEBUG OrderServiceImpl:47 - OrderService : addOrder : starts
+2019-05-21 21:41:47 DEBUG UserDAOImpl:133 - UserDAOdb : findUserById : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:41:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG UserDAOImpl:169 - UserDAOdb : findUserById : ends
+2019-05-21 21:41:47 DEBUG CarDAOImpl:117 - CarDAOdb : takeCarById : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:41:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG CarDAOImpl:148 - CarDAOdb : takeCarById : ends
+2019-05-21 21:41:47 DEBUG OrderDAOImpl:532 - OrderDAOdb : takeDiscountCoefficient : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:41:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG OrderDAOImpl:558 - OrderDAOdb : takeDiscountCoefficient : ends
+2019-05-21 21:41:47 DEBUG OrderDAOImpl:133 - OrderDAOdb : findUsedCarsID : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:41:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:41:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:41:47 DEBUG OrderDAOImpl:163 - OrderDAOdb : findUsedCarsID : ends
+2019-05-21 21:46:28 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-21 21:46:28 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-21 21:46:31 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-21 21:46:31 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-21 21:46:31 DEBUG OrderServiceImpl:47 - OrderService : addOrder : starts
+2019-05-21 21:46:31 DEBUG UserDAOImpl:133 - UserDAOdb : findUserById : starts
+2019-05-21 21:46:31 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:46:31 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:46:31 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:46:31 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:46:31 DEBUG UserDAOImpl:169 - UserDAOdb : findUserById : ends
+2019-05-21 21:46:31 DEBUG CarDAOImpl:117 - CarDAOdb : takeCarById : starts
+2019-05-21 21:46:31 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:46:31 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:46:31 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:46:31 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:46:31 DEBUG CarDAOImpl:148 - CarDAOdb : takeCarById : ends
+2019-05-21 21:46:31 DEBUG OrderDAOImpl:536 - OrderDAOdb : takeDiscountCoefficient : starts
+2019-05-21 21:46:31 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:46:31 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:46:32 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:46:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:46:32 DEBUG OrderDAOImpl:562 - OrderDAOdb : takeDiscountCoefficient : ends
+2019-05-21 21:46:32 DEBUG OrderDAOImpl:136 - OrderDAOdb : findUsedCarsID : starts
+2019-05-21 21:46:32 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:46:32 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:46:32 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:46:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:46:32 DEBUG OrderDAOImpl:169 - OrderDAOdb : findUsedCarsID : ends
+2019-05-21 21:46:32 DEBUG OrderDAOImpl:98 - OrderDAOdb : addOrder : starts
+2019-05-21 21:46:32 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:46:32 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:46:32 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:46:32 DEBUG OrderDAOImpl:126 - OrderDAOdb : addOrder : ends
+2019-05-21 21:46:32 DEBUG OrderServiceImpl:80 - OrderService : addOrder : ends
+2019-05-21 21:48:22 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-21 21:48:22 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-21 21:48:25 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-21 21:48:25 DEBUG OrderServiceImpl:47 - OrderService : addOrder : starts
+2019-05-21 21:48:25 DEBUG UserDAOImpl:133 - UserDAOdb : findUserById : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:48:25 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG UserDAOImpl:169 - UserDAOdb : findUserById : ends
+2019-05-21 21:48:25 DEBUG CarDAOImpl:117 - CarDAOdb : takeCarById : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:48:25 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG CarDAOImpl:148 - CarDAOdb : takeCarById : ends
+2019-05-21 21:48:25 DEBUG OrderDAOImpl:536 - OrderDAOdb : takeDiscountCoefficient : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:48:25 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG OrderDAOImpl:562 - OrderDAOdb : takeDiscountCoefficient : ends
+2019-05-21 21:48:25 DEBUG OrderDAOImpl:136 - OrderDAOdb : findUsedCarsID : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:48:25 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:48:25 DEBUG OrderDAOImpl:169 - OrderDAOdb : findUsedCarsID : ends
+2019-05-21 21:48:25 DEBUG OrderDAOImpl:98 - OrderDAOdb : addOrder : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:48:25 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:48:26 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:48:26 DEBUG OrderDAOImpl:126 - OrderDAOdb : addOrder : ends
+2019-05-21 21:48:26 DEBUG OrderServiceImpl:80 - OrderService : addOrder : ends
+2019-05-21 21:52:44 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-21 21:52:44 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-21 21:52:47 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-21 21:52:47 DEBUG OrderServiceImpl:47 - OrderService : addOrder : starts
+2019-05-21 21:52:47 DEBUG UserDAOImpl:133 - UserDAOdb : findUserById : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:52:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG UserDAOImpl:169 - UserDAOdb : findUserById : ends
+2019-05-21 21:52:47 DEBUG CarDAOImpl:117 - CarDAOdb : takeCarById : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:52:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG CarDAOImpl:148 - CarDAOdb : takeCarById : ends
+2019-05-21 21:52:47 DEBUG OrderDAOImpl:536 - OrderDAOdb : takeDiscountCoefficient : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:52:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG OrderDAOImpl:568 - OrderDAOdb : takeDiscountCoefficient : ends
+2019-05-21 21:52:47 DEBUG OrderDAOImpl:136 - OrderDAOdb : findUsedCarsID : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:52:47 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:52:47 DEBUG OrderDAOImpl:169 - OrderDAOdb : findUsedCarsID : ends
+2019-05-21 21:52:47 DEBUG OrderDAOImpl:98 - OrderDAOdb : addOrder : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-21 21:52:47 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-21 21:52:48 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-21 21:52:48 DEBUG OrderDAOImpl:126 - OrderDAOdb : addOrder : ends
+2019-05-21 21:52:48 DEBUG OrderServiceImpl:80 - OrderService : addOrder : ends
+2019-05-22 10:54:57 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 10:55:02 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 10:55:02 DEBUG UserDAOImpl:325 - UserDAOdb : takeAllUsers : starts
+2019-05-22 10:55:02 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 10:55:02 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 10:55:02 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 10:55:02 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 10:55:02 DEBUG UserDAOImpl:365 - UserDAOdb : takeAllUsers : ends
+2019-05-22 10:58:04 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 10:58:07 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 10:58:07 DEBUG UserDAOImpl:328 - UserDAOdb : takeAllUsers : starts
+2019-05-22 10:58:07 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 10:58:07 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 10:58:08 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 10:58:08 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 10:58:08 DEBUG UserDAOImpl:368 - UserDAOdb : takeAllUsers : ends
+2019-05-22 10:58:35 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 10:58:38 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 10:58:38 DEBUG UserDAOImpl:328 - UserDAOdb : takeAllUsers : starts
+2019-05-22 10:58:38 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 10:58:38 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 10:58:38 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 10:58:38 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 10:58:38 DEBUG UserDAOImpl:368 - UserDAOdb : takeAllUsers : ends
+2019-05-22 11:08:53 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 11:08:58 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 11:08:58 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-22 11:08:58 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-22 11:08:58 DEBUG UserServiceImpl:159 - UserServiceImpl : takeAllUsers : starts
+2019-05-22 11:08:58 DEBUG UserServiceImpl:183 - UserServiceImpl : userToStartPage : starts
+2019-05-22 11:08:58 DEBUG UserServiceImpl:184 - UserServiceImpl : userToStartPage : ends
+2019-05-22 11:08:58 DEBUG UserDAOImpl:328 - UserDAOdb : takeAllUsers : starts
+2019-05-22 11:08:58 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 11:08:58 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 11:08:59 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 11:08:59 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 11:08:59 DEBUG UserDAOImpl:368 - UserDAOdb : takeAllUsers : ends
+2019-05-22 11:08:59 DEBUG UserServiceImpl:166 - UserServiceImpl : takeAllUsers : ends
+2019-05-22 11:09:16 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 11:09:20 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 11:09:20 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-22 11:09:20 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-22 11:09:20 DEBUG UserServiceImpl:159 - UserServiceImpl : takeAllUsers : starts
+2019-05-22 11:09:20 DEBUG UserServiceImpl:183 - UserServiceImpl : userToStartPage : starts
+2019-05-22 11:09:20 DEBUG UserServiceImpl:184 - UserServiceImpl : userToStartPage : ends
+2019-05-22 11:09:20 DEBUG UserDAOImpl:328 - UserDAOdb : takeAllUsers : starts
+2019-05-22 11:09:20 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 11:09:20 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 11:09:20 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 11:09:20 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 11:09:20 DEBUG UserDAOImpl:368 - UserDAOdb : takeAllUsers : ends
+2019-05-22 11:09:20 DEBUG UserServiceImpl:166 - UserServiceImpl : takeAllUsers : ends
+2019-05-22 11:31:49 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 11:31:52 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 11:31:52 DEBUG ServiceFactory:31 - ServiceFactory : init Service factory
+2019-05-22 11:31:52 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-22 11:31:52 DEBUG UserServiceImpl:159 - UserServiceImpl : takeAllUsers : starts
+2019-05-22 11:31:52 DEBUG UserServiceImpl:214 - UserServiceImpl : userToStartPage : starts
+2019-05-22 11:31:52 DEBUG UserServiceImpl:215 - UserServiceImpl : userToStartPage : ends
+2019-05-22 11:31:52 DEBUG UserDAOImpl:327 - UserDAOdb : takeAllUsers : starts
+2019-05-22 11:31:52 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 11:31:52 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 11:31:52 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 11:31:52 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 11:31:52 DEBUG UserDAOImpl:367 - UserDAOdb : takeAllUsers : ends
+2019-05-22 11:31:52 DEBUG UserServiceImpl:166 - UserServiceImpl : takeAllUsers : ends
+2019-05-22 13:53:16 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 13:53:19 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 13:53:19 DEBUG UserDAOImpl:378 - UserDAOdb : countAllUsers : starts
+2019-05-22 13:53:19 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 13:53:19 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 13:53:20 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 13:53:20 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 13:53:20 DEBUG UserDAOImpl:406 - UserDAOdb : countAllUsers : ends
+2019-05-22 13:56:38 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-22 13:56:41 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-22 13:56:41 DEBUG UserDAOImpl:378 - UserDAOdb : countAllUsers : starts
+2019-05-22 13:56:41 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-22 13:56:41 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-22 13:56:41 DEBUG ConnectionPool:149 - ConnectionPool : closeConnection
+2019-05-22 13:56:41 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-22 13:56:41 DEBUG UserDAOImpl:406 - UserDAOdb : countAllUsers : ends
+2019-05-23 20:33:35 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-23 20:33:44 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-23 20:33:44 DEBUG DAOFactory:22 - DAOFactory : init DAO factory
+2019-05-23 20:33:44 DEBUG CarDAOImpl:85 - CarDAOdb : insertCar : starts
+2019-05-23 20:33:44 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-23 20:33:44 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-23 20:33:47 DEBUG ConnectionPool:128 - ConnectionPool : closeConnection
+2019-05-23 20:33:47 DEBUG CarDAOImpl:112 - CarDAOdb : insertCar : ends
+2019-05-24 15:23:31 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:23:34 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:23:34 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:23:34 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:23:56 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:23:59 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:23:59 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:23:59 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:27:55 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:27:58 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:27:58 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:27:58 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:28:31 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:28:34 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:28:34 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:28:34 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:29:20 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:29:23 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:29:23 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:29:23 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:30:40 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:30:43 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:30:43 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:30:43 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:30:59 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:31:02 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:31:02 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:31:02 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:31:40 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:31:43 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:31:43 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:31:43 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:32:38 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:32:42 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:32:42 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:32:42 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:32:54 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:32:58 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:32:58 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:32:58 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends
+2019-05-24 15:41:52 DEBUG ConnectionPool:55 - ConnectionPool : initConnectionPool : starts
+2019-05-24 15:41:55 DEBUG ConnectionPool:77 - ConnectionPool : initConnectionPool : ends
+2019-05-24 15:41:55 DEBUG ConnectionPool:86 - ConnectionPool : takeConnection : starts
+2019-05-24 15:41:55 DEBUG ConnectionPool:100 - ConnectionPool : takeConnection : ends

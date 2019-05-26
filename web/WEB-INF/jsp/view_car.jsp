@@ -84,7 +84,7 @@
         <div class="col-lg-12 well">
             <div class="col-lg-8">
                 <img class="img-responsive car-middle-img"
-                     src="data:image/jpg;base64,${sessionScope.selectedCar.image}" alt="Car"/>
+                     src="${sessionScope.selectedCar.image}" alt="Car"/>
             </div>
 
             <div class="col-lg-4">
@@ -116,12 +116,13 @@
 
                                 <hr/>
                                 <c:if test="${sessionScope.role == 'CUSTOMER'}">
-<%--                                    <div>--%>
-<%--                                        <form action="Controller" method="get">--%>
-<%--                                            <input type="hidden" name="command" value="to-make-order">--%>
-<%--                                            <input type="submit" value="${makeOrder}" class="btn btn-block btn-primary my-info"/>--%>
-<%--                                        </form>--%>
-<%--                                    </div>--%>
+
+                                    <div>
+                                        <form action="Controller" method="get">
+                                            <input type="hidden" name="command" value="to-make-order">
+                                            <input type="submit" value="${makeOrder}" class="btn btn-block btn-primary my-info"/>
+                                        </form>
+                                    </div>
 
                                 </c:if>
                                 <c:if test="${sessionScope.role == 'ADMINISTRATOR'}">

@@ -28,7 +28,6 @@ public class RegisterUserCommand implements Command {
 
 	private static final String LOGIN_PARAMETER = "login";
 	private static final String PASSWORD_PARAMETER = "password";
-	private static final String ROLE_ID_PARAMETER = "role_id";
 	private static final String CONFIRM_PASSWORD_PARAMETER = "confirm-password";
 	private static final String E_MAIL = "e-mail";
 	private static final String NAME = "name";
@@ -42,7 +41,6 @@ public class RegisterUserCommand implements Command {
 	private static final String E_MAIL_VALID = "validEmail";
 	private static final String NAME_VALID = "validName";
 	private static final String SURNAME_VALID = "validSurname";
-//	private static final String MIDDLE_NAME_VALID = "validMiddleName";
 	private static final String PHONE_VALID = "validPhone";
 	private static final String PASSPORT_ID_VALID = "validPassportID";
 	private static final String UNIQUE_LOGIN = "uniqueLogin";
@@ -63,17 +61,26 @@ public class RegisterUserCommand implements Command {
 
 		if (validParameters(request)) {
 			request.getSession(true).setAttribute(SUCCESSFUL_REGISTER, true);
-			request.setAttribute(PROCESS_REQUEST_PARAM, REDIRECT_VALUE); //pass to jsp page
+			request.setAttribute(PROCESS_REQUEST_PARAM, REDIRECT_VALUE);
+
 			LOG.debug(EXECUTE_ENDS_MSG);
+
 			return PageName.INDEX_PAGE;
 		} else {
 			request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);
+
 			LOG.debug(EXECUTE_ENDS_MSG);
+
 			return PageName.REGISTRATION_PAGE;
 		}
 	}
 
-
+	/**
+	 * Validation input data to registration user
+	 * @param request
+	 * @return
+	 * @throws CommandException
+	 */
 	private boolean validParameters(HttpServletRequest request) throws CommandException {
 
 		LOG.debug(VALID_PARAMETERS_STARTS_MSG);
@@ -103,7 +110,6 @@ public class RegisterUserCommand implements Command {
 		request.setAttribute(E_MAIL_VALID, true);
 		request.setAttribute(NAME_VALID, true);
 		request.setAttribute(SURNAME_VALID, true);
-//		request.setAttribute(MIDDLE_NAME_VALID, true);
 		request.setAttribute(PHONE_VALID, true);
 		request.setAttribute(PASSPORT_ID_VALID, true);
 
@@ -153,19 +159,24 @@ public class RegisterUserCommand implements Command {
 		} else {
 			try {
 				UserService service = ServiceFactory.getInstance().getUserService();
-				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, CUSTOMER_ROLE ,name, surname,
-						phone, email, passportID);
+				ValidatorUniqueUser validatorUniqueUser = service.register(login, password, CUSTOMER_ROLE ,name,
+						surname, phone, email, passportID);
+
 				uniqueLogin = validatorUniqueUser.isUniqueLogin();
 				uniqueEmail = validatorUniqueUser.isUniqueEmail();
 				uniquePassport = validatorUniqueUser.isUniquePassportID();
+
 				request.setAttribute(UNIQUE_LOGIN, uniqueLogin);
 				request.setAttribute(UNIQUE_EMAIL, uniqueEmail);
 				request.setAttribute(UNIQUE_PASSPORT_ID, uniquePassport);
+
 				if (!(uniqueLogin && uniqueEmail && uniquePassport)) {
 					LOG.debug(VALID_PARAMETERS_ENDS_MSG);
 					return false;
 				}
+
 				LOG.debug(VALID_PARAMETERS_ENDS_MSG);
+
 				return true;
 			} catch (ServiceException ex) {
 				throw new CommandException(ex);

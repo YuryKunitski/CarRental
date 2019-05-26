@@ -33,6 +33,7 @@ public class CarServiceImpl implements CarService {
 		LOG.debug(ServiceConstant.SERVICE_INSERT_CAR_STARTS_MSG);
 		try {
 			CAR_DAO.insertCar(car);
+
 			LOG.debug(ServiceConstant.SERVICE_INSERT_CAR_ENDS_MSG);
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);

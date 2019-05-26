@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--<%@taglib prefix="cr" uri="/WEB-INF/custom.tld" %>--%>
@@ -47,6 +47,7 @@
     <fmt:message bundle="${locale}" key="local.mForMakingOrderTakeCar" var="mForMakingOrder"/>
     <fmt:message bundle="${locale}" key="local.allFreeCars" var="allFreeCars"/>
     <fmt:message bundle="${locale}" key="local.freeCars" var="unusedCars"/>
+    <fmt:message bundle="${locale}" key="local.mCar" var="mCar"/>
 </head>
 <body>
 
@@ -189,7 +190,7 @@
                         <input type="hidden" name="selectedCarId" value="${car.carID}">
                         <button type="submit" class="btn btn-default">
                             <img class="img-responsive img-hover car-small-img"
-                                 src="data:image/jpg;base64,${car.image}"/>
+                                 src="${car.image}" alt="${mCar}"/>
 
                             <p class="my-info"> ${car.carModel}</p>
                         </button>

@@ -4,6 +4,8 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOExcepti
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.ValidatorUniqueUser;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 
+import java.util.List;
+
 public interface UserDAO {
 
 	/**
@@ -61,5 +63,23 @@ public interface UserDAO {
 	 * @throws DAOException
 	 */
 	boolean removeUserByID(int idUser) throws DAOException;
+
+	/**
+	 * Take all users.
+	 *
+	 * @param startPage number of users to the current user
+	 * @param amountUsersOnPage amount users on the page
+	 * @return List of all users
+	 * @throws DAOException
+	 */
+	public List<User> takeAllUsers(int startPage, int amountUsersOnPage) throws DAOException;
+
+	/**
+	 * Calculate count of all users.
+	 *
+	 * @return Number of all users
+	 * @throws DAOException
+	 */
+	public int countAllUsers() throws DAOException;
 
 }

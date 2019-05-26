@@ -9,8 +9,8 @@
     <title>Private office</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
 <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
@@ -28,16 +28,17 @@
     <fmt:message bundle="${locale}" key="local.viewUsers" var="viewUsers"/>
     <fmt:message bundle="${locale}" key="local.addCar" var="addCar"/>
     <fmt:message bundle="${locale}" key="local.statusRejected" var="sRejected"/>
-    <fmt:message bundle="${locale}" key="local.statusAccepted" var="Accepted"/>
-    <fmt:message bundle="${locale}" key="local.statusClosed" var="Closed"/>
+    <fmt:message bundle="${locale}" key="local.statusUndefined" var="sUndefined"/>
+    <fmt:message bundle="${locale}" key="local.statusApproved" var="sApproved"/>
+    <fmt:message bundle="${locale}" key="local.statusPaid" var="sPaid"/>
+    <fmt:message bundle="${locale}" key="local.statusClosed" var="sClosed"/>
     <fmt:message bundle="${locale}" key="local.mDetails" var="mDetails"/>
     <fmt:message bundle="${locale}" key="local.noOrders" var="mNoOrders"/>
     <fmt:message bundle="${locale}" key="local.orders" var="mOrders"/>
     <fmt:message bundle="${locale}" key="local.mLastName" var="mLastName"/>
     <fmt:message bundle="${locale}" key="local.mFirstName" var="mFirstName"/>
-    <fmt:message bundle="${locale}" key="local.mMiddleName" var="mMiddleName"/>
     <fmt:message bundle="${locale}" key="local.model" var="mModel"/>
-    <fmt:message bundle="${locale}" key="local.mGovNumber" var="mGovNumber"/>
+    <fmt:message bundle="${locale}" key="local.carClass" var="mCarClass"/>
     <fmt:message bundle="${locale}" key="local.mStatus" var="mStatus"/>
     <fmt:message bundle="${locale}" key="local.price" var="price"/>
     <fmt:message bundle="${locale}" key="local.mDamagePrice" var="mDmgPrice"/>
@@ -47,6 +48,7 @@
     <fmt:message bundle="${locale}" key="local.login" var="mLogin"/>
     <fmt:message bundle="${locale}" key="local.password" var="mPassword"/>
     <fmt:message bundle="${locale}" key="local.signIn" var="mSignIn"/>
+    <fmt:message bundle="${locale}" key="local.BYN" var="byn"/>
 </head>
 <body>
 
@@ -80,15 +82,15 @@
                 <input type="submit" value="${viewOrders}" class="btn btn-info">
             </form>
 
-<%--            <form action="Controller" method="get" class="btn">--%>
-<%--                <input type="hidden" name="command" value="view-all-users">--%>
-<%--                <input type="submit" value="${viewUsers}" class="btn btn-info">--%>
-<%--            </form>--%>
+            <form action="Controller" method="get" class="btn">
+                <input type="hidden" name="command" value="view-all-users">
+                <input type="submit" value="${viewUsers}" class="btn btn-info">
+            </form>
 
-<%--            <form action="Controller" method="get" class="btn">--%>
-<%--                <input type="hidden" name="command" value="to-add-car">--%>
-<%--                <input type="submit" value="${addCar}" class="btn btn-info">--%>
-<%--            </form>--%>
+            <form action="Controller" method="get" class="btn">
+                <input type="hidden" name="command" value="to-add-car">
+                <input type="submit" value="${addCar}" class="btn btn-info">
+            </form>
         </div>
 
         <hr/>
@@ -100,89 +102,73 @@
         <hr/>
         <h2>${myOrders}</h2>
 
-<%--        <c:if test="${requestScope.noOrders == true }">--%>
-<%--            <p class="text-danger my-info">${mNoOrders}</p>--%>
-<%--        </c:if>--%>
+        <c:if test="${requestScope.noOrders == true }">
+            <p class="text-danger my-info">${mNoOrders}</p>
+        </c:if>
 
-<%--        <div class="well">--%>
-<%--            <c:forEach var="order" items="${orders}">--%>
-<%--                <div class="div-order">--%>
-<%--                    <table>--%>
-<%--                        <thead>--%>
-<%--                        <tr>--%>
-<%--                            <th>${mOrderNumber}</th>--%>
-<%--                            <th>${mLastName}</th>--%>
-<%--                            <th>${mFirstName}</th>--%>
-<%--                            <th>${mMiddleName}</th>--%>
-<%--                            <th>${mMark}</th>--%>
-<%--                            <th>${mModel}</th>--%>
-<%--                            <th>${mGovNumber}</th>--%>
-<%--                            <th>${mStatus}</th>--%>
-<%--                            <th>${price}, $</th>--%>
-<%--                            <th>${mDmgPrice}, $</th>--%>
-<%--                        </tr>--%>
-<%--                        </thead>--%>
-<%--                        <tbody>--%>
-<%--                        <tr>--%>
-<%--                            <td><c:out value="${order.id}"/></td>--%>
-<%--                            <td><c:out value="${order.user.lastName}"/></td>--%>
-<%--                            <td><c:out value="${order.user.firstName}"/></td>--%>
-<%--                            <td><c:out value="${order.user.middleName}"/></td>--%>
-<%--                            <td><c:out value="${order.car.mark}"/></td>--%>
-<%--                            <td><c:out value="${order.car.model}"/></td>--%>
-<%--                            <td><c:out value="${order.car.govNumber}"/></td>--%>
-<%--                            <td>--%>
-<%--                                <c:if test="${order.status.equals('new')}">--%>
-<%--                                    ${sNew}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('canceled')}">--%>
-<%--                                    ${sCanceld}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('rejected')}">--%>
-<%--                                    ${sRejected}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('payed')}">--%>
-<%--                                    ${Paid}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('accepted')}">--%>
-<%--                                    ${Accepted}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('delivered')}">--%>
-<%--                                    ${Delivered}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('returned')}">--%>
-<%--                                    ${Returned}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('expectsComp')}">--%>
-<%--                                    ${ExpectsComp}--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${order.status.equals('closed')}">--%>
-<%--                                    ${Closed}--%>
-<%--                                </c:if>--%>
-<%--                            </td>--%>
-<%--                            <td><c:out value="${order.orderPrice}"/></td>--%>
-<%--                            <td><c:out value="${order.damagePrice}"/></td>--%>
-<%--                        </tr>--%>
-<%--                        </tbody>--%>
-<%--                    </table>--%>
-<%--                    <br/>--%>
+        <div class="well">
+            <c:forEach var="order" items="${sessionScope.orders}">
+                <div class="div-order">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>${mOrderNumber}</th>
+                            <th>${mLastName}</th>
+                            <th>${mFirstName}</th>
+                            <th>${mCarClass}</th>
+                            <th>${mModel}</th>
+                            <th>${mStatus}</th>
+                            <th>${price}, ${byn}</th>
+                            <th>${mDmgPrice}, ${byn}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><c:out value="${order.orderID}"/></td>
+                            <td><c:out value="${order.user.surName}"/></td>
+                            <td><c:out value="${order.user.name}"/></td>
+                            <td><c:out value="${order.car.carClassType}"/></td>
+                            <td><c:out value="${order.car.carModel}"/></td>
+                            <td>
+                                <c:if test="${order.status.equals('undefined')}">
+                                    ${sUndefined}
+                                </c:if>
+                                <c:if test="${order.status.equals('approved')}">
+                                    ${sApproved}
+                                </c:if>
+                                <c:if test="${order.status.equals('rejected')}">
+                                    ${sRejected}
+                                </c:if>
+                                <c:if test="${order.status.equals('paid')}">
+                                    ${sPaid}
+                                </c:if>
+                                <c:if test="${order.status.equals('closed')}">
+                                    ${sClosed}
+                                </c:if>
+                            </td>
+                            <td><c:out value="${order.totalBill}"/></td>
+                            <td><c:out value="${order.damagePrice}"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br/>
 
-<%--                    <div class="btn-block">--%>
-<%--                        <form action="Controller" method="get">--%>
-<%--                            <input type="hidden" name="selectedOrderId" value="${order.id}">--%>
-<%--                            <input type="hidden" name="command" value="view-order-admin">--%>
-<%--                            <input type="submit" value="${mDetails}" class="btn btn-info"/>--%>
-<%--                        </form>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <hr/>--%>
-<%--            </c:forEach>--%>
+                    <div class="btn-block">
+                        <form action="Controller" method="get">
+                            <input type="hidden" name="selectedOrderId" value="${order.orderID}">
+                            <input type="hidden" name="command" value="view-order-admin">
+                            <input type="submit" value="${mDetails}" class="btn btn-info"/>
+                        </form>
+                    </div>
+                </div>
+                <hr/>
+            </c:forEach>
 
-<%--            <form action="Controller" method="get">--%>
-<%--                <input type="hidden" name="command" value="view-orders-admin">--%>
-<%--                <input type="submit" value="${viewAllOrders}>>" class="btn btn-primary"/>--%>
-<%--            </form>--%>
-<%--        </div>--%>
+            <form action="Controller" method="get">
+                <input type="hidden" name="command" value="view-orders-admin">
+                <input type="submit" value="${viewAllOrders}>>" class="btn btn-primary"/>
+            </form>
+        </div>
     </c:if>
 
     <hr/>

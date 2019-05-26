@@ -10,9 +10,9 @@
     <title>Orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-<%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
+    <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.locbutton.name.en" var="en_button"/>
@@ -50,11 +50,14 @@
     <fmt:message bundle="${locale}" key="local.statusApproved" var="sApproved"/>
     <fmt:message bundle="${locale}" key="local.statusUndefined" var="sUndefined"/>
     <fmt:message bundle="${locale}" key="local.statusClosed" var="sClosed"/>
+    <fmt:message bundle="${locale}" key="local.statusPaid" var="sPaid"/>
     <fmt:message bundle="${locale}" key="local.mToAllOrders" var="mToAllOrders"/>
     <fmt:message bundle="${locale}" key="local.mOrder" var="mOrder"/>
     <fmt:message bundle="${locale}" key="local.viewOrders" var="mViewAllOrders"/>
     <fmt:message bundle="${locale}" key="local.mMakeOrder" var="mMakeOrder"/>
     <fmt:message bundle="${locale}" key="local.mAllOrders" var="mAllOrders"/>
+    <fmt:message bundle="${locale}" key="local.BYN" var="byn"/>
+    <fmt:message bundle="${locale}" key="local.processedOrder" var="processedOrder"/>
 </head>
 <body>
 
@@ -109,11 +112,15 @@
                         <c:if test="${sessionScope.selectedOrder.status.equals('closed')}">
                             ${sClosed}
                         </c:if>
+
+                        <c:if test="${sessionScope.selectedOrder.status.equals('paid')}">
+                            ${sPaid}
+                        </c:if>
                     </p>
 
-                    <p>${mPrice}: <c:out value="${sessionScope.selectedOrder.totalBill}$"/></p>
+                    <p>${mPrice}: <c:out value="${sessionScope.selectedOrder.totalBill} ${byn}"/></p>
 
-                    <p>${mDamagePrice}: <c:out value="${sessionScope.selectedOrder.damagePrice}$"/></p>
+                    <p>${mDamagePrice}: <c:out value="${sessionScope.selectedOrder.damagePrice} ${byn}"/></p>
 
                     <div class="btn-group">
                         <c:if test="${sessionScope.selectedOrder.status.equals('undefined')}">
@@ -124,7 +131,7 @@
                             </form>
                         </c:if>
 
-                        <c:if test="${sessionScope.selectedOrder.status.equals('undefined')}">
+                        <c:if test="${sessionScope.selectedOrder.status.equals('approved')}">
                             <form action="Controller" method="get" class="btn">
                                 <input type="hidden" name="payment-type" value="order"/>
                                 <input type="hidden" name="command" value="to-payment-page"/>
@@ -132,19 +139,13 @@
                             </form>
                         </c:if>
 
-                        <c:if test="${sessionScope.selectedOrder.damagePrice != 0 && sessionScope.selectedOrder.status.equals('approved')}">
-                        <form action="Controller" method="get" class="btn">
-                            <input type="hidden" name="payment-type" value="damage"/>
-                            <input type="hidden" name="command" value="to-payment-page"/>
-                            <input type="submit" value="${mPayForDmg}" class="btn btn-primary"/>
-                        </form>
-                    </c:if>
-
-                        <form action="Controller" method="get" class="btn">
-                            <input type="hidden" name="selectedOrderId" value="${sessionScope.selectedOrder.orderID}">
-                            <input type="hidden" name="command" value="view-order-user">
-                            <input type="submit" value="${mUpdate}" class="btn btn-default"/>
-                        </form>
+                        <c:if test="${sessionScope.selectedOrder.damagePrice != 0 && sessionScope.selectedOrder.status.equals('paid')}">
+                            <form action="Controller" method="get" class="btn">
+                                <input type="hidden" name="payment-type" value="damage"/>
+                                <input type="hidden" name="command" value="to-payment-page"/>
+                                <input type="submit" value="${mPayForDmg}" class="btn btn-primary"/>
+                            </form>
+                        </c:if>
 
                     </div>
                 </div>
@@ -154,7 +155,13 @@
 
                     <p>${mDateTo} <c:out value="${sessionScope.selectedOrder.rentalEndDate}"/></p>
 
-                    </div>
+                    <c:if test="${sessionScope.selectedOrder.status.equals('undefined')}">
+                        <p>
+                            ${processedOrder}
+                        </p>
+                    </c:if>
+
+                </div>
 
                 <hr class="col-lg-12"/>
 

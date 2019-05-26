@@ -11,10 +11,9 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.Us
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -38,6 +37,11 @@ public class UserDAOImpl implements UserDAO {
 			" surname= ?, phone= ?, email= ?, passport_id=?  WHERE user_id = ?;";
 
 	private static final String FIND_USER_BY_ID_QUERY = "SELECT * FROM user WHERE user_id=?;";
+
+	private static final String TAKE_ALL_USERS_QUERY = "SELECT user_id, login, role_id, surname, name, email, phone" +
+			" FROM user ORDER BY (user_id) DESC LIMIT ? OFFSET ?;";
+
+	private static final String COUNT_ALL_USERS_QUERY = "SELECT COUNT(user_id) FROM car_rental.user;";
 
 
 	@Override
@@ -295,10 +299,13 @@ public class UserDAOImpl implements UserDAO {
 			ps.setInt(1, userID);
 			ps.executeUpdate();
 			connection.commit();
+
 			result = true;
+
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(DAOStringConstant.DAO_REMOVE_USER_BY_ID_ERROR_MSG, e);
 		} finally {
+
 			try {
 				if (connectionPool != null) {
 					connectionPool.closeConnection(connection, ps);
@@ -314,6 +321,95 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
+	@Override
+	public List<User> takeAllUsers(int startPage, int amountUsersOnPage) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_TAKE_ALL_USERS_STARTS_MSG);
+
+		List<User> users = new ArrayList<>();
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+
+			connection = connectionPool.takeConnection();
+			ps = connection.prepareStatement(TAKE_ALL_USERS_QUERY);
+			ps.setInt(1, amountUsersOnPage);
+			ps.setInt(2, startPage);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				User user = new User();
+
+				user.setUserID(rs.getInt(1));
+				user.setLogin(rs.getString(2));
+				user.setRoleType(RoleType.getValue(rs.getInt(3)));
+				user.setSurName(rs.getString(4));
+				user.setName(rs.getString(5));
+				user.setEmail(rs.getString(6));
+				user.setPhone(rs.getString(7));
+
+				users.add(user);
+			}
+
+			return users;
+
+		} catch (SQLException | ConnectionPoolException ex) {
+			throw new DAOException(DAOStringConstant.DAO_TAKE_ALL_USERS_ERROR, ex);
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, ps, rs);
+				}
+
+				LOG.debug(DAOStringConstant.DAO_TAKE_ALL_USERS_ENDS_MSG);
+
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(DAOStringConstant.DAO_TAKE_ALL_USERS_CLOSE_CON_ERROR_MSG, ex);
+			}
+		}
+	}
+
+	@Override
+	public int countAllUsers() throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_COUNT_ALL_USERS_STARTS_MSG);
+
+		int ordersAmount = 0;
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Statement st = null;
+		ResultSet rs = null;
+
+		try {
+
+			connection = connectionPool.takeConnection();
+			st = connection.createStatement();
+			rs = st.executeQuery(COUNT_ALL_USERS_QUERY);
+
+			while (rs.next()) {
+				ordersAmount = rs.getInt(1);
+			}
+
+			return ordersAmount;
+
+		} catch (SQLException | ConnectionPoolException ex) {
+			throw new DAOException(ex);
+
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, st, rs);
+				}
+				LOG.debug(DAOStringConstant.DAO_COUNT_ALL_USERS_ENDS_MSG);
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(ex);
+			}
+		}
+	}
+
 	public static void main(String[] args) throws DAOException {
 
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -323,11 +419,8 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		UserDAO userDAO = new UserDAOImpl();
-		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Юрий","Юрьевич","989898","sdsd","df4"));
-//		userDAO.updateUser(new User(2,"Liza","1000", RoleType.CUSTOMER,"Lizaveta","Wolsen","989898","sdsd","df4"));
-//		System.out.println(userDAO.findUserById(2));
-//		userDAO.removeUserByID(1);
-//		System.out.println(userDAO.findUserById(18));
+//		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Юрий","Юрьевич","989898","sdsd","df4"));
+		System.out.println(userDAO.countAllUsers());
 	}
 
 

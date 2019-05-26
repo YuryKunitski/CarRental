@@ -11,8 +11,8 @@ public class Order {
 	private int orderID;
 	private User user;
 	private Car car;
-	private Date rentalStartDate;
-	private Date rentalEndDate;
+	private String rentalStartDate;
+	private String rentalEndDate;
 	private double damagePrice;
 	private String status;
 	private String info;
@@ -21,7 +21,7 @@ public class Order {
 	public Order() {
 	}
 
-	public Order(int orderID, User user, Car car, Date rentalStartDate, Date rentalEndDate,
+	public Order(int orderID, User user, Car car, String rentalStartDate, String rentalEndDate,
 	             double damagePrice, String status, String info, double totalBill) {
 		this.orderID = orderID;
 		this.user = user;
@@ -58,19 +58,19 @@ public class Order {
 		this.car = car;
 	}
 
-	public Date getRentalStartDate() {
+	public String getRentalStartDate() {
 		return rentalStartDate;
 	}
 
-	public void setRentalStartDate(Date rentalStartDate) {
+	public void setRentalStartDate(String rentalStartDate) {
 		this.rentalStartDate = rentalStartDate;
 	}
 
-	public Date getRentalEndDate() {
+	public String getRentalEndDate() {
 		return rentalEndDate;
 	}
 
-	public void setRentalEndDate(Date rentalEndDate) {
+	public void setRentalEndDate(String rentalEndDate) {
 		this.rentalEndDate = rentalEndDate;
 	}
 

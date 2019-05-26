@@ -138,6 +138,8 @@ public class DAOStringConstant {
 	public static final String DAO_UPDATE_USER_BY_ID_CON_ERROR_MSG = "UserDAOdb : updateUserByID : close connection error";
 	public static final String DAO_FIND_USER_BY_ID_ERROR = "UserDAOdb : findUserById : ERROR";
 	public static final String DAO_FIND_USER_BY_ID_CLOSE_CON_ERROR = "UserDAOdb : findUserById : close connection error";
+	public static final String DAO_TAKE_ALL_USERS_CLOSE_CON_ERROR_MSG = "UserDAOdb : takeAllUsers : close connection error";
+	public static final String DAO_TAKE_ALL_USERS_ERROR = "UserDAOdb : takeAllUsers : ERROR";
 
 	public static final String DAO_FIND_USER_STARTS_MSG = "UserDAOdb : findUser : starts";
 	public static final String DAO_FIND_USER_ENDS_MSG = "UserDAOdb : findUser : ends";
@@ -150,6 +152,10 @@ public class DAOStringConstant {
 	public static final String DAO_UPDATE_USER_BY_ID_ENDS_MSG = "UserDAOdb : updateUserByID : ends";
 	public static final String DAO_FIND_USER_BY_ID_STARTS_MSG = "UserDAOdb : findUserById : starts";
 	public static final String DAO_FIND_USER_BY_ID_ENDS_MSG = "UserDAOdb : findUserById : ends";
+	public static final String DAO_TAKE_ALL_USERS_STARTS_MSG = "UserDAOdb : takeAllUsers : starts";
+	public static final String DAO_TAKE_ALL_USERS_ENDS_MSG = "UserDAOdb : takeAllUsers : ends";
+	public static final String DAO_COUNT_ALL_USERS_STARTS_MSG = "UserDAOdb : countAllUsers : starts";
+	public static final String DAO_COUNT_ALL_USERS_ENDS_MSG = "UserDAOdb : countAllUsers : ends";
 
 	public static final String INIT_DAO_FACTORY_MSG = "DAOFactory : init DAO factory";
 

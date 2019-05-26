@@ -100,19 +100,21 @@ public class OrderDAOImpl implements OrderDAO {
 		Connection connection = null;
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		PreparedStatement ps = null;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
 		try {
 
 			connection = connectionPool.takeConnection();
 			ps = connection.prepareStatement(ADD_ORDER_QUERY);
+
 			ps.setInt(1, order.getUser().getUserID());
 			ps.setInt(2, order.getCar().getCarID());
-			ps.setString(3, dateFormat.format(order.getRentalStartDate()));
-			ps.setString(4, dateFormat.format(order.getRentalEndDate()));
+			ps.setString(3, order.getRentalStartDate());
+			ps.setString(4, order.getRentalEndDate());
 			ps.setDouble(5, order.getDamagePrice());
 			ps.setString(6, order.getStatus());
 			ps.setString(7, order.getInfo());
 			ps.setDouble(8, order.getTotalBill());
+
 			ps.executeUpdate();
 		} catch (ConnectionPoolException | SQLException ex) {
 			throw new DAOException(DAOStringConstant.DAO_ADD_ORDER_ERROR_MSG, ex);
@@ -130,37 +132,42 @@ public class OrderDAOImpl implements OrderDAO {
 
 	@Override
 	public List<Integer> findUsedCarsID(Order order) throws DAOException {
+
 		LOG.debug(DAOStringConstant.DAO_FIND_USED_CARS_ID_STARTS_MSG);
+
 		Connection connection = null;
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int carId = 0;
 		List<Integer> carIds = new ArrayList<>();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		try {
 			connection = connectionPool.takeConnection();
 			ps = connection.prepareStatement(TAKE_USED_CARS_ID_QUERY);
 			ps.setString(1, ORDER_STATUS_APPROVED);
-			ps.setString(2, dateFormat.format(order.getRentalStartDate()));
-			ps.setString(3, dateFormat.format(order.getRentalEndDate()));
-			ps.setString(4, dateFormat.format(order.getRentalStartDate()));
-			ps.setString(5, dateFormat.format(order.getRentalEndDate()));
+			ps.setString(2, order.getRentalStartDate());
+			ps.setString(3, order.getRentalEndDate());
+			ps.setString(4, order.getRentalStartDate());
+			ps.setString(5, order.getRentalEndDate());
 
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				carIds.add(rs.getInt(1));
 			}
+
 			return carIds;
+
 		} catch (ConnectionPoolException | SQLException ex) {
 			throw new DAOException(DAOStringConstant.DAO_FIND_USED_CARS_ID_ERROR_MSG, ex);
+
 		} finally {
 			try {
 				if (connectionPool != null) {
 					connectionPool.closeConnection(connection, ps, rs);
 				}
+
 				LOG.debug(DAOStringConstant.DAO_FIND_USED_CARS_ID_ENDS_MSG);
+
 			} catch (ConnectionPoolException ex) {
 				throw new DAOException(DAOStringConstant.DAO_FIND_USED_CARS_ID_CLOSE_CON_ERROR_MSG, ex);
 			}
@@ -189,12 +196,11 @@ public class OrderDAOImpl implements OrderDAO {
 				Order order = new Order();
 				Car car = new Car();
 
+				order.setOrderID(rs.getInt(1));
 				car.setCarModel(rs.getString(2));
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
-
-				order.setOrderID(rs.getInt(1));
-				order.setRentalStartDate(rs.getDate(4));
-				order.setRentalEndDate(rs.getDate(5));
+				order.setRentalStartDate(rs.getString(4));
+				order.setRentalEndDate(rs.getString(5));
 				order.setDamagePrice(rs.getDouble(6));
 				order.setStatus(rs.getString(7));
 				order.setTotalBill(rs.getDouble(8));
@@ -243,8 +249,8 @@ public class OrderDAOImpl implements OrderDAO {
 				user.setUserID(rs.getInt(2));
 
 				order.setOrderID(rs.getInt(1));
-				order.setRentalStartDate(rs.getDate(3));
-				order.setRentalEndDate(rs.getDate(4));
+				order.setRentalStartDate(rs.getString(3));
+				order.setRentalEndDate(rs.getString(4));
 				order.setDamagePrice(rs.getDouble(5));
 				order.setStatus(rs.getString(6));
 				order.setTotalBill(rs.getDouble(7));
@@ -295,8 +301,8 @@ public class OrderDAOImpl implements OrderDAO {
 				user.setSurName(rs.getString(4));
 				car.setCarModel(rs.getString(5));
 
-				order.setRentalStartDate(rs.getDate(6));
-				order.setRentalEndDate(rs.getDate(7));
+				order.setRentalStartDate(rs.getString(6));
+				order.setRentalEndDate(rs.getString(7));
 
 				car.setCarClassType(CarClassType.valueOf(rs.getString(8).toUpperCase()));
 
@@ -360,8 +366,8 @@ public class OrderDAOImpl implements OrderDAO {
 				car.setPricePerDay(rs.getDouble(13));
 				car.setImage(Base64.encode(rs.getBytes(14)));
 
-				order.setRentalStartDate(rs.getDate(15));
-				order.setRentalEndDate(rs.getDate(16));
+				order.setRentalStartDate(rs.getString(15));
+				order.setRentalEndDate(rs.getString(16));
 				order.setDamagePrice(rs.getDouble(17));
 				order.setStatus(rs.getString(18));
 				order.setInfo(rs.getString(19));
@@ -412,8 +418,8 @@ public class OrderDAOImpl implements OrderDAO {
 				car.setPricePerDay(rs.getDouble(5));
 				car.setImage(Base64.encode(rs.getBytes(6)));
 
-				order.setRentalStartDate(rs.getDate(7));
-				order.setRentalEndDate(rs.getDate(8));
+				order.setRentalStartDate(rs.getString(7));
+				order.setRentalEndDate(rs.getString(8));
 				order.setDamagePrice(rs.getDouble(9));
 				order.setStatus(rs.getString(10));
 				order.setInfo(rs.getString(11));
@@ -534,6 +540,7 @@ public class OrderDAOImpl implements OrderDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		double discountCoefficient = 0;
+
 		try {
 
 			connection = connectionPool.takeConnection();
@@ -542,18 +549,24 @@ public class OrderDAOImpl implements OrderDAO {
 			ps.setInt(2, countRentDays);
 
 			rs = ps.executeQuery();
+
 			if (rs.next()) {
 				discountCoefficient = rs.getDouble(1);
 			}
+
 			return discountCoefficient;
+
 		} catch (ConnectionPoolException | SQLException ex) {
 			throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ERROR_MSG, ex);
+
 		} finally {
 			try {
 				if (connectionPool != null) {
 					connectionPool.closeConnection(connection, ps, rs);
 				}
+
 				LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ENDS_MSG);
+
 			} catch (ConnectionPoolException ex) {
 				throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR_MSG, ex);
 			}
@@ -633,20 +646,18 @@ public class OrderDAOImpl implements OrderDAO {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
-		try {
+
 			User user = new User();
 			user.setUserID(1);
 			Car car = new Car();
 			car.setCarID(1);
-			orderDAO.addOrder(new Order(0, user, car, format.parse("2019-05-25"),
-					format.parse("2019-05-28") , 0, "undefined", " ", 250));
+			orderDAO.addOrder(new Order(0, user, car, "2019-05-25",
+					"2019-05-28", 0, "undefined", " ", 250));
 //			List<Integer> listUsedCarIDs = orderDAO.findUsedCarsID(new Order(7, user, car, format.parse("2019-05-02"),
 //					format.parse("2019-05-08") , 0, "undefined", " ", 250));
 //			System.out.println(listUsedCarIDs.toString());
 //
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+
 //		List<Order> orderList = orderDAO.findOrdersByUserId(1);
 //		System.out.println(orderList.toString());
 //		List<Order> orderListByCarID = orderDAO.findOrdersByCarId(10);

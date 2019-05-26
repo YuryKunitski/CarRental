@@ -29,12 +29,9 @@ public class UpdateDamagePrice implements Command {
 
 	private static final String SUCCESSFUL_UPDATED_DMG_PRICE_PARAM = "dmgPriceUpdated";
 	private static final String PROCESS_REQUEST = "processRequest";
-	private static final String TO_DATE_PARAM = "toDate";
 	private static final String FROM_DATE_PARAM = "fromDate";
 
-	private static final String DELIVERED_VALUE = "delivered";
-	private static final String APPROVED_VALUE = "approved";
-	private static final String RETURNED_VALUE = "returned";
+	private static final String APPROVED_VALUE = "paid";
 	private static final String FORWARD_VALUE = "forward";
 	private static final String REDIRECT_VALUE = "redirect";
 

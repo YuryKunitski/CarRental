@@ -15,6 +15,8 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.servic
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+
 /*
  * Class for creating some logical actions with an entity User
  */
@@ -22,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
 	private static final Logger LOG = LogManager.getLogger(UserServiceImpl.class.getName());
 
-	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
+	private final UserDAO USER_DAO = DAOFactory.getInstance().getUserDAO();
 
 
 
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService {
 		LOG.debug(ServiceConstant.LOGIN_START_MSG);
 
 		try {
-			User user = userDAO.authorize(login, password);
+			User user = USER_DAO.authorize(login, password);
 			LOG.debug(ServiceConstant.LOGIN_END_MSG);
 			return user;
 
@@ -72,10 +74,10 @@ public class UserServiceImpl implements UserService {
 		User user = new User(login, password, roleType, name, surname, phone, email, passportID);
 
 		try {
-			ValidatorUniqueUser validatorUniqueUser = userDAO.findUser(login, email, passportID);
+			ValidatorUniqueUser validatorUniqueUser = USER_DAO.findUser(login, email, passportID);
 			if (validatorUniqueUser.isUniqueLogin() && validatorUniqueUser.isUniqueEmail()
 					&& validatorUniqueUser.isUniquePassportID()) {
-				userDAO.register(user);
+				USER_DAO.register(user);
 				LOG.debug(ServiceConstant.REGISTER_END_MSG);
 				return validatorUniqueUser;
 			} else {
@@ -98,7 +100,7 @@ public class UserServiceImpl implements UserService {
 	public User findUserById(int userID) throws ServiceException {
 		LOG.debug(ServiceConstant.TAKE_USER_BY_ID_START_MSG);
 		try {
-			User user = userDAO.findUserById(userID);
+			User user = USER_DAO.findUserById(userID);
 			LOG.debug(ServiceConstant.TAKE_USER_BY_ID_END_MSG);
 			return user;
 		} catch (DAOException ex) {
@@ -116,7 +118,7 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(User newUser) throws ServiceException {
 		LOG.debug(ServiceConstant.UPDATE_USER_START_MSG);
 		try {
-			userDAO.updateUser(newUser);
+			USER_DAO.updateUser(newUser);
 			LOG.debug(ServiceConstant.UPDATE_USER_ENDS_MSG);
 		} catch (DAOException ex) {
 			throw new ServiceException(ex);
@@ -136,7 +138,7 @@ public class UserServiceImpl implements UserService {
 		boolean result = false;
 
 		try {
-			userDAO.removeUserByID(userID);
+			USER_DAO.removeUserByID(userID);
 			result = true;
 
 			LOG.debug(ServiceConstant.UPDATE_USER_ENDS_MSG);
@@ -145,6 +147,75 @@ public class UserServiceImpl implements UserService {
 		}
 		return result;
 	}
+
+	/**
+	 * Take list of all users from DAO
+	 * @return list of all users
+	 * @throws ServiceException error take list of all users
+	 */
+	@Override
+	public List<User> takeAllUsers(int pageNumber, int amountUsersOnPage) throws ServiceException {
+
+		LOG.debug(ServiceConstant.TAKE_ALL_USERS_START_MSG);
+
+		int startPage = userToStartPage(pageNumber, amountUsersOnPage);
+
+		try {
+			List<User> users = USER_DAO.takeAllUsers(startPage, amountUsersOnPage);
+
+			LOG.debug(ServiceConstant.TAKE_ALL_USERS_END_MSG);
+
+			return users;
+
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+	}
+
+	/**
+	 * Calculate count of pages of all users
+	 * @return list of all users
+	 * @throws ServiceException error take list of all users
+	 */
+	@Override
+	public int countPageAmountAllUsers(int amountUsersOnPage) throws ServiceException {
+
+		LOG.debug(ServiceConstant.COUNT_PAGE_AMOUNT_ALL_USERS_START_MSG);
+
+		int pageAmount = 0;
+		int usersAmount = 0;
+
+		try {
+			usersAmount = USER_DAO.countAllUsers();
+			if (usersAmount % amountUsersOnPage != 0) {
+				pageAmount = (usersAmount / amountUsersOnPage) + 1;
+			} else {
+				pageAmount = (usersAmount / amountUsersOnPage);
+			}
+
+			LOG.debug(ServiceConstant.COUNT_PAGE_AMOUNT_ALL_USERS_END_MSG);
+
+			return pageAmount;
+
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+	}
+
+	/**
+	 * Calculate number of users before current page
+	 * @param pageNumber   number of page
+	 * @param usersOnPage count of order on page
+	 * @return count of order to start page
+	 */
+	private int userToStartPage(int pageNumber, int usersOnPage) {
+
+		LOG.debug(ServiceConstant.USER_TO_START_PAGE_STARTS_MSG);
+		LOG.debug(ServiceConstant.USER_TO_START_PAGE_ENDS_MSG);
+
+		return ((pageNumber * usersOnPage) - usersOnPage);
+	}
+
 
 	public static void main(String[] args) {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -155,7 +226,8 @@ public class UserServiceImpl implements UserService {
 		}
 		UserService service = ServiceFactory.getInstance().getUserService();
 		try {
-			service.register("Rusel","1",RoleType.CUSTOMER,"Руслан","Русланович","+37529 1111111","rus@mail.ru","RR3");
+//			service.register("Rusel","1",RoleType.CUSTOMER,"Руслан","Русланович","+37529 1111111","rus@mail.ru","RR3");
+			System.out.println(service.takeAllUsers(2, 5).size());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

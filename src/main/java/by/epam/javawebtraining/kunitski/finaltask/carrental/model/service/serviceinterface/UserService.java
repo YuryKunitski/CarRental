@@ -5,6 +5,8 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.Validat
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.RoleType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 
+import java.util.List;
+
 public interface UserService {
 
 	/**
@@ -58,6 +60,20 @@ public interface UserService {
 	 * @throws ServiceException error remove user by id
 	 */
 	 boolean removeUserByID(int userID) throws ServiceException;
+
+	/**
+	 * Take list of all users from DAO
+	 * @return list of all users
+	 * @throws ServiceException error take list of all users
+	 */
+	public List<User> takeAllUsers(int pageNumber, int amountUsersOnPage) throws ServiceException;
+
+	/**
+	 * Calculate count of pages of all users
+	 * @return list of all users
+	 * @throws ServiceException error take list of all users
+	 */
+	public int countPageAmountAllUsers(int amountUsersOnPage) throws ServiceException;
 
 
 }
