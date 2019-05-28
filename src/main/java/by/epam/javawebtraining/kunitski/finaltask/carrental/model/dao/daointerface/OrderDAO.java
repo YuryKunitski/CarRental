@@ -103,12 +103,11 @@ public interface OrderDAO {
 	public double takeDiscountCoefficient(int countRentDays) throws DAOException;
 
 	/**
-	 * Changing discount coefficient
-	 * @param discountID discount coefficient id
-	 * @param value value for updating
+	 * Taking all discount coefficients
+	 * @return list of all discount coefficient
 	 * @throws DAOException changing discount coefficient
 	 */
-	public void updateDiscountCoefficient(int discountID, double value) throws DAOException;
+	public List<Double> takeAllDiscountCoefficients () throws DAOException;
 
 
 	/**
@@ -117,5 +116,12 @@ public interface OrderDAO {
 	 * @throws DAOException exception take all count of orders
 	 */
 	int countAllOrders() throws DAOException;
+
+	/**
+	 * Find Status By Car Id
+	 *
+	 * @throws DAOException exception take all count of orders
+	 */
+	public List<String> findStatusByCarId(int carID) throws DAOException;
 
 }

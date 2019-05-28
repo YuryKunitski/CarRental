@@ -9,9 +9,8 @@
     <title>All cars</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--        <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--        <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-    <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/car-rental-style.css" rel="stylesheet">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
@@ -100,11 +99,7 @@
                 </div>
 
                 <hr/>
-                <c:if test="${requestScope.invalidClass == true}">
-                    <p class="text-danger">
-                        <c:out value="${selectClass}"/>
-                    </p>
-                </c:if>
+
                 <c:if test="${sessionScope.role != 'ADMINISTRATOR'}">
                     <p class="text-primary">${chooseTripDate}</p>
                 </c:if>
@@ -264,8 +259,12 @@
     <%@include file="../jspf/footer.jspf" %>
 </div>
 
-<%--<script src="../../js/jquery.js"></script>--%>
-<%--<script src="../../js/bootstrap.min.js"></script>--%>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 </body>
 </html>

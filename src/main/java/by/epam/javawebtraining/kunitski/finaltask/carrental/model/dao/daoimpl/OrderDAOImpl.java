@@ -10,13 +10,11 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.Order;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +24,8 @@ public class OrderDAOImpl implements OrderDAO {
 
 	private static final Logger LOG = LogManager.getLogger(OrderDAOImpl.class.getName());
 	private static final String ORDER_STATUS_APPROVED = "approved";
+	private static final double MAX_DISCOUNT_COEFFICIENT = 0.5;
+	private static final int COUNT_DAYS_FOR_MAX_DISCOUNT = 30;
 
 	private static final String ADD_ORDER_QUERY = "INSERT INTO car_rental.order (user_id, car_id, rent_start_date," +
 			" rent_end_date, damage_price, status, info, total_bill) VALUES (?,?,?,?,?,?,?,?);";
@@ -39,13 +39,13 @@ public class OrderDAOImpl implements OrderDAO {
 			"INNER JOIN car ON car.car_id = o.car_id " +
 			"INNER JOIN car_model AS m ON m.car_model_id = car.car_model_id " +
 			"INNER JOIN car_class AS c ON c.car_class_id = car.car_class_id " +
-			"WHERE o.user_id= ? ORDER BY o.order_id;";
+			"WHERE o.user_id= ? ORDER BY o.order_id DESC;";
 
 	private static final String FIND_ORDER_BY_CAR_ID_QUERY = "SELECT o.order_id, u.user_id, o.rent_start_date, " +
 			"o.rent_end_date, o.damage_price, o.status, o.total_bill " +
 			"FROM car_rental.order AS o " +
 			"INNER JOIN car_rental.user AS u ON u.user_id = o.user_id " +
-			"WHERE o.car_id = ? ORDER BY o.order_id;";
+			"WHERE o.car_id = ? ORDER BY o.order_id DESC;";
 
 	private static final String FIND_BY_ORDER_ID_QUERY = "SELECT o.order_id, cm.model, cc.class, car.year_issue, " +
 			"car.price_per_day, car.image, o.rent_start_date, o.rent_end_date, o.damage_price, o.status, o.info, " +
@@ -88,8 +88,10 @@ public class OrderDAOImpl implements OrderDAO {
 	private static final String TAKE_DISCOUNT_COEFFICIENT_QUERY = "SELECT d.coefficient " +
 			"FROM car_rental.discount_coefficient AS d WHERE d.days_from <= ? AND d.days_to >= ?;";
 
-	private static final String UPDATE_DISCOUNT_COEFFICIENT_QUERY = "UPDATE car_rental.discount_coefficient AS d " +
-			"SET d.coefficient = ?  WHERE d.discount_coefficient_id = ?;";
+	private static final String TAKE_ALL_DISCOUNT_COEFFICIENT_QUERY = "SELECT coefficient FROM discount_coefficient;";
+
+	private static final String FIND_ORDER_STATUS_BY_CAR_ID_QUERY = "SELECT status FROM car_rental.order" +
+			" WHERE car_id = ? ;";
 
 
 	@Override
@@ -364,7 +366,7 @@ public class OrderDAOImpl implements OrderDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(11).toUpperCase()));
 				car.setYearIssue(rs.getString(12));
 				car.setPricePerDay(rs.getDouble(13));
-				car.setImage(Base64.encode(rs.getBytes(14)));
+				car.setImage(rs.getString(14));
 
 				order.setRentalStartDate(rs.getString(15));
 				order.setRentalEndDate(rs.getString(16));
@@ -416,7 +418,7 @@ public class OrderDAOImpl implements OrderDAO {
 				car.setCarClassType(CarClassType.valueOf(rs.getString(3).toUpperCase()));
 				car.setYearIssue(rs.getString(4));
 				car.setPricePerDay(rs.getDouble(5));
-				car.setImage(Base64.encode(rs.getBytes(6)));
+				car.setImage(rs.getString(6));
 
 				order.setRentalStartDate(rs.getString(7));
 				order.setRentalEndDate(rs.getString(8));
@@ -541,64 +543,74 @@ public class OrderDAOImpl implements OrderDAO {
 		ResultSet rs = null;
 		double discountCoefficient = 0;
 
-		try {
-
-			connection = connectionPool.takeConnection();
-			ps = connection.prepareStatement(TAKE_DISCOUNT_COEFFICIENT_QUERY);
-			ps.setInt(1, countRentDays);
-			ps.setInt(2, countRentDays);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				discountCoefficient = rs.getDouble(1);
-			}
-
-			return discountCoefficient;
-
-		} catch (ConnectionPoolException | SQLException ex) {
-			throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ERROR_MSG, ex);
-
-		} finally {
+		if (countRentDays <= COUNT_DAYS_FOR_MAX_DISCOUNT) {
 			try {
-				if (connectionPool != null) {
-					connectionPool.closeConnection(connection, ps, rs);
+				connection = connectionPool.takeConnection();
+				ps = connection.prepareStatement(TAKE_DISCOUNT_COEFFICIENT_QUERY);
+				ps.setInt(1, countRentDays);
+				ps.setInt(2, countRentDays);
+
+				rs = ps.executeQuery();
+
+				if (rs.next()) {
+					discountCoefficient = rs.getDouble(1);
 				}
 
-				LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ENDS_MSG);
+			} catch (ConnectionPoolException | SQLException ex) {
+				throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ERROR_MSG, ex);
 
-			} catch (ConnectionPoolException ex) {
-				throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR_MSG, ex);
+			} finally {
+				try {
+					if (connectionPool != null) {
+						connectionPool.closeConnection(connection, ps, rs);
+					}
+
+					LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ENDS_MSG);
+
+				} catch (ConnectionPoolException ex) {
+					throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR_MSG, ex);
+				}
 			}
+		} else {
+			discountCoefficient = MAX_DISCOUNT_COEFFICIENT;
 		}
+		return discountCoefficient;
 	}
 
-	@Override
-	public void updateDiscountCoefficient(int discountID, double value) throws DAOException {
 
-		LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_STARTS_MSG);
+	@Override
+	public List<Double> takeAllDiscountCoefficients () throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_STARTS_MSG);
 
 		Connection connection = null;
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Double> allDiscountCoefficients = new ArrayList<>();
+
 		try {
 
 			connection = connectionPool.takeConnection();
-			ps = connection.prepareStatement(UPDATE_DISCOUNT_COEFFICIENT_QUERY);
-			ps.setDouble(1, value);
-			ps.setInt(2, discountID);
-			ps.executeUpdate();
+			ps = connection.prepareStatement(TAKE_ALL_DISCOUNT_COEFFICIENT_QUERY);
+			rs = ps.executeQuery();
+
+			while (rs.next()){
+				allDiscountCoefficients.add(rs.getDouble(1));
+			}
+
+			return allDiscountCoefficients;
 
 		} catch (ConnectionPoolException | SQLException ex) {
-			throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ERROR_MSG, ex);
+			throw new DAOException(DAOStringConstant.DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_ERROR_MSG, ex);
 		} finally {
 			try {
 				if (connectionPool != null) {
 					connectionPool.closeConnection(connection, ps);
 				}
-				LOG.debug(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_ENDS_MSG);
+				LOG.debug(DAOStringConstant.DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_ENDS_MSG);
 			} catch (ConnectionPoolException ex) {
-				throw new DAOException(DAOStringConstant.DAO_TAKE_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR_MSG, ex);
+				throw new DAOException(DAOStringConstant.DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR, ex);
 			}
 		}
 	}
@@ -636,6 +648,45 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	@Override
+	public List<String> findStatusByCarId(int carID) throws DAOException {
+
+		LOG.debug(DAOStringConstant.DAO_FIND_STATUS_BY_CAR_ID_STARTS_MSG);
+
+		Connection connection = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			connection = connectionPool.takeConnection();
+			ps = connection.prepareStatement(FIND_ORDER_STATUS_BY_CAR_ID_QUERY);
+			ps.setInt(1, carID);
+			rs = ps.executeQuery();
+			List<String> orderStatuses = new ArrayList<>();
+
+			while (rs.next()) {
+				orderStatuses.add(rs.getString(1));
+			}
+
+			LOG.debug(DAOStringConstant.DAO_FIND_STATUS_BY_CAR_ID_ENDS_MSG);
+
+			return orderStatuses;
+
+		} catch (SQLException | ConnectionPoolException ex) {
+			throw new DAOException(DAOStringConstant.DAO_FIND_STATUS_BY_CAR_ID_ERROR_MSG, ex);
+		} finally {
+			try {
+				if (connectionPool != null) {
+					connectionPool.closeConnection(connection, ps, rs);
+				}
+				LOG.debug(DAOStringConstant.DAO_COUNT_ALL_ORDERS_ENDS_MSG);
+			} catch (ConnectionPoolException ex) {
+				throw new DAOException(DAOStringConstant.DAO_FIND_STATUS_BY_CAR_ID_CLOSE_CON_ERROR, ex);
+			}
+		}
+	}
+
 	public static void main(String[] args) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		try {
@@ -643,35 +694,9 @@ public class OrderDAOImpl implements OrderDAO {
 		} catch (ConnectionPoolException e) {
 			e.printStackTrace();
 		}
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 		OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
-
-			User user = new User();
-			user.setUserID(1);
-			Car car = new Car();
-			car.setCarID(1);
-			orderDAO.addOrder(new Order(0, user, car, "2019-05-25",
-					"2019-05-28", 0, "undefined", " ", 250));
-//			List<Integer> listUsedCarIDs = orderDAO.findUsedCarsID(new Order(7, user, car, format.parse("2019-05-02"),
-//					format.parse("2019-05-08") , 0, "undefined", " ", 250));
-//			System.out.println(listUsedCarIDs.toString());
-//
-
-//		List<Order> orderList = orderDAO.findOrdersByUserId(1);
-//		System.out.println(orderList.toString());
-//		List<Order> orderListByCarID = orderDAO.findOrdersByCarId(10);
-//		System.out.println(orderListByCarID.toString());
-//		List<Order> listAllOrders = orderDAO.takeAllOrders(10, 0);
-//		System.out.println(listAllOrders.toString());
-		System.out.println(orderDAO.takeAdminOrderByOrderId(2));
-//		orderDAO.updateStatusWithReason("rejected", 2, "customer has such much accidents");
-//		orderDAO.updateStatusWithoutReason("closed", 10);
-//		orderDAO.updateDamagePriceByOrderId(1, 80);
-//		System.out.println(orderDAO.countAllOrders());
-//		System.out.println(orderDAO.findOrderByOrderId(2));
-//		System.out.println(orderDAO.takeDiscountCoefficient(14));
-//	orderDAO.updateDiscountCoefficient(3, 0.6);
+		System.out.println(orderDAO.takeAllDiscountCoefficients());
 	}
 }
 

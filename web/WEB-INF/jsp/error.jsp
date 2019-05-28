@@ -11,7 +11,6 @@
     <meta charset="utf-8">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/car-rental-style.css" rel="stylesheet">
-    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
@@ -58,10 +57,6 @@
     <%@include file="../jspf/footer.jspf" %>
 
 </div>
-
-
-<script src="../../js/jquery.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
 
 </body>
 </html>

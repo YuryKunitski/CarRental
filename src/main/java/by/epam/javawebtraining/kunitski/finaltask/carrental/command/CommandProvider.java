@@ -17,7 +17,6 @@ public class CommandProvider {
 
 		LOG.debug(INIT_MSG);
 
-
 		commands.put(CommandName.TO_REGISTRATION, new ToRegPageCommand());
 		commands.put(CommandName.LOGIN_USER, new LoginUserCommand());
 		commands.put(CommandName.CHANGE_LOCALE, new ChangeLocalCommand());
@@ -44,11 +43,10 @@ public class CommandProvider {
 		commands.put(CommandName.VIEW_USER, new ViewUserCommand());
 		commands.put(CommandName.TO_ADD_CAR, new ToAddCarCommand());
 		commands.put(CommandName.ADD_CAR, new AddCarCommand());
-//		commands.put(CommandName.DELETE_CAR, new DeleteCarCommand());
+		commands.put(CommandName.DELETE_CAR, new DeleteCarCommand());
 		commands.put(CommandName.VIEW_CLASS, new ViewClassCommand());
 		commands.put(CommandName.VIEW_CLASS_UNUSED, new ViewUnusedClassCars());
 		commands.put(CommandName.TO_ABOUT, new ToAboutCommand());
-//		commands.put(CommandName.TO_DATE, new ToDateCommand());
 	}
 
 	public static CommandProvider getInstance() {

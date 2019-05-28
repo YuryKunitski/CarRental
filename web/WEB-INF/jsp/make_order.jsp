@@ -10,9 +10,8 @@
     <title>Make order</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-<%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.locbutton.name.en" var="en_button"/>
@@ -31,10 +30,7 @@
     <fmt:message bundle="${locale}" key="local.toCarsPage" var="toCars"/>
     <fmt:message bundle="${locale}" key="local.supposedFromDate" var="fromDate"/>
     <fmt:message bundle="${locale}" key="local.supposedToDate" var="toDate"/>
-<%--    <fmt:message bundle="${locale}" key="local.shippingPlaceMessage" var="mShippingPlace"/>--%>
-<%--    <fmt:message bundle="${locale}" key="local.returnPlaceMessage" var="mReturnPlace"/>--%>
     <fmt:message bundle="${locale}" key="local.mInvalidDate" var="mInvalidDate"/>
-<%--    <fmt:message bundle="${locale}" key="local.mInvalidPlaces" var="mInvalidPlaces"/>--%>
     <fmt:message bundle="${locale}" key="local.makeOrder" var="makeOrder"/>
     <fmt:message bundle="${locale}" key="local.mMakingOrder" var="mMakingOrder"/>
     <fmt:message bundle="${locale}" key="local.viewOrders" var="mViewAllOrders"/>
@@ -84,10 +80,11 @@
                 </c:if>
                 <c:if test="${sessionScope.selectedCar.carID != null}">
                     <img class="img-responsive car-middle-img"
-                         src="data:image/jpg;base64,${sessionScope.selectedCar.image}"/>
+                         src="${sessionScope.selectedCar.image}" alt="Car"/>
 
-                    <p class="my-info"><c:out value="${sessionScope.selectedCar.carClassType}"/> <c:out
-                            value="${sessionScope.selectedCar.carModel}"/></p>
+                    <p class="my-info"><c:out value="${sessionScope.selectedCar.carClassType}"/>
+                        <br/>
+                        <c:out value="${sessionScope.selectedCar.carModel}"/></p>
                 </c:if>
             </div>
 

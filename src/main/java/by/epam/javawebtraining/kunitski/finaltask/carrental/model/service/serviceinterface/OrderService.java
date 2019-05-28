@@ -91,6 +91,23 @@ public interface OrderService {
 	 */
 	public int countPageAmountAllOrders(int amountOrdersOnPage) throws ServiceException;
 
+	/**
+	 * Check all statuses of car by car ID
+	 *
+	 * @param carId car id
+	 * @throws DAOException exception is may delete
+	 * @return true - if car may delete/else - false
+	 */
+	public boolean isMayDelete(int carId) throws ServiceException;
+
+	/**
+	 * Taking all discount
+	 *
+	 * @return list of all discount
+	 * @throws ServiceException exception taking all discount
+	 */
+	public List<Double> takeAllDiscountCoefficients() throws ServiceException;
+
 
 
 }

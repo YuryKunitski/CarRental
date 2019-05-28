@@ -20,6 +20,9 @@ import org.apache.log4j.Logger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -28,8 +31,12 @@ public class OrderServiceImpl implements OrderService {
 
 	private static final Logger LOG = LogManager.getLogger(OrderServiceImpl.class.getName());
 
+	private static final String PAID_VALUE = "paid";
+	private static final String APPROVED_VALUE = "approved";
+
 	private static final OrderDAO ORDER_DAO = DAOFactory.getInstance().getOrderDAO();
 	private static final String ORDER_STATUS_DEFOULT = "undefined";
+
 
 	/**
 	 * Sent data to DAO for input an order
@@ -261,6 +268,64 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	/**
+	 * Check all statuses of car by car ID
+	 *
+	 * @param carId car id
+	 * @return true - if car may delete/else - false
+	 * @throws DAOException exception is may delete
+	 */
+	@Override
+	public boolean isMayDelete(int carId) throws ServiceException {
+
+		LOG.debug(ServiceConstant.SERVICE_IS_MAY_DELETE_STARTS_MSG);
+		List<String> orderStatuses = null;
+
+		try {
+			orderStatuses = ORDER_DAO.findStatusByCarId(carId);
+			for (String orderStatus : orderStatuses) {
+				if (orderStatus.equals(APPROVED_VALUE) || orderStatus.equals(PAID_VALUE)) {
+
+					LOG.debug(ServiceConstant.SERVICE_IS_MAY_DELETE_ENDS_MSG);
+					return false;
+				}
+			}
+
+			LOG.debug(ServiceConstant.SERVICE_IS_MAY_DELETE_ENDS_MSG);
+			return true;
+
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+	}
+
+	/**
+	 * Taking all discount
+	 *
+	 * @return list of all discount
+	 * @throws ServiceException exception taking all discount
+	 */
+	@Override
+	public List<Double> takeAllDiscountCoefficients() throws ServiceException {
+
+
+		LOG.debug(ServiceConstant.SERVICE_TAKE_ALL_DISCOUNT_COEFFICIENT_STARTS_MSG);
+
+		List<Double> listAllDiscCoef = null;
+
+		try {
+			listAllDiscCoef = ORDER_DAO.takeAllDiscountCoefficients();
+
+			LOG.debug(ServiceConstant.SERVICE_TAKE_ALL_DISCOUNT_COEFFICIENT_END_MSG);
+
+			return listAllDiscCoef;
+
+		} catch (DAOException ex) {
+			throw new ServiceException(ex);
+		}
+
+	}
+
+	/**
 	 * Calculate the count of rent days by dates
 	 *
 	 * @param rentalStartDate start rent days
@@ -270,18 +335,11 @@ public class OrderServiceImpl implements OrderService {
 	private int countRentDays(String rentalStartDate, String rentalEndDate) {
 
 		int result = 0;
-		Date dateFrom = null;
-		Date dateTo = null;
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-		try {
-			dateFrom = format.parse(rentalStartDate);
-			dateTo = format.parse(rentalEndDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		if (dateFrom != null && dateTo != null) {
-			result = (int) (dateTo.getTime() - dateFrom.getTime()) / (24 * 60 * 60 * 1000);
+		if (rentalStartDate != null && rentalEndDate != null) {
+			LocalDate d1 = LocalDate.parse(rentalStartDate);
+			LocalDate d2 = LocalDate.parse(rentalEndDate);
+			result = (int) ChronoUnit.DAYS.between(d1, d2);
 		}
 
 		return result;
@@ -296,11 +354,17 @@ public class OrderServiceImpl implements OrderService {
 	 * @return total bill of order
 	 */
 	private double calculateTotalBill(Car car, int countRentDays, double discountCoefficient) {
+
+		System.out.println("per/day - " + car.getPricePerDay());
+		System.out.println("count rent days - " + countRentDays);
+		System.out.println("disc coefficent - " + discountCoefficient);
+
 		return car.getPricePerDay() * countRentDays * discountCoefficient;
 	}
 
 	/**
 	 * Calculate number of orders before current page
+	 *
 	 * @param pageNumber   number of page
 	 * @param ordersOnPage count of order on page
 	 * @return count of order to start page
@@ -311,6 +375,7 @@ public class OrderServiceImpl implements OrderService {
 		return ((pageNumber * ordersOnPage) - ordersOnPage);
 	}
 
+
 	public static void main(String[] args) {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		try {
@@ -319,15 +384,14 @@ public class OrderServiceImpl implements OrderService {
 			e.printStackTrace();
 		}
 
-		OrderService orderService = ServiceFactory.getInstance().getOrderService();
-
+//		OrderService orderService = ServiceFactory.getInstance().getOrderService();
+		OrderServiceImpl service = new OrderServiceImpl();
 		try {
-			System.out.println(orderService.addOrder(20, 13, "2019-06-03",
-					"2019-06-23"));
-
+			System.out.println(service.takeAllDiscountCoefficients());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 

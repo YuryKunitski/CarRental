@@ -10,10 +10,8 @@
     <title>Add car</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.css" rel="stylesheet">--%>
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-<%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.locbutton.name.en" var="en_button"/>
@@ -38,9 +36,7 @@
     <fmt:message bundle="${locale}" key="local.price" var="mPrice"/>
     <fmt:message bundle="${locale}" key="local.year" var="mYear"/>
     <fmt:message bundle="${locale}" key="local.yearIssue" var="mYearIssue"/>
-
     <fmt:message bundle="${locale}" key="local.carClass" var="mCarClass"/>
-
     <fmt:message bundle="${locale}" key="local.mImage" var="mImage"/>
     <fmt:message bundle="${locale}" key="local.economyClass" var="econom"/>
     <fmt:message bundle="${locale}" key="local.businessClass" var="business"/>
@@ -115,8 +111,8 @@
 
                 <p>${mYearIssue}:</p>
                 <input type="text" name="carYear" required placeholder="XXXX" maxlength="4"
-                       pattern="[1-3][0-9]{3}"
-                       title="${messageCarYear}" class="form-control" id="year"/>
+                       pattern="[1-2][0-9]{3}"
+                       title="${messageCarYear}" class="form-control" />
 
                 <p>${mModel}:</p>
                 <input type="text" name="carModel" required pattern="[a-z0-9_]+"
@@ -129,7 +125,7 @@
                 <hr/>
 
                 <label for="photo">${mImage}: </label>
-                <input type="file" name="image" accept="image/*" id="photo" class="btn btn-default"/>
+                <input type="file" name="image" accept="image/*" id="photo" required class="btn btn-default"/>
                 <hr/>
 
                 <input type="hidden" name="command" value="add-car">

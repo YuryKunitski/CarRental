@@ -24,10 +24,6 @@ public class ServiceConstant {
 	/**
 	 * String constants for CarService
 	 */
-	public static final String SERVICE_TAKE_MARKS_STARTS_MSG = "CarService : takeMarks : starts";
-	public static final String SERVICE_TAKE_MARKS_ENDS_MSG = "CarService : takeMarks : ends";
-	public static final String SERVICE_TAKE_MODELS_STARTS_MSG = "CarService : takeModels : starts";
-	public static final String SERVICE_TAKE_MODELS_ENDS_MSG = "CarService : takeModels : ends";
 	public static final String SERVICE_TAKE_CAR_CLASS_STARTS_MSG = "CarService : takeCarClass : starts";
 	public static final String SERVICE_TAKE_CAR_CLASS_ENDS_MSG = "CarService : takeCarClass : ends";
 	public static final String SERVICE_TAKE_CARS_BY_CLASS_START_MSG = "CarService : takeCarsByClass : starts";
@@ -70,18 +66,14 @@ public class ServiceConstant {
 	public static final String SERVICE_UPDATE_STATUS_BY_ID_ENDS_MSG = "OrderService : updateStatusById : ends";
 	public static final String SERVICE_UPDATE_DAMAGE_PRICE_BY_ID_STARTS_MSG = "OrderService : updateDamagePriceByOrderId : starts";
 	public static final String SERVICE_UPDATE_DAMAGE_PRICE_BY_ID_ENDS_MSG = "OrderService : updateDamagePriceByOrderId : ends";
-	public static final String SERVICE_UPDATE_REAL_TIME_FROM_STARTS_MSG = "OrderService : updateRealTimeFrom : starts";
-	public static final String SERVICE_UPDATE_REAL_TIME_FROM_ENDS_MSG = "OrderService : updateRealTimeFrom : ends";
-	public static final String SERVICE_UPDATE_REAL_TIME_TO_STARTS_MSG = "OrderService : updateRealTimeTo : starts";
-	public static final String SERVICE_UPDATE_REAL_TIME_TO_ENDS_MSG = "OrderService : updateRealTimeTo : ends";
 	public static final String SERVICE_ORDER_TO_START_PAGE_STARTS_MSG = "OrderService : orderToStartPage : starts";
 	public static final String SERVICE_ORDER_TO_START_PAGE_ENDS_MSG = "OrderService : orderToStartPage : ends";
-	public static final String SERVICE_COUNT_PAGE_AMOUNT_USER_ORDERS_STARTS_MSG = "OrderService : countPageAmountUserOrders : starts";
-	public static final String SERVICE_COUNT_PAGE_AMOUNT_USER_ORDERS_ENDS_MSG = "OrderService : countPageAmountUserOrders : ends";
 	public static final String SERVICE_COUNT_PAGE_AMOUNT_ALL_ORDERS_STARTS_MSG = "OrderService : countPageAmountAllCars : starts";
 	public static final String SERVICE_COUNT_PAGE_AMOUNT_ALL_ORDERS_ENDS_MSG = "OrderService : countPageAmountAllCars : ends";
 	public static final String SERVICE_IS_MAY_DELETE_STARTS_MSG = "OrderService : isMayDelete : starts";
 	public static final String SERVICE_IS_MAY_DELETE_ENDS_MSG = "OrderService : isMayDelete : ends";
+	public static final String SERVICE_TAKE_ALL_DISCOUNT_COEFFICIENT_STARTS_MSG = "OrderService : takeAllDiscountCoefficients : starts";
+	public static final String SERVICE_TAKE_ALL_DISCOUNT_COEFFICIENT_END_MSG = "OrderService : takeAllDiscountCoefficients : ends";
 
 	public static final String INIT_SERVICE_FACTORY_MSG = "ServiceFactory : init Service factory";
 }

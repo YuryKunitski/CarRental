@@ -22,7 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 /**
- * The command add car in car Rental
+ * The command add car in "Car Rental"
  */
 public class AddCarCommand implements Command {
 

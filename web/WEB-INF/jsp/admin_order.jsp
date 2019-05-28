@@ -10,9 +10,8 @@
     <title>Orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-    <%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-    <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/car-rental-style.css" rel="stylesheet">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.locbutton.name.en" var="en_button"/>
@@ -141,15 +140,13 @@
                 <li>
                     <div>
                         <img class="img-responsive car-small-img"
-                             src="data:image/jpg;base64,${requestScope.selectedOrder.car.image}"/>
+                             src="${requestScope.selectedOrder.car.image}" alt="Car"/>
 
                         <p>${mCarClass}: <c:out value="${requestScope.selectedOrder.car.carClassType}"/></p>
 
                         <p>${mModel}: <c:out value="${requestScope.selectedOrder.car.carModel}"/></p>
 
                         <p>${mYear}: <c:out value="${requestScope.selectedOrder.car.yearIssue}"/></p>
-
-
                     </div>
                 </li>
             </ul>
@@ -265,9 +262,13 @@
 <hr/>
 <%@include file="../jspf/footer.jspf" %>
 
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
 
-<%--<script src="../../js/jquery.js"></script>--%>
-<%--<script src="../../js/bootstrap.min.js"></script>--%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

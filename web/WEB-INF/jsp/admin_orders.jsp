@@ -10,9 +10,8 @@
     <title>Admin orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-<%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.locbutton.name.en" var="en_button"/>
@@ -88,7 +87,7 @@
 
                 <div class="div-order">
 
-                    <table border="1" width="100%">
+                    <table >
                         <thead>
                         <tr>
                             <th>${mOrderNumber}</th>

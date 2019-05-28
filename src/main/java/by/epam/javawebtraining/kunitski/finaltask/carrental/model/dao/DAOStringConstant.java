@@ -102,6 +102,10 @@ public class DAOStringConstant {
 	public static final String DAO_TAKE_DISCOUNT_COEFFICIENT_ENDS_MSG = "OrderDAOdb : takeDiscountCoefficient : ends";
 	public static final String DAO_COUNT_ALL_ORDERS_STARTS_MSG = "OrderDAOdb : countAllOrders : stats";
 	public static final String DAO_COUNT_ALL_ORDERS_ENDS_MSG = "OrderDAOdb : countAllOrders : ends";
+	public static final String DAO_FIND_STATUS_BY_CAR_ID_STARTS_MSG = "OrderDAOdb : findStatusByCarId : starts";
+	public static final String DAO_FIND_STATUS_BY_CAR_ID_ENDS_MSG = "OrderDAOdb : findStatusByCarId : ends";
+	public static final String DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_STARTS_MSG = "OrderDAOdb : takeAllDiscountCoefficients : starts";
+	public static final String DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_ENDS_MSG = "OrderDAOdb : takeAllDiscountCoefficients : starts";
 
 	public static final String DAO_ADD_ORDER_ERROR_MSG = "OrderDAOdb : addOrder : ERROR";
 	public static final String DAO_ADD_ORDER_CLOSE_CON_ERROR_MSG = "OrderDAOdb : addOrder : close connection error";
@@ -123,6 +127,11 @@ public class DAOStringConstant {
 	public static final String DAO_TAKE_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR_MSG = "OrderDAOdb : takeDiscountCoefficient : close connection error";
 	public static final String DAO_COUNT_ALL_ORDERS_ERROR_MSG = "OrderDAOdb : countAllOrders : ERROR";
 	public static final String DAO_COUNT_ALL_ORDERS_CLOSE_CON_ERROR_MSG = "OrderDAOdb : countAllOrders : close connection error";
+	public static final String DAO_FIND_STATUS_BY_CAR_ID_ERROR_MSG = "OrderDAOdb : findStatusByCarId : ERROR";
+	public static final String DAO_FIND_STATUS_BY_CAR_ID_CLOSE_CON_ERROR = "OrderDAOdb : findStatusByCarId : close connection error";
+	public static final String DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_ERROR_MSG = "OrderDAOdb : takeAllDiscountCoefficients : ERROR";
+	public static final String DAO_TAKE_ALL_DISCOUNT_COEFFICIENT_CLOSE_CON_ERROR = "OrderDAOdb : takeAllDiscountCoefficients : close connection error";
+
 
 	/**
 	 * String constants for UserDAOdb

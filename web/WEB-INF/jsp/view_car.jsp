@@ -9,9 +9,8 @@
     <title>Car</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%--    <link href="../../css/bootstrap.min.css" rel="stylesheet">--%>
-    <%--    <link href="../../css/car-rental-style.css" rel="stylesheet">--%>
-    <%--    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/car-rental-style.css" rel="stylesheet">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
@@ -43,6 +42,12 @@
     <fmt:message bundle="${locale}" key="local.home" var="home"/>
     <fmt:message bundle="${locale}" key="local.mRublesPerDay" var="mRublesPerDay"/>
     <fmt:message bundle="${locale}" key="local.mAllCars" var="mAutomobiles"/>
+    <fmt:message bundle="${locale}" key="local.countDays" var="mCountDays"/>
+    <fmt:message bundle="${locale}" key="local.one-three" var="mOne_Three"/>
+    <fmt:message bundle="${locale}" key="local.four-seven" var="mFour_Seven"/>
+    <fmt:message bundle="${locale}" key="local.eight-fourteen" var="mEight_Fourteen"/>
+    <fmt:message bundle="${locale}" key="local.fifteen_thirty" var="mFifteen_Thirty"/>
+    <fmt:message bundle="${locale}" key="local.moreThirty" var="mMoreThirty"/>
 </head>
 <body>
 
@@ -77,24 +82,43 @@
 
     <div>
         <c:if test="${requestScope.cannotDelete}">
-        <p class="text-danger my-info">
-                ${mCarIsUsed}
-        </p>
+            <p class="text-danger my-info">
+                    ${mCarIsUsed}
+            </p>
         </c:if>
+
         <div class="col-lg-12 well">
+        <table >
+            <thead>
+            <tr>
+                <th>${mCountDays}</th>
+                <th>${mOne_Three}</th>
+                <th>${mFour_Seven}</th>
+                <th>${mEight_Fourteen}</th>
+                <th>${mFifteen_Thirty}</th>
+                <th>${mMoreThirty}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><c:out value="${price}:${mRublesPerDay}"/></td>
+                <c:forEach var="price" items="${sessionScope.prices}">
+                    <td><c:out value="${price}"/></td>
+                </c:forEach>
+            </tr>
+            </tbody>
+        </table>
+            <hr/>
             <div class="col-lg-8">
                 <img class="img-responsive car-middle-img"
                      src="${sessionScope.selectedCar.image}" alt="Car"/>
             </div>
-
             <div class="col-lg-4">
-
                 <p class="my-info">${model}: ${sessionScope.selectedCar.carModel}</p>
 
                 <p class="my-info">
                     ${year}: ${sessionScope.selectedCar.yearIssue}
                 </p>
-
                 <p class="my-info">
                     ${carClass}:
                     <c:if test="${sessionScope.carClassType == 'BUSINESS'}">
@@ -108,45 +132,43 @@
                     <c:if test="${sessionScope.carClassType == 'TRUCK'}">
                         <c:out value="${truck}"/>
                     </c:if>
-
                 </p>
                 <hr/>
+                <c:if test="${sessionScope.role == 'CUSTOMER'}">
+                    <div>
+                        <form action="Controller" method="get">
+                            <input type="hidden" name="command" value="to-make-order">
+                            <input type="submit" value="${makeOrder}" class="btn btn-block btn-primary my-info"/>
+                        </form>
+                    </div>
 
-                     <p class="price">${price}: ${sessionScope.selectedCar.pricePerDay} ${mRublesPerDay}</p>
+                </c:if>
+                <c:if test="${sessionScope.role == 'ADMINISTRATOR'}">
+                    <div>
+                        <form action="Controller" method="post">
+                            <input type="hidden" name="command" value="delete-car">
+                            <input type="hidden" name="processRequest" value="redirect">
+                            <input type="submit" value="${deleteCar}" class="btn btn-block btn-danger my-info">
+                        </form>
+                    </div>
+                </c:if>
+                <c:if test="${sessionScope.user == null}">
+                    <p class="my-info text-primary">${forMakeOrderMessage}</p>
+                </c:if>
+            </div>
+        </div>
+    </div>
 
-                                <hr/>
-                                <c:if test="${sessionScope.role == 'CUSTOMER'}">
+    <hr/>
+    <%@include file="../jspf/footer.jspf" %>
+</div>
 
-                                    <div>
-                                        <form action="Controller" method="get">
-                                            <input type="hidden" name="command" value="to-make-order">
-                                            <input type="submit" value="${makeOrder}" class="btn btn-block btn-primary my-info"/>
-                                        </form>
-                                    </div>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
 
-                                </c:if>
-                                <c:if test="${sessionScope.role == 'ADMINISTRATOR'}">
-<%--                                    <div>--%>
-<%--                                        <form action="Controller" method="post">--%>
-<%--                                            <input type="hidden" name="command" value="delete-car">--%>
-<%--                                            <input type="hidden" name="processRequest" value="redirect">--%>
-<%--                                            <input type="submit" value="${deleteCar}" class="btn btn-block btn-danger my-info">--%>
-<%--                                        </form>--%>
-<%--                                    </div>--%>
-                                </c:if>
-                                <c:if test="${sessionScope.user == null}">
-                                    <p class="my-info text-primary">${forMakeOrderMessage}</p>
-                                </c:if>
-                <%--            </div>--%>
-                <%--        </div>--%>
-                <%--    </div>--%>
-
-                <%--    <hr/>--%>
-                <%--    <%@include file="../jspf/footer.jspf" %>--%>
-                <%--</div>--%>
-
-                <%--<script src="../../js/jquery.js"></script>--%>
-                <%--<script src="../../js/bootstrap.min.js"></script>--%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 </body>
 </html>

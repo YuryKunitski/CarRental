@@ -9,9 +9,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Car Rental - About</title>
-<%--    <link href="css/bootstrap.min.css" rel="stylesheet">--%>
-<%--    <link href="css/car-rental-style.css" rel="stylesheet">--%>
-<%--    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/car-rental-style.css" rel="stylesheet">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="localization.local" var="locale"/>
     <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
@@ -58,9 +57,7 @@
         </div>
     </div>
     <div class="well col-lg-12">
-        <div class="col-md-6">
-            <img class="img-responsive" src="img/aboutImg.jpg" alt="">
-        </div>
+
         <div class="col-md-6">
             <h2>${mAboutH}</h2>
 
@@ -82,9 +79,6 @@
     <hr/>
     <%@include file="WEB-INF/jspf/footer.jspf" %>
 </div>
-
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
 
 </body>
 

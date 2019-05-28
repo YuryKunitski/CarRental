@@ -26,6 +26,7 @@ public class ViewOrdersAdminCommand implements Command {
 	private static final String ORDERS_PARAM = "orders";
 	private static final String PROCESS_REQUEST_PARAM = "processRequest";
 
+
 	private static final int AMOUNT_ORDERS_ON_PAGE = 4;
 	private static final int DEFAULT_PAGE_NUMBER = 1;
 	private static final String FORWARD_VALUE = "forward";
