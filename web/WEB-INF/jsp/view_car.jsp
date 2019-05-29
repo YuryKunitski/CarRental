@@ -102,7 +102,7 @@
             <tbody>
             <tr>
                 <td><c:out value="${price}:${mRublesPerDay}"/></td>
-                <c:forEach var="price" items="${sessionScope.prices}">
+                <c:forEach var="price" items="${sessionScope.prices}" >
                     <td><c:out value="${price}"/></td>
                 </c:forEach>
             </tr>

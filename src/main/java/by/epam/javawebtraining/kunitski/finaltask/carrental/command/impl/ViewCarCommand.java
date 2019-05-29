@@ -21,7 +21,6 @@ public class ViewCarCommand implements Command {
 
 	private static final String EXECUTE_STARTS = "ViewCarCommand : execute : starts";
 	private static final String EXECUTE_ENDS = "ViewCarCommand : execute : ends";
-//	private static final Double MAX_DISCOUNT_COEFFICIENT = 0.5;
 
 	private static final String SELECTED_CAR_ID_PARAM = "selectedCarId";
 	private static final String SELECTED_CAR_PARAM = "selectedCar";
@@ -48,9 +47,9 @@ public class ViewCarCommand implements Command {
 			List<Double> listAllDiscounts = orderService.takeAllDiscountCoefficients();
 			if (listAllDiscounts != null){
 				for (Double discount : listAllDiscounts){
-					listCarPrices.add(car.getPricePerDay() * discount);
+					double exactPrice = Math.round((car.getPricePerDay() * discount)*100)/100D;
+					listCarPrices.add(exactPrice);
 				}
-//				listAllDiscounts.add(MAX_DISCOUNT_COEFFICIENT);
 			}
 
 			request.getSession().setAttribute(SELECTED_CAR_ID_PARAM, id);

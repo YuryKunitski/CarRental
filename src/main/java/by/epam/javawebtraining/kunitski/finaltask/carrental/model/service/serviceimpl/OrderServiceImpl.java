@@ -1,10 +1,8 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl;
 
-import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.CarDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.OrderDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.UserDAO;
@@ -12,20 +10,13 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.Order;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.user.User;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceConstant;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.OrderService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -374,25 +365,4 @@ public class OrderServiceImpl implements OrderService {
 		LOG.debug(ServiceConstant.SERVICE_ORDER_TO_START_PAGE_ENDS_MSG);
 		return ((pageNumber * ordersOnPage) - ordersOnPage);
 	}
-
-
-	public static void main(String[] args) {
-		ConnectionPool connectionPool = ConnectionPool.getInstance();
-		try {
-			connectionPool.initConnectionPool();
-		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-		}
-
-//		OrderService orderService = ServiceFactory.getInstance().getOrderService();
-		OrderServiceImpl service = new OrderServiceImpl();
-		try {
-			System.out.println(service.takeAllDiscountCoefficients());
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-
 }

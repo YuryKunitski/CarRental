@@ -100,7 +100,7 @@
 
                 <div class="div-order">
 
-                    <table border="1" width="100%">
+                    <table>
                         <thead>
                         <tr>
                             <th>${mOrderNumber}</th>

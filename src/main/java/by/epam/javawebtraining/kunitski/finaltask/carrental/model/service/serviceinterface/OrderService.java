@@ -4,7 +4,6 @@ import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOExcepti
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.Order;
 
-import java.util.Date;
 import java.util.List;
 
 public interface OrderService {

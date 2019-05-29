@@ -5,15 +5,13 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Properties;
-/*
-*
- */
 
 public class DBResourceManager {
 
 	private static final Logger LOG = LogManager.getLogger(ConnectionPool.class.getName());
 	private static DBResourceManager dbResourceManager;
 	private Properties properties;
+
 	public static String DB_DRIVER;
 	public static String DB_URL;
 	public static String DB_USER;

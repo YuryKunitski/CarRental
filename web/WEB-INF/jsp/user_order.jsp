@@ -57,6 +57,7 @@
     <fmt:message bundle="${locale}" key="local.mAllOrders" var="mAllOrders"/>
     <fmt:message bundle="${locale}" key="local.BYN" var="byn"/>
     <fmt:message bundle="${locale}" key="local.processedOrder" var="processedOrder"/>
+    <fmt:message bundle="${locale}" key="local.yearIssue" var="mYear"/>
 </head>
 <body>
 
@@ -155,9 +156,11 @@
                     <p>${mDateTo} <c:out value="${sessionScope.selectedOrder.rentalEndDate}"/></p>
 
                     <c:if test="${sessionScope.selectedOrder.status.equals('undefined')}">
+                        <div class="text-uppercase">
                         <p>
                             ${processedOrder}
                         </p>
+                        </div>
                     </c:if>
 
                 </div>
@@ -182,6 +185,8 @@
                     <p>${mCarClass}: <c:out value="${sessionScope.selectedOrder.car.carClassType}"/></p>
 
                     <p>${mModel}: <c:out value="${sessionScope.selectedOrder.car.carModel}"/></p>
+
+                    <p>${mYear}: <c:out value="${sessionScope.selectedOrder.car.yearIssue}"/></p>
 
                 </div>
 

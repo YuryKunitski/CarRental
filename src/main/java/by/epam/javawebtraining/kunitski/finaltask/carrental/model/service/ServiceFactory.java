@@ -1,13 +1,5 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service;
 
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOStringConstant;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl.CarDAOImpl;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl.OrderDAOImpl;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl.UserDAOImpl;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.CarDAO;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.OrderDAO;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.UserDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl.CarServiceImpl;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl.OrderServiceImpl;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl.UserServiceImpl;

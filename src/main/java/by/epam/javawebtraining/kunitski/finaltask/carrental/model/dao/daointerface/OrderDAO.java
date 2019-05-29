@@ -20,7 +20,7 @@ public interface OrderDAO {
 	 * @return список id автомобилей
 	 * @throws DAOException ошибка при получении списка id автомобилей
 	 */
-	public List<Integer> findUsedCarsID(Order order) throws DAOException;
+	 List<Integer> findUsedCarsID(Order order) throws DAOException;
 
 
 	/**
@@ -56,7 +56,7 @@ public interface OrderDAO {
 	 * @return finding order
 	 * @throws DAOException exception finding order
 	 */
-	public Order takeAdminOrderByOrderId(int orderId) throws DAOException;
+	 Order takeAdminOrderByOrderId(int orderId) throws DAOException;
 
 
 	/**
@@ -93,21 +93,21 @@ public interface OrderDAO {
 	 * @param damagePrice damage price
 	 * @throws DAOException exception changing damage price
 	 */
-	public void updateDamagePriceByOrderId(int orderId, double damagePrice) throws DAOException;
+	 void updateDamagePriceByOrderId(int orderId, double damagePrice) throws DAOException;
 
 	/**
 	 * Taking discount coefficient
 	 * @param countRentDays count rent days
 	 * @throws DAOException taking discount coefficient
 	 */
-	public double takeDiscountCoefficient(int countRentDays) throws DAOException;
+	 double takeDiscountCoefficient(int countRentDays) throws DAOException;
 
 	/**
 	 * Taking all discount coefficients
 	 * @return list of all discount coefficient
 	 * @throws DAOException changing discount coefficient
 	 */
-	public List<Double> takeAllDiscountCoefficients () throws DAOException;
+	 List<Double> takeAllDiscountCoefficients () throws DAOException;
 
 
 	/**
@@ -122,6 +122,6 @@ public interface OrderDAO {
 	 *
 	 * @throws DAOException exception take all count of orders
 	 */
-	public List<String> findStatusByCarId(int carID) throws DAOException;
+	 List<String> findStatusByCarId(int carID) throws DAOException;
 
 }

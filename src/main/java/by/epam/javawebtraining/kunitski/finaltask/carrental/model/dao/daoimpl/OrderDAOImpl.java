@@ -2,7 +2,6 @@ package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOStringConstant;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.OrderDAO;
@@ -14,11 +13,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class OrderDAOImpl implements OrderDAO {
 
@@ -93,7 +89,12 @@ public class OrderDAOImpl implements OrderDAO {
 	private static final String FIND_ORDER_STATUS_BY_CAR_ID_QUERY = "SELECT status FROM car_rental.order" +
 			" WHERE car_id = ? ;";
 
-
+	/**
+	 * Add order into database
+	 *
+	 * @param order adding order
+	 * @throws DAOException exception adding order into data base
+	 */
 	@Override
 	public void addOrder(Order order) throws DAOException {
 
@@ -132,6 +133,12 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Find cars id that are used for a certain period of time.
+	 * @param order заказ
+	 * @return список id автомобилей
+	 * @throws DAOException ошибка при получении списка id автомобилей
+	 */
 	@Override
 	public List<Integer> findUsedCarsID(Order order) throws DAOException {
 
@@ -176,6 +183,13 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Find orders by user id
+	 *
+	 * @param userId
+	 * @return list of orders
+	 * @throws DAOException exception getting orders list
+	 */
 	@Override
 	public List<Order> findOrdersByUserId(int userId) throws DAOException {
 
@@ -225,6 +239,13 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Find orders by car id
+	 *
+	 * @param carId
+	 * @return list of orders
+	 * @throws DAOException exception getting orders list
+	 */
 	@Override
 	public List<Order> findOrdersByCarId(int carId) throws DAOException {
 
@@ -275,6 +296,12 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Getting all orders
+	 *
+	 * @return list of all orders
+	 * @throws DAOException exception getting orders list
+	 */
 	@Override
 	public List<Order> takeAllOrders(int toStartPage, int ordersOnPage) throws DAOException {
 
@@ -331,6 +358,12 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Find an order by order_id for administrator
+	 * @param orderId order's id
+	 * @return finding order
+	 * @throws DAOException exception finding order
+	 */
 	@Override
 	public Order takeAdminOrderByOrderId(int orderId) throws DAOException {
 
@@ -393,6 +426,13 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Find order by order id
+	 *
+	 * @param orderId
+	 * @return sought order
+	 * @throws DAOException exception find order
+	 */
 	@Override
 	public Order findOrderByOrderId(int orderId) throws DAOException {
 
@@ -444,6 +484,14 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Changing the status of the order, indicating the reason for the change
+	 *
+	 * @param status    new status
+	 * @param orderId   order id
+	 * @param orderInfo reason of changing the status
+	 * @throws DAOException exception changing the status
+	 */
 	@Override
 	public void updateStatusWithReason(String status, int orderId, String orderInfo) throws DAOException {
 
@@ -474,6 +522,13 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Changing the status of the order, without the reason for the change
+	 *
+	 * @param status  new status
+	 * @param orderId id changing order
+	 * @throws DAOException exception changing the status
+	 */
 	@Override
 	public void updateStatusWithoutReason(String status, int orderId) throws DAOException {
 
@@ -503,6 +558,12 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Changing damage price
+	 * @param orderId order's id
+	 * @param damagePrice damage price
+	 * @throws DAOException exception changing damage price
+	 */
 	@Override
 	public void updateDamagePriceByOrderId(int orderId, double damagePrice) throws DAOException {
 
@@ -532,6 +593,11 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Taking discount coefficient
+	 * @param countRentDays count rent days
+	 * @throws DAOException taking discount coefficient
+	 */
 	@Override
 	public double takeDiscountCoefficient(int countRentDays) throws DAOException {
 
@@ -577,7 +643,11 @@ public class OrderDAOImpl implements OrderDAO {
 		return discountCoefficient;
 	}
 
-
+	/**
+	 * Taking all discount coefficients
+	 * @return list of all discount coefficient
+	 * @throws DAOException changing discount coefficient
+	 */
 	@Override
 	public List<Double> takeAllDiscountCoefficients () throws DAOException {
 
@@ -615,6 +685,11 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Take all count of orders
+	 *
+	 * @throws DAOException exception take all count of orders
+	 */
 	@Override
 	public int countAllOrders() throws DAOException {
 
@@ -648,6 +723,11 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 	}
 
+	/**
+	 * Find Status By Car Id
+	 *
+	 * @throws DAOException exception take all count of orders
+	 */
 	@Override
 	public List<String> findStatusByCarId(int carID) throws DAOException {
 
@@ -685,18 +765,6 @@ public class OrderDAOImpl implements OrderDAO {
 				throw new DAOException(DAOStringConstant.DAO_FIND_STATUS_BY_CAR_ID_CLOSE_CON_ERROR, ex);
 			}
 		}
-	}
-
-	public static void main(String[] args) throws DAOException {
-		ConnectionPool connectionPool = ConnectionPool.getInstance();
-		try {
-			connectionPool.initConnectionPool();
-		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-		}
-
-		OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
-		System.out.println(orderDAO.takeAllDiscountCoefficients());
 	}
 }
 

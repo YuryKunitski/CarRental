@@ -43,7 +43,11 @@ public class UserDAOImpl implements UserDAO {
 
 	private static final String COUNT_ALL_USERS_QUERY = "SELECT COUNT(user_id) FROM car_rental.user;";
 
-
+	/**
+	 * Register user.
+	 * @param user
+	 * @throws DAOException
+	 */
 	@Override
 	public void register(User user) throws DAOException {
 		LOG.debug(DAOStringConstant.DAO_REGISTRATION_STARTS_MSG);
@@ -83,6 +87,14 @@ public class UserDAOImpl implements UserDAO {
 		LOG.debug(DAOStringConstant.DAO_REGISTARATION_ENDS_MSG);
 	}
 
+	/**
+	 * Authorize user.
+	 *
+	 * @param login
+	 * @param password
+	 * @return
+	 * @throws DAOException
+	 */
 	@Override
 	public User authorize(String login, String password) throws DAOException {
 
@@ -131,6 +143,13 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
+	/**
+	 * Find user by ID
+	 *
+	 * @param userID user's id
+	 * @return found user
+	 * @throws DAOException error find user by id
+	 */
 	@Override
 	public User findUserById(int userID) throws DAOException {
 
@@ -177,6 +196,16 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	/**
+	 * Check for similar login, e-mail, password in the database
+	 *
+	 * @param login      user's login
+	 * @param email      user's e-mail
+	 * @param passportID user's passportID
+	 * @return object of class ValidatorUniqueUser, which contains information about uniqueness
+	 * inserted data
+	 * @throws DAOException error checking the presence of such a login, email, password in the database
+	 */
 	@Override
 	public ValidatorUniqueUser findUser(String login, String email, String passportID) throws DAOException {
 
@@ -238,6 +267,12 @@ public class UserDAOImpl implements UserDAO {
 		return validatorUniqueUser;
 	}
 
+	/**
+	 * Updating user
+	 *
+	 * @param newUser
+	 * @throws DAOException error getting all users
+	 */
 	@Override
 	public void updateUser(User newUser) throws DAOException {
 
@@ -280,6 +315,13 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
+	/**
+	 * Remove user account by id.
+	 *
+	 * @param userID
+	 * @return true/false
+	 * @throws DAOException
+	 */
 	@Override
 	public boolean removeUserByID(int userID) throws DAOException {
 
@@ -321,6 +363,14 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
+	/**
+	 * Take all users.
+	 *
+	 * @param startPage number of users to the current user
+	 * @param amountUsersOnPage amount users on the page
+	 * @return List of all users
+	 * @throws DAOException
+	 */
 	@Override
 	public List<User> takeAllUsers(int startPage, int amountUsersOnPage) throws DAOException {
 
@@ -372,6 +422,12 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	/**
+	 * Calculate count of all users.
+	 *
+	 * @return Number of all users
+	 * @throws DAOException
+	 */
 	@Override
 	public int countAllUsers() throws DAOException {
 
@@ -409,19 +465,5 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 	}
-
-	public static void main(String[] args) throws DAOException {
-
-		ConnectionPool connectionPool = ConnectionPool.getInstance();
-		try {
-			connectionPool.initConnectionPool();
-		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-		}
-		UserDAO userDAO = new UserDAOImpl();
-//		userDAO.register(new User("Salomon","1",RoleType.CUSTOMER,"Юрий","Юрьевич","989898","sdsd","df4"));
-		System.out.println(userDAO.countAllUsers());
-	}
-
 
 }

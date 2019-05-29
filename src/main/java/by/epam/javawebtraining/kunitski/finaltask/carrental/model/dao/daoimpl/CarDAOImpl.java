@@ -2,20 +2,14 @@ package by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daoimpl;
 
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOStringConstant;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.CarDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
-import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +76,12 @@ public class CarDAOImpl implements CarDAO {
 
 	private static final String CHECK_MODEL_QUERY = "SELECT COUNT(model) FROM car_rental.car_model WHERE model = ?;";
 
+	/**
+	 * Inserting a car into the database
+	 *
+	 * @param car which insert into database
+	 * @throws DAOException
+	 */
 	@Override
 	public void insertCar(Car car) throws DAOException {
 
@@ -164,6 +164,13 @@ public class CarDAOImpl implements CarDAO {
 		return result;
 	}
 
+	/*
+	 *Take car by id
+	 *
+	 * @param id car's id
+	 * @return car
+	 * @throws DAOException  error take car by id
+	 */
 	@Override
 	public Car takeCarById(int id) throws DAOException {
 
@@ -206,6 +213,14 @@ public class CarDAOImpl implements CarDAO {
 
 	}
 
+	/**
+	 * Get all cars
+	 *
+	 * @param toStartPage number of page
+	 * @param carsOnPage count cars on page
+	 * @return list of all cars
+	 * @throws DAOException error get all cars
+	 */
 	@Override
 	public List<Car> takeAllCars(int toStartPage, int carsOnPage) throws DAOException {
 
@@ -249,6 +264,12 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Delete a car by id
+	 *
+	 * @param carId car's id
+	 * @throws DAOException delete a car by id
+	 */
 	@Override
 	public void deleteCarById(int carId) throws DAOException {
 
@@ -277,6 +298,14 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting a list of free cars on some free time interval
+	 *
+	 * @param supposedDateFrom date and time of car rental by user from
+	 * @param supposedDateTo   date and time of car rental by user to
+	 * @return list of free cars
+	 * @throws DAOException
+	 */
 	@Override
 	public List<Car> takeUnusedCars(String supposedDateFrom, String supposedDateTo, int startPage, int carsOnPage)
 			throws DAOException {
@@ -332,6 +361,14 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting a list of free cars by class on some free time interval by class
+	 *
+	 * @param supposedDateFrom date and time of car rental by user from
+	 * @param supposedDateTo   date and time of car rental by user to
+	 * @return list of free cars
+	 * @throws DAOException
+	 */
 	@Override
 	public List<Car> takeUnUsedCarsByClass(String supposedDateFrom, String supposedDateTo, CarClassType carClassType,
 	                                       int startPage, int carsOnPage) throws DAOException {
@@ -389,6 +426,13 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting all cars of certain class
+	 *
+	 * @param carClassType car class
+	 * @return list of cars of certain class
+	 * @throws DAOException error getting all cars of certain class
+	 */
 	@Override
 	public List<Car> takeCarsByClass(CarClassType carClassType, int toStartPage, int carsOnPage) throws DAOException {
 
@@ -433,6 +477,12 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting count of all cars
+	 *
+	 * @return count of all cars
+	 * @throws DAOException
+	 */
 	@Override
 	public int countAllCars() throws DAOException {
 
@@ -468,6 +518,12 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting count of all car classes
+	 *
+	 * @return count of all car classes
+	 * @throws DAOException
+	 */
 	@Override
 	public int countUnusedCars(String dateFrom, String dateTo) throws DAOException {
 
@@ -508,6 +564,12 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting count of all unused cars
+	 *
+	 * @return count of all unused cars
+	 * @throws DAOException
+	 */
 	@Override
 	public int countUnusedClassCars(CarClassType carClassType, String dateFrom, String dateTo) throws DAOException {
 
@@ -549,6 +611,12 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting count of all unused cars by classes
+	 *
+	 * @return count of all unused cars by classes
+	 * @throws DAOException
+	 */
 	@Override
 	public int countAllClassCars(CarClassType carClassType) throws DAOException {
 
@@ -583,6 +651,12 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
+	/**
+	 * Getting all car classes
+	 *
+	 * @return list of car classes
+	 * @throws DAOException
+	 */
 	@Override
 	public List<CarClassType> takeCarClass() throws DAOException {
 
@@ -620,19 +694,4 @@ public class CarDAOImpl implements CarDAO {
 		}
 	}
 
-
-	public static void main(String[] args) throws DAOException {
-		ConnectionPool connectionPool = ConnectionPool.getInstance();
-		try {
-			connectionPool.initConnectionPool();
-		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-		}
-//		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-//		CarDAO carDAO = DAOFactory.getInstance().getCarDAO();
-//		carDAO.insertCar(new Car(1, "uazik", CarClassType.TRUCK, "1999",
-//				99.9, " "));
-		System.out.println(new CarDAOImpl().isNotExistModel("mercede_e650"));
-	}
 }

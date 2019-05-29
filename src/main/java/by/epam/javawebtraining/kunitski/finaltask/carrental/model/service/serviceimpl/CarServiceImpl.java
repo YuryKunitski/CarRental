@@ -1,20 +1,16 @@
 package by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceimpl;
 
-import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ConnectionPoolException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.DAOException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.exception.ServiceException;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.DAOFactory;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.connectionpool.ConnectionPool;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.dao.daointerface.CarDAO;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.Car;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.entity.car.CarClassType;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceConstant;
-import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.ServiceFactory;
 import by.epam.javawebtraining.kunitski.finaltask.carrental.model.service.serviceinterface.CarService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.sql.Date;
 import java.util.List;
 
 public class CarServiceImpl implements CarService {
@@ -370,35 +366,4 @@ public class CarServiceImpl implements CarService {
 
 		return ((pageNumber * carsOnPage) - carsOnPage);
 	}
-
-
-
-	public static void main(String[] args) {
-		ConnectionPool connectionPool = ConnectionPool.getInstance();
-		try {
-			connectionPool.initConnectionPool();
-		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-		}
-//		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-		CarService carService = ServiceFactory.getInstance().getCarService();
-//
-		try {
-//		List<Car> carList = carService.takeUnysedCarsByClassAndDate(CarClassType.BUSINESS, "2019-05-20",
-//				"2019-05-25", 1, 9);
-//			System.out.println(carList);
-
-			int countPage = carService.countPageAmountUnusedCars( "2019-05-20", "2019-05-25",
-					9);
-			System.out.println(countPage);
-//			System.out.println(carService.takeUnysedCarsByClassAndDate(CarClassType.ECONOM, new  Date(format.parse( "2019-06-10").getTime()),
-//					new Date(format.parse( "2019-06-16").getTime()), 15, 1 ).toString());
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-//		catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-	}
-
 }
