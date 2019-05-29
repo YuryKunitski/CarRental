@@ -247,7 +247,7 @@
 
         <p> ${orderInfo}: <c:out value="${requestScope.selectedOrder.info}"/></p>
     </div>
-</div>
+
 </c:if>
 
 <c:if test="${sessionScope.role != 'ADMINISTRATOR'}">
@@ -261,6 +261,7 @@
 
 <hr/>
 <%@include file="../jspf/footer.jspf" %>
+</div>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>

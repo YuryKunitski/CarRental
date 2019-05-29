@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class DBResourceManager {
 
-	private static final Logger LOG = LogManager.getLogger(ConnectionPool.class.getName());
+	private static final Logger LOG = LogManager.getLogger(DBResourceManager.class);
 	private static DBResourceManager dbResourceManager;
 	private Properties properties;
 
@@ -25,7 +25,6 @@ public class DBResourceManager {
 		} catch (IOException e) {
 			LOG.error("Resource Connection Error" + e);
 		}
-
 	}
 
 	private DBResourceManager() {

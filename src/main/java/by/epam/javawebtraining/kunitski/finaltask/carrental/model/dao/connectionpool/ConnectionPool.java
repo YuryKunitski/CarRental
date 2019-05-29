@@ -14,8 +14,8 @@ import java.util.concurrent.Executor;
 
 public class ConnectionPool {
 
-	private static final Logger LOG = LogManager.getLogger(ConnectionPool.class.getName());
-	private static final DBResourceManager resourceManager = DBResourceManager.getInstance();
+	private static final Logger LOG = LogManager.getLogger(ConnectionPool.class);
+	private DBResourceManager dbResourceManager = DBResourceManager.getInstance();
 	private static ConnectionPool connectionPool;
 
 	private BlockingQueue<Connection> connectionQueue;
@@ -79,7 +79,7 @@ public class ConnectionPool {
 	}
 
 	/*
-	 * Take the connetion from pool.
+	 * Take the connection from pool.
 	 */
 	public Connection takeConnection() throws ConnectionPoolException {
 
@@ -105,7 +105,6 @@ public class ConnectionPool {
 	/*
 	 * Destroy connection pool.
 	 */
-
 	public void dispose() throws ConnectionPoolException {
 
 		LOG.debug(DAOStringConstant.DISPOSE_STARTS_MSG);
@@ -122,7 +121,7 @@ public class ConnectionPool {
 	}
 
 	/*
-	 * Close connection pool.
+	 * Close Connection and Statement
 	 */
 	public void closeConnection(Connection con, Statement st) throws ConnectionPoolException {
 		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_MSG);
@@ -144,6 +143,9 @@ public class ConnectionPool {
 		}
 	}
 
+	/*
+	 * Close Connection, Statement and ResultSet
+	 */
 	public void closeConnection(Connection con, Statement st, ResultSet rs) throws ConnectionPoolException {
 
 		LOG.debug(DAOStringConstant.CLOSE_CONNECTION_MSG);

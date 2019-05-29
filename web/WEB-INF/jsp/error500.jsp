@@ -27,7 +27,6 @@
     <fmt:message bundle="${locale}" key="local.cars" var="cars"/>
     <fmt:message bundle="${locale}" key="local.info" var="info"/>
     <fmt:message bundle="${locale}" key="local.logOut" var="logOut"/>
-
     <fmt:message bundle="${locale}" key="local.mERROR500" var="mError"/>
     <fmt:message bundle="${locale}" key="local.mErrorMessage500" var="mErrorMessage"/>
     <fmt:message bundle="${locale}" key="local.carRental" var="carRental"/>
