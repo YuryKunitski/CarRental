@@ -25,6 +25,7 @@ public class ViewOrderUserCommand implements Command {
 	private static final String SELECTED_ORDER_ID_PARAM = "selectedOrderId";
 	private static final String SELECTED_ORDER_PARAM = "selectedOrder";
 	private static final String PROCESS_REQUEST_PARAM = "processRequest";
+	private static final String TOTAL_BILL_PARAM = "totalBill";
 
 	private static final String FORWARD_VALUE = "forward";
 
@@ -37,12 +38,15 @@ public class ViewOrderUserCommand implements Command {
 		OrderService service = ServiceFactory.getInstance().getOrderService();
 		request.setAttribute(SELECTED_ORDER_ID_PARAM, orderId);
 		request.getSession().setAttribute(SELECTED_ORDER_ID_PARAM, orderId);
+		double totalPrice = 0;
 		Order order = null;
 
 		try {
 			order = service.findOrderByOrderId(orderId);
+			totalPrice = Math.round(order.getTotalBill() *100)/100D;
 
 			request.getSession().setAttribute(SELECTED_ORDER_PARAM, order);
+			request.setAttribute(TOTAL_BILL_PARAM, totalPrice);
 			request.setAttribute(PROCESS_REQUEST_PARAM, FORWARD_VALUE);
 
 			LOG.debug(EXECUTE_ENDS);

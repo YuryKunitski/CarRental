@@ -47,6 +47,9 @@ public class ViewOrdersAdminCommand implements Command {
 
 		try {
 			orders = service.takeAllOrders(pageNumber, AMOUNT_ORDERS_ON_PAGE);
+			for (Order order: orders){
+				order.setTotalBill(order.getTotalBill());
+			}
 
 			if (orders.size() == 0) {
 

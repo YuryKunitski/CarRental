@@ -103,7 +103,7 @@ public class Order {
 	}
 
 	public void setTotalBill(double totalBill) {
-		this.totalBill = totalBill;
+		this.totalBill = Math.round(totalBill * 100)/100D;
 	}
 
 	@Override

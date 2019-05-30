@@ -118,7 +118,7 @@
                         </c:if>
                     </p>
 
-                    <p>${mPrice}: <c:out value="${sessionScope.selectedOrder.totalBill} ${byn}"/></p>
+                    <p>${mPrice}: <c:out value="${requestScope.totalBill} ${byn}"/></p>
 
                     <p>${mDamagePrice}: <c:out value="${sessionScope.selectedOrder.damagePrice} ${byn}"/></p>
 

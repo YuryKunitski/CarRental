@@ -27,12 +27,7 @@ public class UpdateStatusCommand implements Command {
 	private static final String INVALID_INFO = "invalidInfo";
 	private static final String SUCCESSFUL_UPDATED_STATUS_PARAM = "successfulUpdatedStatus";
 	private static final String PROCESS_REQUEST = "processRequest";
-	private static final String TO_DATE_PARAM = "toDate";
-	private static final String FROM_DATE_PARAM = "fromDate";
 
-	private static final String DELIVERED_VALUE = "delivered";
-	private static final String RETURNED_VALUE = "returned";
-	private static final String CLOSED_VALUE = "closed";
 	private static final String FORWARD_VALUE = "forward";
 	private static final String REDIRECT_VALUE = "redirect";
 

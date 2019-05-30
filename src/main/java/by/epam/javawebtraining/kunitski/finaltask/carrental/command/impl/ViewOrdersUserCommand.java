@@ -28,6 +28,7 @@ public class ViewOrdersUserCommand implements Command {
 	private static final String FORWARD_VALUE = "forward";
 
 	private static final String USER_PARAM = "user";
+	private static final String TOTAL_BILL_PARAM = "totalBill";
 	private static final String NO_ORDERS_PARAM = "noOrders";
 	private static final String ORDERS_PARAM = "orders";
 	private static final String PAGE_NUMBER_PARAM = "pageNumber";
@@ -53,6 +54,9 @@ public class ViewOrdersUserCommand implements Command {
 		try {
 			if (user != null) {
 				orders = service.findOrdersByUserId(user.getUserID());
+				for (Order order: orders){
+					order.setTotalBill(order.getTotalBill());
+				}
 				if (orders.size() == 0) {
 					request.setAttribute(NO_ORDERS_PARAM, true);
 				}

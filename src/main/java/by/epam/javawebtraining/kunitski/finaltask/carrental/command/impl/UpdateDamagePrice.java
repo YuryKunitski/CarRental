@@ -23,7 +23,6 @@ public class UpdateDamagePrice implements Command {
 	private static final String ORDER_ID_PARAM = "selectedOrderId";
 	private static final String SELECTED_ORDER_PARAM = "selectedOrder";
 	private static final String ORDER_STATUS_PARAM = "statusOrder";
-	private static final String ORDER_INFO_PARAM = "order-info";
 	private static final String INVALID_INFO = "invalidInfo";
 	private static final String DAMAGE_PRICE_PARAM = "damage-price";
 

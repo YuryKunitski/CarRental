@@ -215,7 +215,7 @@
 
     <div class="col-lg-8">
 
-        <p> ${mOrderPrice} <c:out value="${requestScope.selectedOrder.totalBill}"/> ${byn}</p>
+        <p> ${mOrderPrice} <c:out value="${requestScope.totalBill}"/> ${byn}</p>
 
         <p> ${mRealDateFrom} <c:out value="${requestScope.selectedOrder.rentalStartDate}"/></p>
 
